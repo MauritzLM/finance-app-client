@@ -1,33 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Auth from './components/auth/auth'
+import Overview from './pages/overview'
+import Navbar from './components/navbar'
+import Transactions from './pages/transactions'
+import Budgets from './pages/budgets'
+import Pots from './pages/pots'
+import RecurringBills from './pages/recurring_bills'
+import ErrorPage from './pages/error_page'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [currentPage, setCurrentPage] = useState('')
+
+  // get token from local storage
+
+  // if no token display login page
+
+  // else attempt to fetch overview content
+
+  // if token expired -> login page
+  if (!isAuthenticated) {
+    return (
+      <>
+        <Auth />
+
+      </>
+    )
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path='/' element={<Overview />} />
+          <Route path='/transactions' element={<Transactions />} />
+          <Route path='/budgets' element={<Budgets />} />
+          <Route path='/pots' element={<Pots />} />
+          <Route path='/recurring-bills' element={<RecurringBills />} />
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+      </main>
+
     </>
   )
 }
