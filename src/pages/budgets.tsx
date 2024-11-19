@@ -1,8 +1,13 @@
+import { userObj } from "../types"
 
-function Budgets() {
+interface budgetProps {
+    user: userObj
+}
+function Budgets({ user }: budgetProps) {
+
     return (
         <>
-         <h1>Budgets page</h1>
+            <h1>Budgets page</h1>
         </>
     )
 }

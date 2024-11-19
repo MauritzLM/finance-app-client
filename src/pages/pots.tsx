@@ -1,8 +1,13 @@
+import { userObj } from "../types"
 
-function Pots() {
+interface potsProps {
+    user: userObj
+}
+
+function Pots({ user }: potsProps) {
     return (
         <>
-         <h1>Pots page</h1>
+            <h1>Pots page</h1>
         </>
     )
 }
