@@ -1,8 +1,13 @@
 import { useState } from "react";
 import LoginForm from "./login_form";
 import SignUpForm from "./signup_form";
+import { userObj } from "../../types";
 
-function Auth() {
+interface authProps {
+    updateUser: (u: userObj) => void
+}
+
+function Auth({updateUser}: authProps) {
     const [loginState, setLoginState] = useState(true)
 
     function signUpStatus() {
@@ -18,14 +23,14 @@ function Auth() {
     if (loginState) {
         return (
             <div>
-                <LoginForm signUpStatus={signUpStatus}/>
+                <LoginForm signUpStatus={signUpStatus} updateUser={updateUser}/>
             </div>
         )
     }
 
     return (
         <div>
-            <SignUpForm loginStatus={loginStatus} />
+            <SignUpForm loginStatus={loginStatus} updateUser={updateUser}/>
         </div>
     )
 }

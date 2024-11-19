@@ -1,9 +1,14 @@
+import { userObj } from "../../types"
 
 interface signUpProps {
-    loginStatus: () => void
+    loginStatus: () => void,
+    updateUser: (u: userObj) => void
 }
 
-function SignUpForm({ loginStatus }: signUpProps) {
+function SignUpForm({ loginStatus, updateUser }: signUpProps) {
+
+    // signup function*
+
     return (
         <>
             <div>
