@@ -31,6 +31,7 @@ function LoginForm({ signUpStatus, updateUser }: loginProps) {
       // update user context/state with user & token
       if (data.token) {
         updateUser(data)
+        localStorage.setItem('user', JSON.stringify(data))
         return
       }
 
