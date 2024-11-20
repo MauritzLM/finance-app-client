@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Auth from './components/auth/auth'
 import Overview from './pages/overview'
@@ -20,13 +20,14 @@ function App() {
     setIsAuthenticated(true)
   }
 
-  // get token from local storage
+  // check if userobj in localstorage
+  useEffect(() => {
+    if (localStorage.user) {
+      updateUser(JSON.parse(localStorage.user))
+    }
+  },[])
 
-  // if no token display login page
-
-  // else attempt to fetch overview content
-
-  // if token expired -> login page
+  // if not authenticated go to login page
   if (!isAuthenticated) {
     return (
       <>
