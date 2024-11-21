@@ -39,11 +39,16 @@ export interface pot {
     total: number
 }
 
+export interface budget_spending {
+    [key: string]: number
+}
+
 export interface overviewData {
     budgets: budget[],
     expenses: transaction[],
     income: transaction[],
     pots: pot[],
     recent_transactions: transaction[],
-    recurring_bills: transaction[]
+    recurring_bills: transaction[],
+    budget_spending: budget_spending,
 }

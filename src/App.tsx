@@ -9,15 +9,37 @@ import Pots from './pages/pots'
 import RecurringBills from './pages/recurring_bills'
 import ErrorPage from './pages/error_page'
 import { Route, Routes } from 'react-router-dom'
-import { userObj } from './types'
+import { userObj, pot, budget, budget_spending } from './types'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState<userObj>({ 'token': '', 'user': { 'id': -1, 'username': '' } })
+  const [user, setUser] = useState<userObj>({})
+  const [pots, setPots] = useState<pot[]>([])
+  const [budgets, setBudgets] = useState<budget[]>([])
+  const [budgetSpending, setBudgetSpending] = useState<budget_spending>({})
 
   function updateUser(u: userObj) {
     setUser({ 'token': u.token, 'user': { ...u.user } })
     setIsAuthenticated(true)
+  }
+
+  // when token is expired
+  function changeAuthStatus() {
+    setIsAuthenticated(false)
+  }
+
+  // update pots function
+  function updatePots(potsArr: pot[]) {
+    setPots([...potsArr])
+  }
+
+  // update budgets function
+  function updateBudgets(budgetsArr: budget[]) {
+    setBudgets([...budgetsArr])
+  }
+
+  function updateBudgetSpending(spendingObj: budget_spending) {
+    setBudgetSpending({...spendingObj})
   }
 
   // check if userobj in localstorage
@@ -25,7 +47,7 @@ function App() {
     if (localStorage.user) {
       updateUser(JSON.parse(localStorage.user))
     }
-  },[])
+  }, [])
 
   // if not authenticated go to login page
   if (!isAuthenticated) {
@@ -42,10 +64,10 @@ function App() {
       <Navbar user={user} />
       <main>
         <Routes>
-          <Route path='/' element={<Overview user={user} />} />
+          <Route path='/' element={<Overview user={user} changeAuthStatus={changeAuthStatus} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} />} />
           <Route path='/transactions' element={<Transactions user={user} />} />
-          <Route path='/budgets' element={<Budgets user={user} />} />
-          <Route path='/pots' element={<Pots user={user} />} />
+          <Route path='/budgets' element={<Budgets user={user} budgets={budgets} budgetSpending={budgetSpending} />} />
+          <Route path='/pots' element={<Pots user={user} pots={pots} />} />
           <Route path='/recurring-bills' element={<RecurringBills user={user} />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
