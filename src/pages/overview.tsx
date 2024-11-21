@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
-import { userObj, overviewData, transaction } from "../types"
+import { userObj, overviewData, transaction, pot, budget, budget_spending } from "../types"
 import { Link } from "react-router-dom"
 
 interface overviewProps {
-    user: userObj
+    user: userObj,
+    changeAuthStatus: () => void,
+    updatePots: (potsArr: pot[]) => void,
+    updateBudgets: (budgetsArr: budget[]) => void,
+    updateBudgetSpending: (spendingObj: budget_spending) => void
 }
 
-function Overview({ user }: overviewProps) {
-    const [overviewData, setOverviewData] = useState<overviewData | undefined>()
+function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBudgetSpending }: overviewProps) {
+    const [overviewData, setOverviewData] = useState<overviewData>({})
     const [expenses, setExpenses] = useState<number>()
     const [income, setIncome] = useState<number>()
 
@@ -27,16 +31,27 @@ function Overview({ user }: overviewProps) {
                 body: JSON.stringify(user)
             })
 
-            const data = await response.json()
+            const data: overviewData = await response.json()
+
+            if (response.status === 401) {
+                changeAuthStatus()
+                // clear localstorage
+                localStorage.removeItem('user')
+                return
+            }
 
             if (response.status === 200) {
                 // set overview data
                 setOverviewData(data)
 
+                // update pots and budgets
+                updatePots(data.pots)
+                updateBudgets(data.budgets)
+                updateBudgetSpending(data.budget_spending)
+
                 // calculate and set income and expenses
                 setExpenses(data.expenses.reduce((a: number, c: transaction) => a + c.amount, 0))
                 setIncome(data.income.reduce((a: number, c: transaction) => a + c.amount, 0))
-
             }
 
             console.log(data)
@@ -47,7 +62,9 @@ function Overview({ user }: overviewProps) {
     }
 
     useEffect(() => {
-        getOverviewData()
+        if (Object.keys(overviewData).length !== 6) {
+            getOverviewData()
+        }
     }, [])
 
     return (
@@ -72,51 +89,62 @@ function Overview({ user }: overviewProps) {
                     <h2>Pots</h2>
                     {/* total */}
                     <Link to="/pots">See Details</Link>
-                    <div className="total">
-                        {overviewData?.pots.reduce((a, c) => a + c.total, 0)}
-                    </div>
+                    {Object.keys(overviewData).includes('pots') &&
+                        <div>
+                            <div className="total">
+                                <span>Total Saved</span>
+                                <span>{overviewData.pots.reduce((a, c) => a + c.total, 0)}</span>
+                            </div>
 
-                    {/* pot list */}
-                    <ul>
-                        {overviewData?.pots.map(pot =>
-                            <li key={pot.name}>
-                                {pot.total}
-                            </li>
-                        )}
-                    </ul>
+
+                            <ul>
+                                {overviewData.pots.slice(0, 4).map(pot =>
+                                    <li key={pot.name}>
+                                        <span>{pot.name}</span>
+                                        <span>{pot.total}</span>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    }
                 </div>
 
                 <div className="budgets">
                     <h2>Budgets</h2>
-                    {/* total spent */}
-                    {overviewData?.budgets.reduce((a, c) => a + c.maximum, 0)}
+                    {Object.keys(overviewData).includes('budgets') &&
+                        <div>
+                            {/* calculate total spent* */}
+                            <span>{Math.abs(Object.values(overviewData.budget_spending).reduce((a, c) => a + c, 0))}</span>
+                            {/* limit */}
 
-                    {/* list */}
-                    <ul>
-                        {overviewData?.budgets.map(budget =>
-                            <li>
-                                {/* theme color* */}
-                                <span>{budget.category}</span>
-                                <span>{budget.maximum}</span>
-                            </li>
-                        )}
-                    </ul>
-
+                            <span>of {overviewData.budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
+                            <ul>
+                                {overviewData.budgets.map(budget =>
+                                    <li key={budget.category}>
+                                        {/* theme color* */}
+                                        <span>{budget.category}</span>
+                                        <span>{budget.maximum}</span>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    }
                 </div>
 
                 <div className="transactions">
                     <h2>Transactions</h2>
                     <Link to="/transactions">View All</Link>
                     <ul>
-                        {overviewData?.recent_transactions.map(item =>
-                            <li>
+                        {Object.keys(overviewData).includes('recent_transactions') && overviewData.recent_transactions.map(item =>
+                            <li key={item.date}>
                                 <div>
                                     {/* img* */}
                                     <span>{item.name}</span>
                                 </div>
                                 <div>
+                                    {/* format amount +/- */}
                                     <span>{item.amount}</span>
-                                    <span>{new Date(item.date).toLocaleDateString('en-GB')}</span>
+                                    <span>{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                                 </div>
 
                             </li>
@@ -132,17 +160,17 @@ function Overview({ user }: overviewProps) {
                     <ul>
                         <li>
                             <span>Paid Bills</span>
-                            {/* calculate amount */}
+                            {/* calculate amount* */}
                             <span></span>
                         </li>
                         <li>
                             <span>Total Upcoming</span>
-                            {/* calculate amount */}
+                            {/* calculate amount* */}
                             <span></span>
                         </li>
                         <li>
                             <span>Due Soon</span>
-                            {/* calculate amount */}
+                            {/* calculate amount* */}
                             <span></span>
                         </li>
                     </ul>
