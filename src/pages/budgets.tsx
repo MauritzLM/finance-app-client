@@ -1,16 +1,43 @@
+import { useEffect } from "react"
 import { userObj, budget, budget_spending } from "../types"
 
 interface budgetProps {
     user: userObj,
     budgets: budget[],
-    budgetSpending: budget_spending
+    budgetSpending: budget_spending,
+    updateBudgets: (budgetsArr: budget[]) => void,
+    updateBudgetSpending: (spendingObj: budget_spending) => void
 }
 
-function Budgets({ user, budgets, budgetSpending }: budgetProps) {
-
-    // fetch latest spending*
+function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpending }: budgetProps) {
 
     // fetch budgets and spending if not in props
+    async function getBudgets() {
+        try {
+            const response = await fetch('http://localhost:8000/finance-api/budgets', {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `token ${user['token']}`
+                },
+            })
+
+            const data = await response.json()
+
+            updateBudgets(data.budgets)
+            updateBudgetSpending(data.budget_spending)
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if(!budgets.length || !budgetSpending.length) {
+            getBudgets()
+        }
+    })
 
     return (
         <>
@@ -29,7 +56,7 @@ function Budgets({ user, budgets, budgetSpending }: budgetProps) {
 
                         <ul>
                             {budgets.map(budget =>
-                                <li>
+                                <li key={budget.id}>
                                     <span>{budget.category}</span>
                                     <span>{Math.abs(budgetSpending[budget.category])} of {budget.maximum}</span>
                                 </li>
@@ -40,7 +67,7 @@ function Budgets({ user, budgets, budgetSpending }: budgetProps) {
                     <div className="budgets-detail">
 
                         {budgets.map(budget =>
-                            <div>
+                            <div key={budget.category}>
                                 <h2>{budget.category}</h2>
                                 <button></button>
                                 <p>maximum of {budget.maximum}</p>
