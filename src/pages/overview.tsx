@@ -7,10 +7,11 @@ interface overviewProps {
     changeAuthStatus: () => void,
     updatePots: (potsArr: pot[]) => void,
     updateBudgets: (budgetsArr: budget[]) => void,
-    updateBudgetSpending: (spendingObj: budget_spending) => void
+    updateBudgetSpending: (spendingObj: budget_spending) => void,
+    updateRecurringBills: (transactionArr: transaction[]) => void
 }
 
-function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBudgetSpending }: overviewProps) {
+function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBudgetSpending, updateRecurringBills }: overviewProps) {
     const [overviewData, setOverviewData] = useState<overviewData>({})
     const [expenses, setExpenses] = useState<number>()
     const [income, setIncome] = useState<number>()
@@ -23,12 +24,11 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
     async function getOverviewData() {
         try {
             const response = await fetch('http://localhost:8000/finance-api/overview', {
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
                     Authorization: `token ${user['token']}`
                 },
-                body: JSON.stringify(user)
             })
 
             const data: overviewData = await response.json()
@@ -44,10 +44,11 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                 // set overview data
                 setOverviewData(data)
 
-                // update pots and budgets
+                // update pots, budgets and recurringbills
                 updatePots(data.pots)
                 updateBudgets(data.budgets)
                 updateBudgetSpending(data.budget_spending)
+                updateRecurringBills(data.recurring_bills)
 
                 // calculate and set income and expenses
                 setExpenses(data.expenses.reduce((a: number, c: transaction) => a + c.amount, 0))
