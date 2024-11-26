@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { userObj, overviewData, transaction, pot, budget, budget_spending } from "../types"
 import { Link } from "react-router-dom"
+import { isPaid, totalUpcoming, dueSoon } from "../helpers/helpers"
 
 interface overviewProps {
     user: userObj,
@@ -158,23 +159,26 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                 <div className="recurring-bills">
                     <h2>Recurring Bills</h2>
                     {/* paid */}
-                    <ul>
-                        <li>
-                            <span>Paid Bills</span>
-                            {/* calculate amount* */}
-                            <span></span>
-                        </li>
-                        <li>
-                            <span>Total Upcoming</span>
-                            {/* calculate amount* */}
-                            <span></span>
-                        </li>
-                        <li>
-                            <span>Due Soon</span>
-                            {/* calculate amount* */}
-                            <span></span>
-                        </li>
-                    </ul>
+                    {/* Number(new Date().toLocaleDateString('en-GB', {'day': 'numeric'})) Number(new Date(item.date).toLocaleDateString('en-GB', {'day': 'numeric'})) */}
+                    {Object.keys(overviewData).includes('recurring_bills') &&
+                        <ul>
+                            <li>
+                                <span>Paid Bills</span>
+                                {/* calculate amount* */}
+                                <span>${Math.abs(overviewData.recurring_bills.filter(isPaid).reduce((a, c) => a + c.amount, 0))}</span>
+                            </li>
+                            <li>
+                                <span>Total Upcoming</span>
+                                {/* calculate amount* */}
+                                <span>${Math.abs(overviewData.recurring_bills.filter(totalUpcoming).reduce((a, c) => a + c.amount, 0))}</span>
+                            </li>
+                            <li>
+                                <span>Due Soon</span>
+                                {/* calculate amount* */}
+                                <span>${Math.abs(overviewData.recurring_bills.filter(dueSoon).reduce((a, c) => a + c.amount, 0))}</span>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </>
