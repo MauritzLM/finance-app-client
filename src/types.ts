@@ -43,6 +43,16 @@ export interface budget_spending {
     [key: string]: number
 }
 
+export interface latest_budget_spending {
+    [key: string]: transaction[]
+}
+
+export interface budgetForm {
+    category: string,
+    maximum: number,
+    theme: string,
+}
+
 export interface overviewData {
     budgets: budget[],
     expenses: transaction[],
@@ -51,4 +61,10 @@ export interface overviewData {
     recent_transactions: transaction[],
     recurring_bills: transaction[],
     budget_spending: budget_spending,
+}
+
+
+export interface stringOrNumberObj {
+    [index: string]: number | string;
+    theme: string;
 }
