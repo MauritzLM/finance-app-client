@@ -1,5 +1,5 @@
-import { transaction } from "../types"
-// compare the days of two dates
+import { transaction, budget, stringOrNumberObj } from "../types"
+
 // paid
 export function isPaid(item: transaction) {
     const today: string = new Date().toLocaleDateString('en-GB', { 'day': 'numeric' })
@@ -116,4 +116,28 @@ export function filterAndSortArr(currentArr: transaction[], search: string, sort
     }
 
     return newArr
+}
+
+// create an unused categories arr
+export function unusedCategories(categories: string[], budgets: budget[]) {
+
+    // array for categories to exclude
+    const newArr: string[] = []
+
+    for (let i = 0; i < budgets.length; i++) {
+        newArr.push(budgets[i].category)
+    }
+
+    return categories.filter(el => newArr.includes(el) === false)
+}
+
+// create an unused themes array
+export function unusedThemes(themes: string[], arr: stringOrNumberObj[]) {
+    const newArr: string[] = []
+
+    for (let i = 0; i < arr.length; i++) {
+        newArr.push(arr[i].theme)
+    }
+
+    return themes.filter(el => newArr.includes(el) === false)
 }
