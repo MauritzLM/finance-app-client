@@ -15,6 +15,7 @@ export interface userObj {
 }
 
 export interface budget {
+    [index: string]: number | string;
     id: number,
     category: string,
     maximum: number,
@@ -32,6 +33,7 @@ export interface transaction {
 }
 
 export interface pot {
+    [index: string]: number | string;
     id: number,
     name: string,
     target: number,
@@ -67,4 +69,8 @@ export interface overviewData {
 export interface stringOrNumberObj {
     [index: string]: number | string;
     theme: string;
+}
+
+export interface strObj {
+    [index: string]: string
 }
