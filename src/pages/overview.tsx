@@ -86,7 +86,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                         <span>{expenses ? Math.abs(expenses) : ''}</span>
                     </div>
                 </div>
-
+                  {/* pots */}
                 <div className="pots">
                     <h2>Pots</h2>
                     {/* total */}
@@ -110,7 +110,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                         </div>
                     }
                 </div>
-
+                {/* budgets */}
                 <div className="budgets">
                     <h2>Budgets</h2>
                     {Object.keys(overviewData).includes('budgets') &&
@@ -132,7 +132,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                         </div>
                     }
                 </div>
-
+                {/* transactions */}
                 <div className="transactions">
                     <h2>Transactions</h2>
                     <Link to="/transactions">View All</Link>
@@ -144,7 +144,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                                     <span>{item.name}</span>
                                 </div>
                                 <div>
-                                    {/* format amount +/- */}
+                                    {/* format amount +/-* */}
                                     <span>{item.amount}</span>
                                     <span>{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                                 </div>
@@ -152,29 +152,23 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                             </li>
                         )}
                     </ul>
-
-
                 </div>
-
+                {/* recurring bills */}
                 <div className="recurring-bills">
                     <h2>Recurring Bills</h2>
-                    {/* paid */}
-                    {/* Number(new Date().toLocaleDateString('en-GB', {'day': 'numeric'})) Number(new Date(item.date).toLocaleDateString('en-GB', {'day': 'numeric'})) */}
+
                     {Object.keys(overviewData).includes('recurring_bills') &&
                         <ul>
                             <li>
                                 <span>Paid Bills</span>
-                                {/* calculate amount* */}
                                 <span>${Math.abs(overviewData.recurring_bills.filter(isPaid).reduce((a, c) => a + c.amount, 0))}</span>
                             </li>
                             <li>
                                 <span>Total Upcoming</span>
-                                {/* calculate amount* */}
                                 <span>${Math.abs(overviewData.recurring_bills.filter(totalUpcoming).reduce((a, c) => a + c.amount, 0))}</span>
                             </li>
                             <li>
                                 <span>Due Soon</span>
-                                {/* calculate amount* */}
                                 <span>${Math.abs(overviewData.recurring_bills.filter(dueSoon).reduce((a, c) => a + c.amount, 0))}</span>
                             </li>
                         </ul>

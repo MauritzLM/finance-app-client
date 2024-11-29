@@ -19,8 +19,10 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
     const [showNewForm, setShowNewForm] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false)
     const [showDeleteForm, setShowDeleteform] = useState(false)
-    const [newBudget, setNewBudget] = useState('')
     const [budgetToEdit, setBudgetToEdit] = useState<budget>({})
+    // if new budget has been created
+    const [newBudget, setNewBudget] = useState('')
+    
 
     // fetch budgets and spending if not in props
     async function getBudgets() {
@@ -35,8 +37,14 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
 
             const data = await response.json()
 
-            updateBudgets(data.budgets)
-            updateBudgetSpending(data.budget_spending)
+            if (response.status === 200) {
+                updateBudgets(data.budgets)
+                updateBudgetSpending(data.budget_spending)
+
+                return
+            }
+
+            // 401 status -> change auth status*
 
 
         } catch (error) {
@@ -44,6 +52,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         }
     }
 
+    // get budget spending of newly created budget and update budget spending state
     async function getNewBudgetSpending() {
         try {
             const response = await fetch(`http://localhost:8000/finance-api/budgets/new/${newBudget}`, {
@@ -72,7 +81,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         setNewBudget(name)
     }
 
-    // hide form
+    // hide new form
     function hideNewForm() {
         setShowNewForm(false)
     }
@@ -106,7 +115,8 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         if (!budgets.length || !budgetSpending.length) {
             getBudgets()
         }
-
+        
+        // if new budget has been created get the spending of that budget
         if (newBudget !== '') {
             getNewBudgetSpending()
         }
@@ -118,11 +128,11 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
             <h1>Budgets</h1>
             <button onClick={() => setShowNewForm(true)}>+ Add New Budget</button>
 
-            {/* summary */}
+            {/* spending summary */}
             {budgets.length > 0 &&
                 <div>
                     <div className="budgets-summary">
-
+                        {/* total spent and total limit */}
                         <span>{Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0))}</span>
                         <span>of {budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
 
@@ -137,14 +147,14 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                             )}
                         </ul>
                     </div>
-                    {/* list */}
+                    {/* budgets detail list */}
                     <div className="budgets-detail">
 
                         {budgets.map(budget =>
                             <div key={budget.category}>
                                 <div>
                                     <h2>{budget.category}</h2>
-                                    {/* toggle button* */}
+                                    {/* toggle edit delete button* */}
                                     <button></button>
                                     <div className="">
                                         <button onClick={() => displayEditForm(budget)}>Edit budget</button>
@@ -193,9 +203,9 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
 
             {/* delete form */}
             {showDeleteForm &&
-              <div className="form-modal">
-                 <DeleteBudgetForm user={user} budget={budgetToEdit} budgets={budgets} hideDeleteForm={hideDeleteForm} updateBudgets={updateBudgets}/>
-              </div>
+                <div className="form-modal">
+                    <DeleteBudgetForm user={user} budget={budgetToEdit} budgets={budgets} hideDeleteForm={hideDeleteForm} updateBudgets={updateBudgets} />
+                </div>
             }
 
         </>

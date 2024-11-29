@@ -32,6 +32,8 @@ function Transactions({ user }: transactionsProps) {
             setTransactions([...data.page_list])
             setNumPages(data.num_pages)
 
+            // 401 status -> change auth status*
+
         } catch (error) {
             console.log(error)
         }

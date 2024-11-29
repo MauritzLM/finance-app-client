@@ -17,7 +17,7 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
     const [formErrors, setFormErrors] = useState({ 'category': '', 'maximum': '', 'theme': '' })
 
 
-    // submit function*
+    // submit function
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         try {
             event.preventDefault()
@@ -33,6 +33,8 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
 
             const data = await response.json()
             console.log(data)
+
+            // 401 - unauthorized*
 
             // if errors
             if (response.status !== 201) {

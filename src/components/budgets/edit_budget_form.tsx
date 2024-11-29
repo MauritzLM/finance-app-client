@@ -33,6 +33,8 @@ function EditBudgetForm({ user, budget, budgets, hideEditForm, updateBudgets }: 
 
             console.log(data)
 
+            // 401 - unauthorized*
+
             // if errors
             if (response.status === 400) {
                 const dataArr = Object.keys(data)

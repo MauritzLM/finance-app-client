@@ -10,6 +10,7 @@ interface deleteFormProps {
 }
 
 function DeleteBudgetForm({ user, budget, budgets, updateBudgets, hideDeleteForm }: deleteFormProps) {
+    // state -> formErrors* 
 
     // handle submit
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -25,6 +26,8 @@ function DeleteBudgetForm({ user, budget, budgets, updateBudgets, hideDeleteForm
 
             const data = await response.json()
             console.log(data)
+
+            // 401 - unauthorized*
 
             if (response.status === 200) {
                 const newArr: budget[] = budgets.filter(item => item.id !== budget.id)

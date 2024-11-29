@@ -29,6 +29,8 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
 
             console.log(data)
 
+            // 401 status -> change auth status*
+
         } catch (error) {
             console.log(error)
         }
