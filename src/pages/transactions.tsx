@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import { userObj, transaction } from "../types"
+import { formatTransaction } from "../helpers/helpers"
 
 interface transactionsProps {
     user: userObj
@@ -61,7 +62,7 @@ function Transactions({ user }: transactionsProps) {
             const data = await response.json()
 
             setTransactions([...data.page_list])
-            setCategory(data.num_pages)
+            setNumPages(data.num_pages)
 
         } catch (error) {
             console.log(error)
@@ -125,7 +126,7 @@ function Transactions({ user }: transactionsProps) {
                                 <td>{t.name}</td>
                                 <td>{t.category}</td>
                                 <td>{t.date}</td>
-                                <td>{t.amount}</td>
+                                <td className={t.amount < 0 ? '' : 'income'}>{formatTransaction(t.amount.toString())}</td>
                             </tr>
                         )}
                     </tbody>
