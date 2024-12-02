@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react"
 import { userObj, pot } from "../types"
+import NewPotForm from "../components/pots/new_pot_form"
+import EditPotForm from "../components/pots/edit_pot_form"
+import AddForm from "../components/pots/add_form"
+import WithdrawForm from "../components/pots/withdraw_form"
+import DeletePotForm from "../components/pots/delete_pot_form"
+import { roundPercentage } from "../helpers/helpers"
 
 interface potsProps {
     user: userObj,
@@ -38,8 +44,47 @@ function Pots({ user, pots, updatePots }: potsProps) {
     }
 
     // forms -> new, edit, delete / add, withdraw*
+    function displayEditForm(p: pot) {
+        setPotToEdit(p)
+        setShowEditForm(true)
+        // hide other forms
+    }
 
-    // show / hide state functions*
+    function displayDeleteForm(p: pot) {
+        setPotToEdit(p)
+        setShowDeleteform(true)
+    }
+
+    function displayAddForm(p: pot) {
+        setPotToEdit(p)
+        setShowAddForm(true)
+    }
+
+    function displayWithdrawForm(p: pot) {
+        setPotToEdit(p)
+        setShowWithdrawForm(true)
+    }
+
+    // show / hide state functions
+    function hideNewForm() {
+        setShowNewForm(false)
+    }
+
+    function hideEditForm() {
+        setShowEditForm(false)
+    }
+
+    function hideDeleteForm() {
+        setShowDeleteform(false)
+    }
+
+    function hideAddForm() {
+        setShowAddForm(false)
+    }
+
+    function hideWithdrawForm() {
+        setShowWithdrawForm(false)
+    }
 
     useEffect(() => {
         if (!pots.length) {
@@ -50,19 +95,23 @@ function Pots({ user, pots, updatePots }: potsProps) {
     return (
         <>
             <h1>Pots</h1>
-            <button>+ Add New Pot</button>
+            <button onClick={() => setShowNewForm(true)}>+ Add New Pot</button>
 
             {/* pot detail list */}
             <div className="pots-container">
                 {pots?.map(pot =>
                     <div key={pot.name} className="pot-card">
                         <div>
-                            <h2>{pot.name}</h2>
+                            <div>
+                                <div style={{ backgroundColor: pot.theme }}></div>
+                                <h2>{pot.name}</h2>
+                            </div>
+
                             {/* toggle button */}
                             <button></button>
                             <div>
-                                <button>Edit Pot</button>
-                                <button>Delete Pot</button>
+                                <button onClick={() => displayEditForm(pot)}>Edit Pot</button>
+                                <button onClick={() => displayDeleteForm(pot)}>Delete Pot</button>
                             </div>
                         </div>
 
@@ -70,16 +119,18 @@ function Pots({ user, pots, updatePots }: potsProps) {
                             <div>
                                 <span>Total Saved</span><span>${pot.total}</span>
                             </div>
-                            {/* add progress bar* */}
-                            <div className="progress-bar"></div>
+                            {/* progress bar */}
+                            <div className="progress-bar">
+                                <div style={{ backgroundColor: pot.theme, width: `${roundPercentage((pot.total / pot.target) * 100)}%` }}></div>
+                            </div>
                             <div>
-                                <span>{(pot.total / pot.target) * 100}%</span><span>Target of ${pot.target}</span>
+                                <span>{roundPercentage((pot.total / pot.target) * 100)}%</span><span>Target of ${pot.target}</span>
                             </div>
                         </div>
 
                         <div>
-                            <button>+ Add Money</button>
-                            <button>Withdraw Money</button>
+                            <button onClick={() => displayAddForm(pot)}>+ Add Money</button>
+                            <button onClick={() => displayWithdrawForm(pot)}>Withdraw Money</button>
                         </div>
                     </div>
                 )}
@@ -88,34 +139,34 @@ function Pots({ user, pots, updatePots }: potsProps) {
             {/* new pot form* */}
             {showNewForm &&
                 <div className="form_modal">
-
+                    <NewPotForm user={user} pots={pots} updatePots={updatePots} hideNewForm={hideNewForm} />
                 </div>
             }
             {/* edit pot form* */}
             {showEditForm &&
                 <div className="form_modal">
-
+                    <EditPotForm user={user} pot={potToEdit} pots={pots} updatePots={updatePots} hideEditForm={hideEditForm} />
                 </div>
             }
 
             {/* delete pot form* */}
             {showDeleteForm &&
                 <div className="form_modal">
-
+                    <DeletePotForm user={user} pot={potToEdit} pots={pots} updatePots={updatePots} hideDeleteForm={hideDeleteForm} />
                 </div>
             }
 
             {/* add form* */}
             {showAddForm &&
                 <div className="form_modal">
-
+                    <AddForm user={user} pot={potToEdit} pots={pots} updatePots={updatePots} hideAddForm={hideAddForm} />
                 </div>
             }
 
             {/* withdraw form* */}
             {showWithdrawForm &&
                 <div className="form_modal">
-
+                    <WithdrawForm user={user} pot={potToEdit} pots={pots} updatePots={updatePots} hideWithdrawForm={hideWithdrawForm} />
                 </div>
             }
         </>
