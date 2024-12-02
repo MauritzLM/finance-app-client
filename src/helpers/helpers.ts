@@ -141,3 +141,23 @@ export function unusedThemes(themes: string[], arr: stringOrNumberObj[]) {
 
     return themes.filter(el => newArr.includes(el) === false)
 }
+
+// round percentage
+export function roundPercentage(num: number) {
+    return Math.round(num * 100) / 100
+}
+
+// format transaction amount
+export function formatTransaction(t: string) {
+    if (t.startsWith('-')) {
+        const newT = t.replace('-', '$')
+
+        return '-' + newT
+    }
+
+    else {
+        const newT = t.replace('+', '$')
+
+        return '+' + newT
+    }
+}
