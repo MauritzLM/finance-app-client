@@ -105,8 +105,11 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                         {recurringBills.length && filterAndSortArr(recurringBills, searchTerm, sortBy).map(t =>
                             <tr key={t.id}>
                                 <td>{t.name}</td>
-                                <td>Monthly-{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric' })}</td>
-                                <td>${Math.abs(t.amount)}</td>
+                                <td>Monthly-{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric' })}
+                                    {dueSoon(t) && <img src="./src/assets/images/icon-bill-due.svg"></img>}
+                                    {isPaid(t) && <img src="./src/assets/images/icon-bill-paid.svg"></img>}
+                                </td>
+                                <td className={dueSoon(t) ? 'danger' : ''}>${Math.abs(t.amount)}</td>
                             </tr>
                         )}
                     </tbody>
