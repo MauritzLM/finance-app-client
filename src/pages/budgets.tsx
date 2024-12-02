@@ -6,6 +6,7 @@ import NewBudgetForm from "../components/budgets/new_budget_form"
 import { Link } from "react-router-dom"
 import EditBudgetForm from "../components/budgets/edit_budget_form"
 import DeleteBudgetForm from "../components/budgets/delete_budget_form"
+import { roundPercentage } from "../helpers/helpers"
 
 interface budgetProps {
     user: userObj,
@@ -22,7 +23,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
     const [budgetToEdit, setBudgetToEdit] = useState<budget>({})
     // if new budget has been created
     const [newBudget, setNewBudget] = useState('')
-    
+
 
     // fetch budgets and spending if not in props
     async function getBudgets() {
@@ -115,7 +116,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         if (!budgets.length || !budgetSpending.length) {
             getBudgets()
         }
-        
+
         // if new budget has been created get the spending of that budget
         if (newBudget !== '') {
             getNewBudgetSpending()
@@ -141,6 +142,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                         <ul>
                             {budgets.map(budget =>
                                 <li key={budget.id}>
+                                    <div style={{ backgroundColor: budget.theme }}></div>
                                     <span>{budget.category}</span>
                                     <span>{Math.abs(budgetSpending[budget.category]).toString()} of {budget.maximum}</span>
                                 </li>
@@ -153,7 +155,10 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                         {budgets.map(budget =>
                             <div key={budget.category}>
                                 <div>
-                                    <h2>{budget.category}</h2>
+                                    <div>
+                                        <div style={{ backgroundColor: budget.theme }}></div>
+                                        <h2>{budget.category}</h2>
+                                    </div>
                                     {/* toggle edit delete button* */}
                                     <button></button>
                                     <div className="">
@@ -163,8 +168,11 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                     <p>maximum of {budget.maximum}</p>
                                     <div>
                                         {/* spending bar* */}
-                                        <div></div>
+                                        <div className="spending-bar">
+                                            <div style={{ backgroundColor: budget.theme, width: `${roundPercentage((Math.abs(budgetSpending[budget.category]) / budget.maximum) * 100)}%` }}></div>
+                                        </div>
                                         <div>
+                                            <div style={{ backgroundColor: budget.theme }}></div>
                                             <span>Spent</span>
                                             <span>{Math.abs(budgetSpending[budget.category]).toString()}</span>
                                         </div>
