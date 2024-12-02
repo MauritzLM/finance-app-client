@@ -37,7 +37,7 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
             // 401 - unauthorized*
 
             // if errors
-            if (response.status !== 201) {
+            if (response.status === 400) {
                 const dataArr = Object.keys(data)
 
                 const errorsObj: strObj = {}
@@ -47,16 +47,19 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
                 setFormErrors({ ...formErrors, ...errorsObj })
                 return
             }
+            
+            // success
+            if (response.status === 201) {
+                // close form & update budget with returned object
+                const newBudgetArr = [...budgets, data]
 
-            // close form & update budget with returned object
-            const newBudgetArr = [...budgets, data]
+                // add new budget to budgets state
+                updateBudgets(newBudgetArr)
+                // update state to new budget category
+                updateNewBudget(formData.category)
 
-            // add new budget to budgets state
-            updateBudgets(newBudgetArr)
-            // update state to new budget category
-            updateNewBudget(formData.category)
-
-            hideNewForm()
+                hideNewForm()
+            }
 
 
         } catch (error) {

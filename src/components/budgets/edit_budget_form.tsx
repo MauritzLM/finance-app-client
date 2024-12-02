@@ -46,7 +46,8 @@ function EditBudgetForm({ user, budget, budgets, hideEditForm, updateBudgets }: 
                 setFormErrors({ ...formErrors, ...errorsObj })
                 return
             }
-
+            
+            // success
             if (response.status === 200) {
                 // remove object and replace with updated object
                 const filteredArr: budget[] = budgets.filter(item => item.id !== budget.id)

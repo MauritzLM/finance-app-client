@@ -28,7 +28,8 @@ function DeleteBudgetForm({ user, budget, budgets, updateBudgets, hideDeleteForm
             console.log(data)
 
             // 401 - unauthorized*
-
+            
+            // success
             if (response.status === 200) {
                 const newArr: budget[] = budgets.filter(item => item.id !== budget.id)
 
