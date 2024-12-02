@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { userObj, overviewData, transaction, pot, budget, budget_spending } from "../types"
 import { Link } from "react-router-dom"
-import { isPaid, totalUpcoming, dueSoon } from "../helpers/helpers"
+import { isPaid, totalUpcoming, dueSoon, formatTransaction } from "../helpers/helpers"
 
 interface overviewProps {
     user: userObj,
@@ -86,7 +86,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                         <span>{expenses ? Math.abs(expenses) : ''}</span>
                     </div>
                 </div>
-                  {/* pots */}
+                {/* pots */}
                 <div className="pots">
                     <h2>Pots</h2>
                     {/* total */}
@@ -102,6 +102,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                             <ul>
                                 {overviewData.pots.slice(0, 4).map(pot =>
                                     <li key={pot.name}>
+                                        <div style={{ backgroundColor: pot.theme }}></div>
                                         <span>{pot.name}</span>
                                         <span>{pot.total}</span>
                                     </li>
@@ -113,6 +114,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                 {/* budgets */}
                 <div className="budgets">
                     <h2>Budgets</h2>
+                    <Link to="/budgets">See Details</Link>
                     {Object.keys(overviewData).includes('budgets') &&
                         <div>
                             {/* calculate total spent* */}
@@ -122,8 +124,8 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                             <span>of {overviewData.budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
                             <ul>
                                 {overviewData.budgets.map(budget =>
-                                    <li key={budget.category}>
-                                        {/* theme color* */}
+                                    <li key={budget.category} >
+                                        <div style={{ backgroundColor: budget.theme }}></div>
                                         <span>{budget.category}</span>
                                         <span>{budget.maximum}</span>
                                     </li>
@@ -145,7 +147,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                                 </div>
                                 <div>
                                     {/* format amount +/-* */}
-                                    <span>{item.amount}</span>
+                                    <span className={item.amount < 0 ? '' : 'income'}>{formatTransaction(item.amount.toString())}</span>
                                     <span>{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                                 </div>
 
