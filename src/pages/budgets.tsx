@@ -134,17 +134,17 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                 <div>
                     <div className="budgets-summary">
                         {/* total spent and total limit */}
-                        <span>{Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0))}</span>
-                        <span>of {budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
+                        <span data-testid="total-spent">${Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0))}</span>
+                        <span data-testid="limit">of ${budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
 
                         <h2>Spending Summary</h2>
 
                         <ul>
                             {budgets.map(budget =>
-                                <li key={budget.id}>
+                                <li data-testid="summary-list" key={budget.id}>
                                     <div style={{ backgroundColor: budget.theme }}></div>
                                     <span>{budget.category}</span>
-                                    <span>{Math.abs(budgetSpending[budget.category]).toString()} of {budget.maximum}</span>
+                                    <span data-testid="budget-spending">${Math.abs(budgetSpending[budget.category]).toFixed(2)} of ${budget.maximum.toFixed(2)}</span>
                                 </li>
                             )}
                         </ul>
@@ -157,7 +157,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                 <div>
                                     <div>
                                         <div style={{ backgroundColor: budget.theme }}></div>
-                                        <h2>{budget.category}</h2>
+                                        <h2 data-testid="detail-category">{budget.category}</h2>
                                     </div>
                                     {/* toggle edit delete button* */}
                                     <button></button>
@@ -174,11 +174,11 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                         <div>
                                             <div style={{ backgroundColor: budget.theme }}></div>
                                             <span>Spent</span>
-                                            <span>{Math.abs(budgetSpending[budget.category]).toString()}</span>
+                                            <span data-testid="detail-spending">${Math.abs(budgetSpending[budget.category]).toFixed(2)}</span>
                                         </div>
                                         <div>
                                             <span>Remaining</span>
-                                            <span>{(budget.maximum - Math.abs(budgetSpending[budget.category])).toString()}</span>
+                                            <span data-testid="detail-remaining">${(budget.maximum - Math.abs(budgetSpending[budget.category])).toFixed(2)}</span>
                                         </div>
 
                                     </div>
