@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { userObj, transaction } from "../types"
-import { isPaid, totalUpcoming, dueSoon, filterAndSortArr } from "../helpers/helpers"
+import { isPaid, isUpcoming, dueSoon, filterAndSortArr } from "../helpers/helpers"
 
 interface recurringBillsProps {
     user: userObj,
@@ -66,7 +66,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                             <li>
                                 <span>Total Upcoming</span>
                                 {/* calculate amount* */}
-                                <span>{recurringBills.filter(totalUpcoming).length} (${Math.abs(recurringBills.filter(totalUpcoming).reduce((a, c) => a + c.amount, 0))})</span>
+                                <span>{recurringBills.filter(isUpcoming).length} (${Math.abs(recurringBills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0))})</span>
                             </li>
                             <li>
                                 <span>Due Soon</span>

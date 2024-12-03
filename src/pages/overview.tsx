@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { userObj, overviewData, transaction, pot, budget, budget_spending } from "../types"
 import { Link } from "react-router-dom"
-import { isPaid, totalUpcoming, dueSoon, formatTransaction } from "../helpers/helpers"
+import { isPaid, isUpcoming, dueSoon, formatTransaction } from "../helpers/helpers"
 
 interface overviewProps {
     user: userObj,
@@ -167,7 +167,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                             </li>
                             <li>
                                 <span>Total Upcoming</span>
-                                <span>${Math.abs(overviewData.recurring_bills.filter(totalUpcoming).reduce((a, c) => a + c.amount, 0))}</span>
+                                <span>${Math.abs(overviewData.recurring_bills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0))}</span>
                             </li>
                             <li>
                                 <span>Due Soon</span>
