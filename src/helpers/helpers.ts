@@ -12,8 +12,8 @@ export function isPaid(item: transaction) {
     return false
 }
 
-// total upcoming
-export function totalUpcoming(item: transaction) {
+// is upcoming
+export function isUpcoming(item: transaction) {
     const today: string = new Date().toLocaleDateString('en-GB', { 'day': 'numeric' })
     const due_date: string = new Date(item.date).toLocaleDateString('en-GB', { 'day': 'numeric' })
 
@@ -37,7 +37,7 @@ export function dueSoon(item: transaction) {
     return false
 }
 
-// filter
+// filter and sort for recurring bills
 export function filterAndSortArr(currentArr: transaction[], search: string, sort: string) {
     let newArr = []
     // show all if no search term
@@ -46,15 +46,36 @@ export function filterAndSortArr(currentArr: transaction[], search: string, sort
     }
 
     else {
-        newArr = currentArr.filter(item => item.name.toLowerCase().includes(search))
+        newArr = currentArr.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
     }
 
     // sort according to sortby
     // oldest
     if (sort === 'Oldest') {
         return newArr.sort((a, b) => {
-            const dateA = new Date(a.date).toLocaleString('en-GB', { 'year': 'numeric', 'month': 'short', 'day': 'numeric' })
-            const dateB = new Date(b.date).toLocaleString('en-GB', { 'year': 'numeric', 'month': 'short', 'day': 'numeric' })
+            // only compare day
+            const dateA = new Date(a.date).toLocaleString('en-GB', { 'day': 'numeric' })
+            const dateB = new Date(b.date).toLocaleString('en-GB', { 'day': 'numeric' })
+
+            if (dateA > dateB) {
+                return -1
+            }
+
+            if (dateB > dateA) {
+                return 1
+            }
+
+            return 0
+
+        })
+    }
+    
+    // latest
+    if (sort === 'Latest') {
+        return newArr.sort((a, b) => {
+            // only compare day
+            const dateA = new Date(a.date).toLocaleString('en-GB', { 'day': 'numeric' })
+            const dateB = new Date(b.date).toLocaleString('en-GB', { 'day': 'numeric' })
 
             if (dateA > dateB) {
                 return 1
@@ -107,12 +128,12 @@ export function filterAndSortArr(currentArr: transaction[], search: string, sort
 
     // Highest
     if (sort === 'Highest') {
-        return newArr.sort((a, b) => a.amount - b.amount)
+        return newArr.sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount))
     }
 
     // Lowest
     if (sort === 'Lowest') {
-        return newArr.sort((a, b) => b.amount - a.amount)
+        return newArr.sort((a, b) => Math.abs(a.amount) - Math.abs(b.amount))
     }
 
     return newArr
