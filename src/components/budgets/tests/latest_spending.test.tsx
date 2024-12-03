@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import '@testing-library/jest-dom'
 import LatestSpending from '../latest_spending'
 import { userObj } from '../../../types'
+import { act } from 'react'
 
 
 // mocks
@@ -21,8 +22,10 @@ const mockUser: userObj = { 'user': { 'id': 1, 'username': 'mo' }, 'token': '123
 
 describe('test latest spending component', () => {
     it('test component rendering', async () => {
-        render(<BrowserRouter><LatestSpending user={mockUser} category={'Education'} /></BrowserRouter>)
-
+        act(() => {
+            render(<BrowserRouter><LatestSpending user={mockUser} category={'Education'} /></BrowserRouter>)
+        })
+        
         const transaction_list = await screen.findAllByRole('listitem');
 
         expect(transaction_list).toHaveLength(3)
