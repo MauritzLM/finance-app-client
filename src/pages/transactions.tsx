@@ -122,11 +122,11 @@ function Transactions({ user }: transactionsProps) {
                     </thead>
                     <tbody>
                         {transactions?.map(t =>
-                            <tr key={t.id}>
+                            <tr data-testid="transaction" key={t.id}>
                                 <td>{t.name}</td>
                                 <td>{t.category}</td>
-                                <td>{t.date}</td>
-                                <td className={t.amount < 0 ? '' : 'income'}>{formatTransaction(t.amount.toString())}</td>
+                                <td data-testid="date">{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric', 'month': 'short', 'year': 'numeric' })}</td>
+                                <td data-testid="amount" className={t.amount < 0 ? '' : 'income'}>${formatTransaction(t.amount.toString())}</td>
                             </tr>
                         )}
                     </tbody>
@@ -136,7 +136,7 @@ function Transactions({ user }: transactionsProps) {
 
             <div className="page-buttons">
                 {Array.from({ length: numPages }, (v, i) => i + 1).map(page =>
-                    <button key={page} onClick={() => setPageNumber(page)} disabled={pageNumber === page ? true : false}>{page}</button>
+                    <button data-testid="page-btn" key={page} onClick={() => setPageNumber(page)} disabled={pageNumber === page ? true : false}>{page}</button>
                 )}
             </div>
 
