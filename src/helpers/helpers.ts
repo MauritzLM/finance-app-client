@@ -69,7 +69,7 @@ export function filterAndSortArr(currentArr: transaction[], search: string, sort
 
         })
     }
-    
+
     // latest
     if (sort === 'Latest') {
         return newArr.sort((a, b) => {
@@ -171,14 +171,13 @@ export function roundPercentage(num: number) {
 // format transaction amount
 export function formatTransaction(t: string) {
     if (t.startsWith('-')) {
-        const newT = t.replace('-', '$')
 
-        return '-' + newT
+        const newTArr = t.split('-')
+
+        return '-' + '$' + Number(newTArr[1]).toFixed(2)
     }
 
     else {
-        const newT = t.replace('+', '$')
-
-        return '+' + newT
+        return '+' + '$' + Number(t).toFixed(2)
     }
 }
