@@ -95,12 +95,12 @@ function Pots({ user, pots, updatePots }: potsProps) {
     return (
         <>
             <h1>Pots</h1>
-            <button onClick={() => setShowNewForm(true)}>+ Add New Pot</button>
+            <button data-testid="new-btn" onClick={() => setShowNewForm(true)}>+ Add New Pot</button>
 
             {/* pot detail list */}
             <div className="pots-container">
                 {pots?.map(pot =>
-                    <div key={pot.name} className="pot-card">
+                    <div data-testid="pot-item" key={pot.name} className="pot-card">
                         <div>
                             <div>
                                 <div style={{ backgroundColor: pot.theme }}></div>
@@ -110,27 +110,27 @@ function Pots({ user, pots, updatePots }: potsProps) {
                             {/* toggle button */}
                             <button></button>
                             <div>
-                                <button onClick={() => displayEditForm(pot)}>Edit Pot</button>
-                                <button onClick={() => displayDeleteForm(pot)}>Delete Pot</button>
+                                <button data-testid="edit-btn" onClick={() => displayEditForm(pot)}>Edit Pot</button>
+                                <button data-testid="delete-btn" onClick={() => displayDeleteForm(pot)}>Delete Pot</button>
                             </div>
                         </div>
 
                         <div>
                             <div>
-                                <span>Total Saved</span><span>${pot.total}</span>
+                                <span>Total Saved</span><span data-testid="pot-total">${pot.total.toFixed(2)}</span>
                             </div>
                             {/* progress bar */}
                             <div className="progress-bar">
                                 <div style={{ backgroundColor: pot.theme, width: `${roundPercentage((pot.total / pot.target) * 100)}%` }}></div>
                             </div>
                             <div>
-                                <span>{roundPercentage((pot.total / pot.target) * 100)}%</span><span>Target of ${pot.target}</span>
+                                <span data-testid="pot-percentage">{roundPercentage((pot.total / pot.target) * 100)}%</span><span data-testid="pot-target">Target of ${pot.target}</span>
                             </div>
                         </div>
 
                         <div>
-                            <button onClick={() => displayAddForm(pot)}>+ Add Money</button>
-                            <button onClick={() => displayWithdrawForm(pot)}>Withdraw Money</button>
+                            <button data-testid="add-btn" onClick={() => displayAddForm(pot)}>+ Add Money</button>
+                            <button data-testid="withdraw-btn" onClick={() => displayWithdrawForm(pot)}>Withdraw Money</button>
                         </div>
                     </div>
                 )}

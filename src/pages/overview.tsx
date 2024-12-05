@@ -17,10 +17,6 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
     const [expenses, setExpenses] = useState<number>()
     const [income, setIncome] = useState<number>()
 
-    function getBalance(i: number = 0, e: number = 0) {
-        return i + e
-    }
-
     // fetch overview content
     async function getOverviewData() {
         try {
@@ -56,8 +52,6 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                 setIncome(data.income.reduce((a: number, c: transaction) => a + c.amount, 0))
             }
 
-            console.log(data)
-
         } catch (error) {
             console.log(error)
         }
@@ -75,15 +69,15 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                 <div className="balance">
                     <div>
                         <span>Balance</span>
-                        <span>{getBalance(income, expenses)}</span>
+                        <span data-testid="balance">${income && expenses ? (income + expenses).toFixed(2) : 0}</span>
                     </div>
                     <div>
                         <span>Income</span>
-                        <span>{income ? income : ''}</span>
+                        <span data-testid="income">${income ? income.toFixed(2) : ''}</span>
                     </div>
                     <div>
                         <span>Expenses</span>
-                        <span>{expenses ? Math.abs(expenses) : ''}</span>
+                        <span data-testid="expenses">${expenses ? Math.abs(expenses).toFixed(2) : ''}</span>
                     </div>
                 </div>
                 {/* pots */}
@@ -95,16 +89,15 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                         <div>
                             <div className="total">
                                 <span>Total Saved</span>
-                                <span>{overviewData.pots.reduce((a, c) => a + c.total, 0)}</span>
+                                <span data-testid="pots-total">${Math.floor(overviewData.pots.reduce((a, c) => a + c.total, 0))}</span>
                             </div>
-
 
                             <ul>
                                 {overviewData.pots.slice(0, 4).map(pot =>
-                                    <li key={pot.name}>
+                                    <li data-testid='pot-item' key={pot.name}>
                                         <div style={{ backgroundColor: pot.theme }}></div>
                                         <span>{pot.name}</span>
-                                        <span>{pot.total}</span>
+                                        <span data-testid="pot-total">${Math.floor(pot.total)}</span>
                                     </li>
                                 )}
                             </ul>
@@ -118,16 +111,16 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                     {Object.keys(overviewData).includes('budgets') &&
                         <div>
                             {/* calculate total spent* */}
-                            <span>{Math.abs(Object.values(overviewData.budget_spending).reduce((a, c) => a + c, 0))}</span>
+                            <span data-testid="budgets-spent">${Math.floor(Math.abs(Object.values(overviewData.budget_spending).reduce((a, c) => a + c, 0)))}</span>
                             {/* limit */}
 
-                            <span>of {overviewData.budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
+                            <span data-testid="budgets-limit">of ${overviewData.budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
                             <ul>
-                                {overviewData.budgets.map(budget =>
+                                {overviewData.budgets.slice(0, 4).map(budget =>
                                     <li key={budget.category} >
                                         <div style={{ backgroundColor: budget.theme }}></div>
                                         <span>{budget.category}</span>
-                                        <span>{budget.maximum}</span>
+                                        <span data-testid="budget-maximum">${budget.maximum.toFixed(2)}</span>
                                     </li>
                                 )}
                             </ul>
@@ -140,15 +133,15 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                     <Link to="/transactions">View All</Link>
                     <ul>
                         {Object.keys(overviewData).includes('recent_transactions') && overviewData.recent_transactions.map(item =>
-                            <li key={item.date}>
+                            <li data-testid="transaction" key={item.date}>
                                 <div>
                                     {/* img* */}
                                     <span>{item.name}</span>
                                 </div>
                                 <div>
                                     {/* format amount +/-* */}
-                                    <span className={item.amount < 0 ? '' : 'income'}>{formatTransaction(item.amount.toString())}</span>
-                                    <span>{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                                    <span data-testid="t-amount" className={item.amount < 0 ? '' : 'income'}>{formatTransaction(item.amount.toString())}</span>
+                                    <span data-testid="t-dates">{new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                                 </div>
 
                             </li>
@@ -161,17 +154,17 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
 
                     {Object.keys(overviewData).includes('recurring_bills') &&
                         <ul>
-                            <li>
+                            <li data-testid="recurring-item">
                                 <span>Paid Bills</span>
-                                <span>${Math.abs(overviewData.recurring_bills.filter(isPaid).reduce((a, c) => a + c.amount, 0))}</span>
+                                <span data-testid="paid">${Math.abs(overviewData.recurring_bills.filter(isPaid).reduce((a, c) => a + c.amount, 0)).toFixed(2)}</span>
                             </li>
-                            <li>
+                            <li data-testid="recurring-item">
                                 <span>Total Upcoming</span>
-                                <span>${Math.abs(overviewData.recurring_bills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0))}</span>
+                                <span>${Math.abs(overviewData.recurring_bills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0)).toFixed(2)}</span>
                             </li>
-                            <li>
+                            <li data-testid="recurring-item">
                                 <span>Due Soon</span>
-                                <span>${Math.abs(overviewData.recurring_bills.filter(dueSoon).reduce((a, c) => a + c.amount, 0))}</span>
+                                <span>${Math.abs(overviewData.recurring_bills.filter(dueSoon).reduce((a, c) => a + c.amount, 0)).toFixed(2)}</span>
                             </li>
                         </ul>
                     }

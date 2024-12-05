@@ -127,7 +127,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
     return (
         <>
             <h1>Budgets</h1>
-            <button onClick={() => setShowNewForm(true)}>+ Add New Budget</button>
+            <button data-testid="new-btn" onClick={() => setShowNewForm(true)}>+ Add New Budget</button>
 
             {/* spending summary */}
             {budgets.length > 0 &&
@@ -162,8 +162,8 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                     {/* toggle edit delete button* */}
                                     <button></button>
                                     <div className="">
-                                        <button onClick={() => displayEditForm(budget)}>Edit budget</button>
-                                        <button onClick={() => displayDeleteForm(budget)}>Delete budget</button>
+                                        <button data-testid="edit-btn" onClick={() => displayEditForm(budget)}>Edit budget</button>
+                                        <button data-testid="delete-btn" onClick={() => displayDeleteForm(budget)}>Delete budget</button>
                                     </div>
                                     <p>maximum of {budget.maximum}</p>
                                     <div>

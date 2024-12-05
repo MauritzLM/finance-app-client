@@ -51,7 +51,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
 
                     <div className="total">
                         <p>Total Bills</p>
-                        <p>${Math.abs(recurringBills.reduce((a: number, c: transaction) => a + c.amount, 0))}
+                        <p data-testid="total">${Math.abs(recurringBills.reduce((a: number, c: transaction) => a + c.amount, 0)).toFixed(2)}
                         </p>
                     </div>
 
@@ -61,17 +61,17 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                             <li>
                                 <span>Paid Bills</span>
                                 {/* calculate amount* */}
-                                <span>{recurringBills.filter(isPaid).length} (${Math.abs(recurringBills.filter(isPaid).reduce((a, c) => a + c.amount, 0))})</span>
+                                <span data-testid="paid">{recurringBills.filter(isPaid).length} (${Math.abs(recurringBills.filter(isPaid).reduce((a, c) => a + c.amount, 0)).toFixed(2)})</span>
                             </li>
                             <li>
                                 <span>Total Upcoming</span>
                                 {/* calculate amount* */}
-                                <span>{recurringBills.filter(isUpcoming).length} (${Math.abs(recurringBills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0))})</span>
+                                <span data-testid="upcoming">{recurringBills.filter(isUpcoming).length} (${Math.abs(recurringBills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0)).toFixed(2)})</span>
                             </li>
                             <li>
                                 <span>Due Soon</span>
                                 {/* calculate amount* */}
-                                <span>{recurringBills.filter(dueSoon).length} (${Math.abs(recurringBills.filter(dueSoon).reduce((a, c) => a + c.amount, 0))})</span>
+                                <span>{recurringBills.filter(dueSoon).length} (${Math.abs(recurringBills.filter(dueSoon).reduce((a, c) => a + c.amount, 0)).toFixed(2)})</span>
                             </li>
                         </ul>
                     </div>
@@ -81,7 +81,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
 
             <div>
                 {/* search */}
-                <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.currentTarget.value)} />
+                <input data-testid="search" type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.currentTarget.value)} />
 
                 {/* sort */}
                 <select name="sort" id="sort" onChange={(e) => setSortBy(e.currentTarget.value)}>
@@ -103,13 +103,13 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                     </thead>
                     <tbody>
                         {recurringBills.length && filterAndSortArr(recurringBills, searchTerm, sortBy).map(t =>
-                            <tr key={t.id}>
+                            <tr data-testid="bill" key={t.id}>
                                 <td>{t.name}</td>
-                                <td>Monthly-{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric' })}
+                                <td data-testid="date">Monthly-{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric' })}
                                     {dueSoon(t) && <img src="./src/assets/images/icon-bill-due.svg"></img>}
                                     {isPaid(t) && <img src="./src/assets/images/icon-bill-paid.svg"></img>}
                                 </td>
-                                <td className={dueSoon(t) ? 'danger' : ''}>${Math.abs(t.amount)}</td>
+                                <td data-testid="amount" className={dueSoon(t) ? 'danger' : ''}>${Math.abs(t.amount).toFixed(2)}</td>
                             </tr>
                         )}
                     </tbody>
