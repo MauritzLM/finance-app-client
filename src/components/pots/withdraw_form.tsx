@@ -61,7 +61,7 @@ function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdra
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form data-testid="withdraw-form" onSubmit={(e) => handleSubmit(e)}>
                 <h2>Withdraw from '{pot.name}'</h2>
                 <button type="button" onClick={hideWithdrawForm}>close</button>
                 {/* form groups (new amount, bar/numbers, amount to withdraw) */}

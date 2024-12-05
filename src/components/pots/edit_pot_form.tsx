@@ -63,7 +63,7 @@ function EditPotForm({ user, pot, pots, updatePots, hideEditForm }: editFormProp
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form data-testid="edit-form" onSubmit={(e) => handleSubmit(e)}>
                 <h2>Edit Pot</h2>
                 <button type="button" onClick={hideEditForm}>Close</button>
                 <p>If your saving targets change, feel free to update your pots.</p>

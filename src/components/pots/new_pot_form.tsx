@@ -61,7 +61,7 @@ function NewPotForm({ user, pots, updatePots, hideNewForm }: newFormProps) {
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form data-testid="new-form" onSubmit={(e) => handleSubmit(e)}>
                 <h2>Add New Pot</h2>
                 <button type="button" onClick={hideNewForm}>Close</button>
                 <p>Create a pot to set savings targets. These can help keep you on track as you save for special purchases.</p>

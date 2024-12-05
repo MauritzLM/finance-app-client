@@ -66,7 +66,7 @@ function EditBudgetForm({ user, budget, budgets, hideEditForm, updateBudgets }: 
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form data-testid="edit-form" onSubmit={(e) => handleSubmit(e)}>
                 <button type="button" onClick={hideEditForm}>Close</button>
                 <h2>Edit Budget</h2>
                 <p>As your budgets change, feel free to update your spending limits.</p>

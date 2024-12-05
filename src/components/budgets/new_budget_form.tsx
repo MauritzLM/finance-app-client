@@ -69,7 +69,7 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form data-testid="new-form" onSubmit={(e) => handleSubmit(e)}>
                 <button onClick={hideNewForm}>Close</button>
                 <h2>Add New Budget</h2>
                 <p>Choose a category to set a spending budget. These categories can help you monitor spending</p>

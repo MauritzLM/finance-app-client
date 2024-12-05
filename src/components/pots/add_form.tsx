@@ -62,7 +62,7 @@ function AddForm({ user, pot, pots, updatePots, hideAddForm }: addFormProps) {
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form data-testid="add-form" onSubmit={(e) => handleSubmit(e)}>
                 <h2>Add to '{pot.name}'</h2>
                 <button type="button" onClick={hideAddForm}>close</button>
                 {/* form groups (new amount, bar/numbers, amount to add) */}
