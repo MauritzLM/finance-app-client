@@ -39,7 +39,7 @@ describe('test transactions component', () => {
             render(<BrowserRouter><Transactions user={mockUser} /></BrowserRouter>)
         })
 
-        // how to get after update?
+        // how to get after update?*
         const page_buttons = await screen.findAllByTestId('page-btn')
 
         expect(page_buttons).toHaveLength(3)
@@ -50,12 +50,12 @@ describe('test transactions component', () => {
 
         const dates = await screen.findAllByTestId('date')
 
-        expect(dates[0]).toHaveTextContent('1 Aug 2024')
-        expect(dates[2]).toHaveTextContent('30 Jul 2024')
+        expect(dates[0].textContent).toMatch('1 Aug 2024')
+        expect(dates[2].textContent).toMatch('30 Jul 2024')
 
         const amounts = await screen.findAllByTestId('amount')
 
-        expect(amounts[0]).toHaveTextContent('$18.50')
-        expect(amounts[1]).toHaveTextContent('-$17.00')
+        expect(amounts[0].textContent).toMatch('$18.50')
+        expect(amounts[1].textContent).toMatch('-$17.00')
     });
 });
