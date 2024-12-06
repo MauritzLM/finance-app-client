@@ -2,7 +2,7 @@
 import { userObj, budget, budgetForm, strObj } from "../../types";
 import { categories, themeData } from "../../data/data";
 import { useState } from "react";
-import { unusedCategories, unusedThemes } from "../../helpers/helpers";
+import { unusedCategories } from "../../helpers/helpers";
 
 interface newBudgetFormProps {
     user: userObj,
@@ -47,7 +47,7 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
                 setFormErrors({ ...formErrors, ...errorsObj })
                 return
             }
-            
+
             // success
             if (response.status === 201) {
                 // close form & update budget with returned object
@@ -75,7 +75,7 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
                 <p>Choose a category to set a spending budget. These categories can help you monitor spending</p>
 
                 <div className="form-group">
-                    {formErrors.category && <span className="error">{formErrors.category}</span>}
+                    {formErrors.category && <span data-testid="error" className="error">{formErrors.category}</span>}
                     <label htmlFor="category">Budget Category</label>
                     <select name="category" id="category" onChange={(e) => setFormData({ ...formData, 'category': e.currentTarget.value })}>
                         <option value=''>Select a category</option>
@@ -86,13 +86,13 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
                 </div>
 
                 <div className="form-group">
-                    {formErrors.maximum && <span className="error">{formErrors.maximum}</span>}
+                    {formErrors.maximum && <span data-testid="error" className="error">{formErrors.maximum}</span>}
                     <label htmlFor="maximum">Maximum Spend</label>
                     <input type="number" name="maximum" id="maximum" value={formData.maximum} onInput={(e) => setFormData({ ...formData, 'maximum': Number(e.currentTarget.value) })}></input>
                 </div>
 
                 <div className="form-group">
-                    {formErrors.theme && <span className="error">{formErrors.theme}</span>}
+                    {formErrors.theme && <span data-testid="error" className="error">{formErrors.theme}</span>}
                     <label htmlFor="theme">Theme</label>
                     <select name="theme" id="theme" onChange={(e) => setFormData({ ...formData, 'theme': e.currentTarget.value })}>
                         <option value="">Select a Theme</option>
