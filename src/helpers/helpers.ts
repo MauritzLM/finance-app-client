@@ -181,3 +181,19 @@ export function formatTransaction(t: string) {
         return '+' + '$' + Number(t).toFixed(2)
     }
 }
+
+export function formatDay(d: string) {
+    if (d === '1' || d === '21' || d === '31') {
+        return d + 'st'
+    }
+
+    if (d === '2' || d === '22') {
+        return d + 'nd'
+    }
+
+    if (d === '3' || d === '23') {
+        return d + 'rd'
+    }
+
+    return d + 'th'
+}
