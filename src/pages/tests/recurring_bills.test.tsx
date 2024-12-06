@@ -48,7 +48,7 @@ describe('test recurring bills component', () => {
         expect(bill_list.length).toEqual(3)
         expect(amounts[2]).toHaveTextContent('$30.00')
         expect(dates[0].textContent).toMatch('Monthly-1st')
-        expect(dates[0].textContent).toMatch('Monthly-2nd')
+        expect(dates[1].textContent).toMatch('Monthly-2nd')
     });
 
     it('test user search', async () => {
