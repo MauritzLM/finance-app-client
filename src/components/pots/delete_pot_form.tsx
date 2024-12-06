@@ -44,11 +44,10 @@ function DeletePotForm({ user, pot, pots, updatePots, hideDeleteForm }: deleteFo
         <>
             <form data-testid="delete-form" onSubmit={(e) => handleSubmit(e)}>
                 <h2>Delete '{pot.name}'?</h2>
-                <button type="button" onClick={hideDeleteForm}>close</button>
                 <p>Are you sure you want to delete this pot? This action cannot be reversed, and all the data inside it will be removed forever.</p>
 
                 <button type="submit">Yes, Confirm Deletion</button>
-                <button type="button">No, Go Back</button>
+                <button type="button" onClick={hideDeleteForm}>No, Go Back</button>
             </form>
         </>
     )
