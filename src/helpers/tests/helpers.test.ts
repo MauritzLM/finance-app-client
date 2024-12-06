@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { isPaid, dueSoon, isUpcoming, filterAndSortArr, unusedCategories, formatTransaction } from '../helpers'
+import { isPaid, dueSoon, isUpcoming, filterAndSortArr, unusedCategories, formatTransaction, formatDay } from '../helpers'
 import { transaction, budget } from '../../types'
 import { categories } from '../../data/data';
 
 
-// ispaid
-describe('test isPaid, dueSoon and totalUpcoming functions', () => {
+// ispaid, duesoon, totalupcoming -> DEPENDS ON DAY*
+describe('test isPaid, dueSoon, totalUpcoming and formatDay functions', () => {
     it('isPaid test', () => {
         const mockTransaction1: transaction = { 'amount': 15.00, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true }
         const mockTransaction2: transaction = { 'amount': 15.00, 'avatar': '', 'category': 'Bills', 'date': '2024-07-29T10:05:42Z', 'id': 11, 'name': 'Peter', 'recurring': true }
@@ -28,6 +28,13 @@ describe('test isPaid, dueSoon and totalUpcoming functions', () => {
 
         expect(isUpcoming(mockTransaction1)).toBe(false)
         expect(isUpcoming(mockTransaction2)).toBe(true)
+    });
+
+    it('formatDay test', () => {
+        expect(formatDay('1')).toMatch('1st')
+        expect(formatDay('23')).toMatch('23rd')
+        expect(formatDay('11')).toMatch('11th')
+        expect(formatDay('2')).toMatch('2nd')
     });
 });
 
