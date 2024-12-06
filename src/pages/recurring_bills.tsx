@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { userObj, transaction } from "../types"
-import { isPaid, isUpcoming, dueSoon, filterAndSortArr } from "../helpers/helpers"
+import { isPaid, isUpcoming, dueSoon, filterAndSortArr, formatDay } from "../helpers/helpers"
 
 interface recurringBillsProps {
     user: userObj,
@@ -105,7 +105,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                         {recurringBills.length && filterAndSortArr(recurringBills, searchTerm, sortBy).map(t =>
                             <tr data-testid="bill" key={t.id}>
                                 <td>{t.name}</td>
-                                <td data-testid="date">Monthly-{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric' })}
+                                <td data-testid="date">Monthly-{formatDay(new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric' }))}
                                     {dueSoon(t) && <img src="./src/assets/images/icon-bill-due.svg"></img>}
                                     {isPaid(t) && <img src="./src/assets/images/icon-bill-paid.svg"></img>}
                                 </td>
