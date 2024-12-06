@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { themeData } from "../../data/data"
-import { unusedThemes } from "../../helpers/helpers"
 import { pot, userObj, strObj } from "../../types"
 
 interface newFormProps {
