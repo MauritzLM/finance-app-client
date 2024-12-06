@@ -50,7 +50,7 @@ function DeleteBudgetForm({ user, budget, budgets, updateBudgets, hideDeleteForm
         <>
             <form data-testid="delete-form" onSubmit={(e) => handleSubmit(e)}>
                 <button type="button" onClick={hideDeleteForm}>close</button>
-                <h2>Delete '{budget.category}'</h2>
+                <h2>Delete '{budget.category}'?</h2>
                 <p>Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever.</p>
 
                 <button type="submit">Yes, Confirm Deletion</button>
