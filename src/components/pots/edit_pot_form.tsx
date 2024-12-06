@@ -83,7 +83,6 @@ function EditPotForm({ user, pot, pots, updatePots, hideEditForm }: editFormProp
                     {formErrors.theme && <span className="error">{formErrors.theme}</span>}
                     <label htmlFor="theme">Theme</label>
                     <select name="theme" id="theme" value={formData.theme} onChange={(e) => setFormData({ ...formData, 'theme': e.currentTarget.value })}>
-                        <option value="">Select a theme</option>
                         {Object.keys(themeData).map(t =>
                             <option key={t} value={themeData[t]}>{t}</option>
                         )}
