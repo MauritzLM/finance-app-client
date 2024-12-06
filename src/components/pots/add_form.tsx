@@ -66,10 +66,13 @@ function AddForm({ user, pot, pots, updatePots, hideAddForm }: addFormProps) {
                 <h2>Add to '{pot.name}'</h2>
                 <button type="button" onClick={hideAddForm}>close</button>
                 {/* form groups (new amount, bar/numbers, amount to add) */}
-                <div><span>New Amount</span> <span>{formData.amount + pot.total}</span></div>
-                {/* bar* */}
-                <div></div>
-                <div><span>{roundPercentage(((formData.amount + pot.total) / pot.target) * 100)}%</span> <span>Target of {pot.target}</span></div>
+                <div><span>New Amount</span> <span data-testid="new-amount">${(formData.amount + pot.total).toFixed(2)}</span></div>
+                {/* bar */}
+                <div className="progress-bar">
+                    <div className="initial-value" style={{ width: `${roundPercentage((pot.total / pot.target) * 100)}%` }}></div>
+                    <div className="new-value" style={{ width: `${roundPercentage(((formData.amount + pot.total) / pot.target) * 100)}%` }}></div>
+                </div>
+                <div><span data-testid="percentage">{roundPercentage(((formData.amount + pot.total) / pot.target) * 100)}%</span> <span data-testid="target">Target of ${pot.target}</span></div>
                 <div className="form-group">
                     {formErrors.amount && <span className="error">{formErrors.amount}</span>}
                     <label htmlFor="amount">Amount to Add</label>

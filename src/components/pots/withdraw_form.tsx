@@ -65,14 +65,19 @@ function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdra
                 <h2>Withdraw from '{pot.name}'</h2>
                 <button type="button" onClick={hideWithdrawForm}>close</button>
                 {/* form groups (new amount, bar/numbers, amount to withdraw) */}
-                <div><span>New Amount</span> <span>{pot.total - formData.amount}</span></div>
+                <div><span>New Amount</span> <span data-testid="new-amount">${(pot.total - formData.amount).toFixed(2)}</span></div>
                 {/* bar* */}
-                <div></div>
-                <div><span>{roundPercentage(((pot.total - formData.amount) / pot.target) * 100)}%</span> <span>Target of {pot.target}</span></div>
+
+                <div className="progress-bar">
+                    <div className="initial-value" style={{ width: `${roundPercentage((pot.total / pot.target) * 100)}%` }}></div>
+                    <div className="new-value" style={{ width: `${roundPercentage(((pot.total - formData.amount) / pot.target) * 100)}%` }}></div>
+                </div>
+
+                <div><span data-testid="percentage">{roundPercentage(((pot.total - formData.amount) / pot.target) * 100)}%</span> <span data-testid="target">Target of ${pot.target}</span></div>
                 <div className="form-group">
                     {formErrors.amount && <span className="error">{formErrors.amount}</span>}
                     <label htmlFor="amount">Amount to Withdraw</label>
-                    <input type="number" name="amount" id="amount" min={10} max={pot.target - pot.total} value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
+                    <input type="number" name="amount" id="amount" min={10} max={pot.total} value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
                 </div>
                 <button type="submit">Confirm Withdrawal</button>
             </form>
