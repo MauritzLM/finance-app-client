@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import { userObj, transaction } from "../types"
-import { formatTransaction } from "../helpers/helpers"
+import { formatTransaction, separateButtons } from "../helpers/helpers"
 
 interface transactionsProps {
     user: userObj
@@ -82,7 +82,7 @@ function Transactions({ user }: transactionsProps) {
                 <div>
                     <form onSubmit={(e) => getTransactionsSearch(e)}>
                         <input type="text" name="search" value={searchTerm} onInput={(e) => setSearchTerm(e.currentTarget.value)}></input>
-                        <button type="submit">
+                        <button type="submit" disabled={searchTerm === '' ? true : false}>
                             <svg fill="none" height="14" viewBox="0 0 14 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m13.3538 13.1462-3.1294-3.1287c.907-1.08894 1.3593-2.48564 1.2628-3.89955-.0966-1.41391-.7345-2.73618-1.78109-3.69173-1.0466-.95555-2.42131-1.470821-3.83815-1.438621-1.41683.032201-2.76671.609391-3.76883 1.611501-1.00211 1.00212-1.579301 2.352-1.611501 3.76883-.0322 1.41684.483071 2.79155 1.438621 3.83817.95556 1.0466 2.27782 1.6845 3.69173 1.781 1.41391.0966 2.81061-.3557 3.89954-1.2627l3.12878 3.1293c.0464.0465.1016.0833.1623.1085.0607.0251.1257.0381.1914.0381s.1308-.013.1915-.0381c.0607-.0252.1158-.062.1623-.1085.0464-.0464.0833-.1016.1084-.1623.0252-.0607.0381-.1257.0381-.1914s-.0129-.1308-.0381-.1915c-.0251-.0607-.062-.1158-.1084-.1623zm-11.85378-6.64621c0-.89002.26392-1.76005.75839-2.50007.49446-.74002 1.19727-1.31679 2.01954-1.65739.82226-.34059 1.72706-.42971 2.59998-.25607.87291.17363 1.67473.60221 2.30407 1.23155s1.0579 1.43116 1.2316 2.30407c.1736.87292.0845 1.77772-.2561 2.59999-.34062.82226-.91739 1.52507-1.65741 2.01953-.74002.4945-1.61005.7584-2.50007.7584-1.19307-.0013-2.33689-.4759-3.18052-1.31949-.84363-.84363-1.31816-1.98745-1.31948-3.18052z" fill="#201f24" /></svg>
                         </button>
                     </form>
@@ -156,9 +156,27 @@ function Transactions({ user }: transactionsProps) {
             </button>
 
             <div className="page-buttons">
-                {Array.from({ length: numPages }, (v, i) => i + 1).map(page =>
+                {/* if only 4 pages or less */}
+                {numPages <= 4 && Array.from({ length: numPages }, (v, i) => i + 1).map(page =>
                     <button data-testid="page-btn" key={page} onClick={() => setPageNumber(page)} disabled={pageNumber === page ? true : false}>{page}</button>
                 )}
+                {/* if more than 4 pages */}
+                {/* buttons 1,2 and last */}
+                {numPages > 4 && separateButtons(numPages)[0].map(page =>
+                    <button data-testid="page-btn" key={page} onClick={() => setPageNumber(page)} disabled={pageNumber === page ? true : false}>{page}</button>
+                )}
+                {/* middle buttons with toggle */}
+                {numPages > 4 &&
+                    <>
+                        <button className="toggle-btn">
+                            <svg fill="none" height="4" viewBox="0 0 14 4" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8.75 2c0 .34612-.10264.68446-.29493.97225-.19229.28778-.4656.51209-.78537.64454s-.67164.16711-1.01111.09958c-.33946-.06752-.65128-.23419-.89603-.47893-.24474-.24474-.41141-.55657-.47893-.89603-.06753-.33947-.03287-.69134.09958-1.01111.13246-.31977.35676-.593079.64454-.785372.28779-.192292.62613-.294928.97225-.294928.46413 0 .90925.184375 1.23744.512563.32819.328187.51256.773307.51256 1.237437zm-6.75-1.75c-.34612 0-.68446.102636-.97225.294928-.287783.192293-.512085.465602-.644538.785372-.132454.31977-.16711.67164-.099585 1.01111.067524.33946.234195.65129.478937.89603.244746.24474.556566.41141.896026.47893.33947.06753.69134.03287 1.01111-.09958s.59308-.35676.78537-.64454c.1923-.28779.29493-.62613.29493-.97225 0-.46413-.18437-.90925-.51256-1.237437-.32819-.328188-.77331-.512563-1.23744-.512563zm10 0c-.3461 0-.6845.102636-.9722.294928-.2878.192293-.5121.465602-.6446.785372-.1324.31977-.1671.67164-.0996 1.01111.0676.33946.2342.65129.479.89603.2447.24474.5565.41141.896.47893.3395.06753.6913.03287 1.0111-.09958s.5931-.35676.7854-.64454c.1923-.28779.2949-.62613.2949-.97225 0-.22981-.0453-.45738-.1332-.6697-.088-.21232-.2169-.405234-.3794-.567737-.1625-.162502-.3554-.291407-.5677-.379352-.2123-.087946-.4399-.133211-.6697-.133211z" fill="#b3b3b3" /></svg>
+                        </button>
+                        <div>
+                            {separateButtons(numPages)[1].map(page =>
+                                <button data-testid="page-btn" key={page} onClick={() => setPageNumber(page)} disabled={pageNumber === page ? true : false}>{page}</button>)}
+                        </div>
+                    </>
+                }
             </div>
 
             <button disabled={pageNumber === numPages ? true : false} onClick={() => setPageNumber(pageNumber + 1)}>
