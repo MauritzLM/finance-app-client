@@ -197,3 +197,19 @@ export function formatDay(d: string) {
 
     return d + 'th'
 }
+
+
+export function separateButtons(num: number) {
+    if (num <= 4) {
+        return []
+    }
+
+    const numArr = Array.from({ length: num }, (v, i) => i + 1)
+    // arr one contains button 1,2 and last button
+    const newArr_1 = numArr.slice(0, 2)
+    newArr_1.push(numArr[numArr.length - 1])
+    // arr two contains button 3 - 2nd last button
+    const newArr_2 = numArr.slice(2, numArr.length - 1)
+
+    return [newArr_1, newArr_2]
+}
