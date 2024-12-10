@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isPaid, dueSoon, isUpcoming, filterAndSortArr, unusedCategories, formatTransaction, formatDay } from '../helpers'
+import { isPaid, dueSoon, isUpcoming, filterAndSortArr, unusedCategories, formatTransaction, formatDay, separateButtons } from '../helpers'
 import { transaction, budget } from '../../types'
 import { categories } from '../../data/data';
 
@@ -81,7 +81,7 @@ describe('test filterAndSortArr function', () => {
 describe('test unusedCategories function', () => {
 
     const test_budgets: budget[] = [{ 'id': 1, 'category': 'Bills', 'maximum': 500.00, 'theme': '#fff' }, { 'id': 2, 'category': 'Education', 'maximum': 250.00, 'theme': '#1f3' }]
-    
+
     it('test function removes used categories', () => {
         const newArr: string[] = unusedCategories(categories, test_budgets)
         expect(newArr.includes('Bills')).toBe(false)
@@ -102,5 +102,18 @@ describe('test formatTransaction', () => {
     it('test function formats - and  + numbers correctly', () => {
         expect(formatTransaction(testTransaction1.amount.toString())).toEqual('-$18.50')
         expect(formatTransaction(testTransaction2.amount.toString())).toEqual('+$18.50')
-    })
-})
+    });
+});
+
+// separate buttons
+describe('test separateButtons function', () => {
+    it('test function returns two separate arrays', () => {
+        const test_arr = separateButtons(7)
+
+        expect(test_arr.length).toEqual(2)
+        expect(test_arr[0].length).toEqual(3)
+        expect(test_arr[0]).toEqual([1, 2, 7])
+        expect(test_arr[1].length).toEqual(4)
+        expect(test_arr[1]).toEqual([3, 4, 5, 6])
+    });
+});
