@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { userObj, overviewData, transaction, pot, budget, budget_spending } from "../types"
 import { Link } from "react-router-dom"
 import { isPaid, isUpcoming, dueSoon, formatTransaction } from "../helpers/helpers"
+import '../assets/sass/overview.scss'
 
 interface overviewProps {
     user: userObj,
@@ -65,7 +66,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
 
     return (
         <>
-            <div className="container">
+            <div className="overview-wrapper">
                 <div className="balance">
                     <div>
                         <span>Balance</span>
