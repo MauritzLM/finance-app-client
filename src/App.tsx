@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 import Auth from './components/auth/auth'
 import Overview from './pages/overview'
 import Navbar from './components/navbar'
@@ -69,18 +68,19 @@ function App() {
 
   return (
     <>
-      <Navbar user={user} />
-      <main>
-        <Routes>
-          <Route path='/' element={<Overview user={user} changeAuthStatus={changeAuthStatus} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} />} />
-          <Route path='/transactions' element={<Transactions user={user} />} />
-          <Route path='/budgets' element={<Budgets user={user} budgets={budgets} budgetSpending={budgetSpending} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} />} />
-          <Route path='/pots' element={<Pots user={user} pots={pots} updatePots={updatePots} />} />
-          <Route path='/recurring-bills' element={<RecurringBills user={user} recurringBills={recurringBills} updateRecurringBills={updateRecurringBills} />} />
-          <Route path='*' element={<ErrorPage />} />
-        </Routes>
-      </main>
-
+      <div id='container'>
+        <Navbar user={user} />
+        <main>
+          <Routes>
+            <Route path='/' element={<Overview user={user} changeAuthStatus={changeAuthStatus} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} />} />
+            <Route path='/transactions' element={<Transactions user={user} />} />
+            <Route path='/budgets' element={<Budgets user={user} budgets={budgets} budgetSpending={budgetSpending} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} />} />
+            <Route path='/pots' element={<Pots user={user} pots={pots} updatePots={updatePots} />} />
+            <Route path='/recurring-bills' element={<RecurringBills user={user} recurringBills={recurringBills} updateRecurringBills={updateRecurringBills} />} />
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        </main>
+      </div>
     </>
   )
 }
