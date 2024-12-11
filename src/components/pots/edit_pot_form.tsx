@@ -11,7 +11,7 @@ interface editFormProps {
 }
 
 function EditPotForm({ user, pot, pots, updatePots, hideEditForm }: editFormProps) {
-    const [formData, setFormData] = useState({ 'name': pot.name, 'target': pot.target, 'theme': pot.theme })
+    const [formData, setFormData] = useState({ 'name': pot.name, 'target': (pot.target / 100), 'theme': pot.theme })
     const [formErrors, setFormErrors] = useState({ 'name': '', 'target': '', 'theme': '' })
 
     // handle submit function

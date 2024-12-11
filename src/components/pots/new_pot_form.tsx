@@ -10,7 +10,7 @@ interface newFormProps {
 }
 
 function NewPotForm({ user, pots, updatePots, hideNewForm }: newFormProps) {
-    const [formData, setFormData] = useState({ 'name': '', 'target': 0, 'theme': '', 'total': 0.00 })
+    const [formData, setFormData] = useState({ 'name': '', 'target': 0, 'theme': '', 'total': 0 })
     const [formErrors, setFormErrors] = useState({ 'name': '', 'target': '', 'theme': '' })
 
     // handle submit function

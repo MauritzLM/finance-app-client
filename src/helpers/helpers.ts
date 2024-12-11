@@ -174,11 +174,11 @@ export function formatTransaction(t: string) {
 
         const newTArr = t.split('-')
 
-        return '-' + '$' + Number(newTArr[1]).toFixed(2)
+        return '-' + '$' + (Number(newTArr[1]) / 100).toFixed(2)
     }
 
     else {
-        return '+' + '$' + Number(t).toFixed(2)
+        return '+' + '$' + (Number(t) / 100).toFixed(2)
     }
 }
 

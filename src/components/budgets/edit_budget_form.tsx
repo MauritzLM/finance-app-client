@@ -12,7 +12,7 @@ interface editFormProps {
 }
 
 function EditBudgetForm({ user, budget, budgets, hideEditForm, updateBudgets }: editFormProps) {
-    const [formData, setFormData] = useState<budgetForm>({ 'category': budget.category, 'maximum': budget.maximum, 'theme': budget.theme })
+    const [formData, setFormData] = useState<budgetForm>({ 'category': budget.category, 'maximum': (budget.maximum / 100), 'theme': budget.theme })
     const [formErrors, setFormErrors] = useState({ 'category': '', 'maximum': '', 'theme': '' })
 
     // submit function

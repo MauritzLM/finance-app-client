@@ -11,23 +11,23 @@ fetchMock.mockReturnValue(
     Promise.resolve({
         status: 200,
         json: () => Promise.resolve({
-            'pots': [{ 'id': 100, 'name': 'Vacation', 'total': 50.00, 'target': 150.00, 'theme': '#FFF' }, { 'id': 101, 'name': 'Savings', 'total': 150.00, 'target': 550.00, 'theme': '#AAA' },
-            { 'id': 111, 'name': 'Gift', 'total': 40.50, 'target': 80.00, 'theme': '#EEE' }, { 'id': 125, 'name': 'New Laptop', 'total': 120.00, 'target': 400.00, 'theme': '#3A3' },
-            { 'id': 241, 'name': 'Concert Ticket', 'total': 35.00, 'target': 45.00, 'theme': '#D4A' }],
-            'budgets': [{ 'id': 1, 'category': 'Bills', 'maximum': 500.00, 'theme': '#FFF' }, { 'id': 2, 'category': 'Education', 'maximum': 250.00, 'theme': '#1f3' }],
-            'income': [{ 'amount': 230.00, 'avatar': '', 'category': 'Education', 'date': '2024-07-30T10:05:42Z', 'id': 12, 'name': 'Peter', 'recurring': false },
-            { 'amount': 70.00, 'avatar': '', 'category': 'General', 'date': '2024-08-14T10:05:42Z', 'id': 112, 'name': 'Ryu', 'recurring': false }
+            'pots': [{ 'id': 100, 'name': 'Vacation', 'total': 5000, 'target': 15000, 'theme': '#FFF' }, { 'id': 101, 'name': 'Savings', 'total': 15000, 'target': 55000, 'theme': '#AAA' },
+            { 'id': 111, 'name': 'Gift', 'total': 4050, 'target': 8000, 'theme': '#EEE' }, { 'id': 125, 'name': 'New Laptop', 'total': 12000, 'target': 40000, 'theme': '#3A3' },
+            { 'id': 241, 'name': 'Concert Ticket', 'total': 3500, 'target': 4500, 'theme': '#D4A' }],
+            'budgets': [{ 'id': 1, 'category': 'Bills', 'maximum': 50000, 'theme': '#FFF' }, { 'id': 2, 'category': 'Education', 'maximum': 25000, 'theme': '#1f3' }],
+            'income': [{ 'amount': 23000, 'avatar': '', 'category': 'Education', 'date': '2024-07-30T10:05:42Z', 'id': 12, 'name': 'Peter', 'recurring': false },
+            { 'amount': 7000, 'avatar': '', 'category': 'General', 'date': '2024-08-14T10:05:42Z', 'id': 112, 'name': 'Ryu', 'recurring': false }
             ],
-            'expenses': [{ 'amount': -17.25, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
-            { 'amount': -200.30, 'avatar': '', 'category': 'General', 'date': '2024-07-12T09:25:11Z', 'id': 21, 'name': 'Makro', 'recurring': false }],
+            'expenses': [{ 'amount': -1725, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
+            { 'amount': -20030, 'avatar': '', 'category': 'General', 'date': '2024-07-12T09:25:11Z', 'id': 21, 'name': 'Makro', 'recurring': false }],
             'recent_transactions': [
-                { 'amount': 18.50, 'avatar': '', 'category': 'Education', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': false },
-                { 'amount': -17.00, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
-                { 'amount': 30.00, 'avatar': '', 'category': 'Education', 'date': '2024-07-30T10:05:42Z', 'id': 12, 'name': 'Peter', 'recurring': false }
+                { 'amount': 1850, 'avatar': '', 'category': 'Education', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': false },
+                { 'amount': -1700, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
+                { 'amount': 3000, 'avatar': '', 'category': 'Education', 'date': '2024-07-30T10:05:42Z', 'id': 12, 'name': 'Peter', 'recurring': false }
             ],
-            'recurring_bills': [{ 'amount': -17.00, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
-            { 'amount': -23.00, 'avatar': '', 'category': 'Bills', 'date': '2024-08-31T09:25:11Z', 'id': 15, 'name': 'David', 'recurring': true }],
-            'budget_spending': { 'Bills': 400.50, 'Education': 100.00 }
+            'recurring_bills': [{ 'amount': -1700, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
+            { 'amount': -2300, 'avatar': '', 'category': 'Bills', 'date': '2024-08-31T09:25:11Z', 'id': 15, 'name': 'David', 'recurring': true }],
+            'budget_spending': { 'Bills': 40050, 'Education': 10000 }
         }),
     }),
 );

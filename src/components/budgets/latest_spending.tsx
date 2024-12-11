@@ -46,7 +46,7 @@ function LatestSpending({ user, category }: LatestSpendingProps) {
                                 <span>{t.name}</span>
                             </div>
                             <div>
-                                <span data-testid="amount">-${t.amount.toFixed(2)}</span>
+                                <span data-testid="amount">-${(t.amount / 100).toFixed(2)}</span>
                                 <span data-testid="date">{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric', 'month': 'short', 'year': 'numeric' })}</span>
                             </div>
 

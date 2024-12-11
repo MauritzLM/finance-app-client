@@ -96,8 +96,8 @@ describe('test unusedCategories function', () => {
 
 // format transaction
 describe('test formatTransaction', () => {
-    const testTransaction1: transaction = { 'amount': -18.50, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true }
-    const testTransaction2: transaction = { 'amount': 18.50, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true }
+    const testTransaction1: transaction = { 'amount': -1850, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true }
+    const testTransaction2: transaction = { 'amount': 1850, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true }
 
     it('test function formats - and  + numbers correctly', () => {
         expect(formatTransaction(testTransaction1.amount.toString())).toEqual('-$18.50')

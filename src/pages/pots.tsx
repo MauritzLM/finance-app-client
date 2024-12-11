@@ -119,14 +119,14 @@ function Pots({ user, pots, updatePots }: potsProps) {
 
                         <div>
                             <div>
-                                <span>Total Saved</span><span data-testid="pot-total">${pot.total.toFixed(2)}</span>
+                                <span>Total Saved</span><span data-testid="pot-total">${(pot.total / 100).toFixed(2)}</span>
                             </div>
                             {/* progress bar */}
                             <div className="progress-bar">
                                 <div style={{ backgroundColor: pot.theme, width: `${roundPercentage((pot.total / pot.target) * 100)}%` }}></div>
                             </div>
                             <div>
-                                <span data-testid="pot-percentage">{roundPercentage((pot.total / pot.target) * 100)}%</span><span data-testid="pot-target">Target of ${pot.target}</span>
+                                <span data-testid="pot-percentage">{roundPercentage((pot.total / pot.target) * 100)}%</span><span data-testid="pot-target">Target of ${pot.target / 100}</span>
                             </div>
                         </div>
 

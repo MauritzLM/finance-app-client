@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event'
 
 // mocks
 const mockUser: userObj = { 'user': { 'id': 1, 'username': 'mo' }, 'token': '1234' }
-const mockBudgets: budget[] = [{ 'id': 1, 'category': 'Bills', 'maximum': 500.00, 'theme': '#fff' }, { 'id': 2, 'category': 'Education', 'maximum': 250.00, 'theme': '#1f3' }]
+const mockBudgets: budget[] = [{ 'id': 1, 'category': 'Bills', 'maximum': 50000, 'theme': '#fff' }, { 'id': 2, 'category': 'Education', 'maximum': 25000, 'theme': '#1f3' }]
 const mockHideForm = vi.fn()
 const fetchMock = vi.fn();
 fetchMock.mockReturnValue(

@@ -17,9 +17,9 @@ fetchMock.mockReturnValue(
 );
 vi.stubGlobal('fetch', fetchMock);
 const mockUser: userObj = { 'user': { 'id': 1, 'username': 'mo' }, 'token': '1234' }
-const mockBills: transaction[] = [{ 'amount': -18.50, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true },
-{ 'amount': -17.00, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
-{ 'amount': -30.00, 'avatar': '', 'category': 'Education', 'date': '2024-07-30T10:05:42Z', 'id': 12, 'name': 'Peter', 'recurring': true }]
+const mockBills: transaction[] = [{ 'amount': -1850, 'avatar': '', 'category': 'Bills', 'date': '2024-08-01T09:25:11Z', 'id': 10, 'name': 'Daniel', 'recurring': true },
+{ 'amount': -1700, 'avatar': '', 'category': 'Bills', 'date': '2024-08-02T09:25:11Z', 'id': 11, 'name': 'Tom', 'recurring': true },
+{ 'amount': -3000, 'avatar': '', 'category': 'Education', 'date': '2024-07-30T10:05:42Z', 'id': 12, 'name': 'Peter', 'recurring': true }]
 
 // total bills, total paid text content, bill list, search and sort
 

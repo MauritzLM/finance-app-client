@@ -134,8 +134,8 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                 <div>
                     <div className="budgets-summary">
                         {/* total spent and total limit */}
-                        <span data-testid="total-spent">${Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0))}</span>
-                        <span data-testid="limit">of ${budgets.reduce((a, c) => a + c.maximum, 0)} limit</span>
+                        <span data-testid="total-spent">${Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0)) / 100}</span>
+                        <span data-testid="limit">of ${budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit</span>
 
                         <h2>Spending Summary</h2>
 
@@ -144,7 +144,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                 <li data-testid="summary-list" key={budget.id}>
                                     <div style={{ backgroundColor: budget.theme }}></div>
                                     <span>{budget.category}</span>
-                                    <span data-testid="budget-spending">${Math.abs(budgetSpending[budget.category]).toFixed(2)} of ${budget.maximum.toFixed(2)}</span>
+                                    <span data-testid="budget-spending">${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)} of ${(budget.maximum / 100).toFixed(2)}</span>
                                 </li>
                             )}
                         </ul>
@@ -167,7 +167,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                         <button data-testid="edit-btn" onClick={() => displayEditForm(budget)}>Edit budget</button>
                                         <button data-testid="delete-btn" onClick={() => displayDeleteForm(budget)}>Delete budget</button>
                                     </div>
-                                    <p>maximum of {budget.maximum}</p>
+                                    <p>maximum of ${(budget.maximum / 100).toFixed(2)}</p>
                                     <div>
                                         {/* spending bar* */}
                                         <div className="spending-bar">
@@ -176,11 +176,11 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                         <div>
                                             <div style={{ backgroundColor: budget.theme }}></div>
                                             <span>Spent</span>
-                                            <span data-testid="detail-spending">${Math.abs(budgetSpending[budget.category]).toFixed(2)}</span>
+                                            <span data-testid="detail-spending">${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}</span>
                                         </div>
                                         <div>
                                             <span>Remaining</span>
-                                            <span data-testid="detail-remaining">${(budget.maximum - Math.abs(budgetSpending[budget.category])).toFixed(2)}</span>
+                                            <span data-testid="detail-remaining">${((budget.maximum - Math.abs(budgetSpending[budget.category])) / 100).toFixed(2)}</span>
                                         </div>
 
                                     </div>
