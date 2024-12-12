@@ -57,16 +57,7 @@ export function filterAndSortArr(currentArr: transaction[], search: string, sort
             const dateA = new Date(a.date).toLocaleString('en-GB', { 'day': 'numeric' })
             const dateB = new Date(b.date).toLocaleString('en-GB', { 'day': 'numeric' })
 
-            if (dateA > dateB) {
-                return -1
-            }
-
-            if (dateB > dateA) {
-                return 1
-            }
-
-            return 0
-
+            return Number(dateB) - Number(dateA)
         })
     }
 
@@ -77,15 +68,7 @@ export function filterAndSortArr(currentArr: transaction[], search: string, sort
             const dateA = new Date(a.date).toLocaleString('en-GB', { 'day': 'numeric' })
             const dateB = new Date(b.date).toLocaleString('en-GB', { 'day': 'numeric' })
 
-            if (dateA > dateB) {
-                return 1
-            }
-
-            if (dateB > dateA) {
-                return -1
-            }
-
-            return 0
+            return Number(dateA) - Number(dateB)
 
         })
     }
