@@ -2,23 +2,267 @@
 .overview-wrapper {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.page-link {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--grey-500);
+}
+
+/* BALANCE SECTION */
+.balance {
+    background-color: transparent;
+    padding: 0;
+
+    .balance-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-radius: 10px;
+            background-color: white;
+            padding: 20px;
+
+            span {
+                &:nth-of-type(1) {
+                    font-size: 14px;
+                    color: var(--grey-500);
+                }
+
+                &:nth-of-type(2) {
+                    font-size: 32px;
+                    font-weight: 700;
+                }
+            }
+
+            // balance div
+            &:nth-of-type(1) {
+                background-color: var(--grey-900);
+                color: white;
+
+                span {
+                    &:nth-of-type(1) {
+                        font-size: 14px;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
-/* BALANCE SECTION */
-
-
-
 /* POTS SECTION */
+.pots {
+    .total {
+        background-color: var(--beige-100);
+        padding: 20px 16px;
+        border-radius: 10px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        div {
+            display: flex;
+            flex-direction: column;
+
+            span {
+                &:nth-of-type(1) {
+                    color: var(--grey-500);
+                }
+
+                &:nth-of-type(2) {
+                    font-size: 32px;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 16px;
+
+        li {
+            position: relative;
+            padding-left: 20px;
+
+            /* color line */
+            div {
+                position: absolute;
+                left: 0;
+                height: 100%;
+                width: 4px;
+                border-radius: 10px;
+            }
+
+            span {
+                display: block;
+
+                &:nth-of-type(1) {
+                    color: var(--grey-500);
+                    font-size: 12px;
+                }
+
+                &:nth-of-type(2) {
+                    font-size: 14px;
+                    font-weight: 700;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+}
 
 
 
 /* TRANSACTIONS SECTION */
+.transactions {
+    ul {
+        li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--grey-100);
 
+            &:last-of-type {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            div {
+                display: flex;
+                align-items: center;
+
+                &:nth-of-type(1) {
+                    gap: 16px;
+                }
+
+                &:nth-of-type(2) {
+                    flex-direction: column;
+                    gap: 8px;
+
+                    span {
+                        &:nth-of-type(1) {
+                            font-weight: 700;
+                        }
+
+                        &:nth-of-type(2) {
+                            color: var(--grey-500);
+                        }
+                    }
+
+                    .income {
+                        color: var(--green);
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 /* BUDGETS SECTION */
+.budgets {
+    .total {
+        span {
+            &:nth-of-type(1) {
+                font-size: 32px;
+                font-weight: 700;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            &:nth-of-type(2) {
+                color: var(--grey-500);
+                font-size: 14px;
+            }
+        }
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 16px;
+
+        li {
+            position: relative;
+            padding-left: 20px;
+
+            /* color line */
+            div {
+                position: absolute;
+                left: 0;
+                height: 100%;
+                width: 4px;
+                border-radius: 10px;
+            }
+
+            span {
+                display: block;
+
+                &:nth-of-type(1) {
+                    color: var(--grey-500);
+                    font-size: 12px;
+                }
+
+                &:nth-of-type(2) {
+                    font-size: 14px;
+                    font-weight: 700;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+}
 
 
 
 /* RECURRING BILLS SECTION */
+.recurring-bills {
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        li {
+            background-color: var(--beige-100);
+            padding: 20px 16px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--grey-500);
+
+            &:nth-of-type(1) {
+                border-left: 4px solid var(--green);
+            }
+
+            &:nth-of-type(2) {
+                border-left: 4px solid var(--yellow);
+            }
+
+            &:nth-of-type(3) {
+                border-left: 4px solid var(--cyan);
+            }
+
+            span {
+                &:nth-of-type(2) {
+                    font-weight: 700;
+                    color: var(--grey-900);
+                }
+            }
+        }
+    }
+}
