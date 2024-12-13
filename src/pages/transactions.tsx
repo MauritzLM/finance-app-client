@@ -18,7 +18,14 @@ function Transactions({ user }: transactionsProps) {
     // get transactions
     async function getTransactions() {
         try {
-            const response = await fetch(`http://localhost:8000/finance-api/transactions/${category}/${sortBy}/${pageNumber}`, {
+
+            let formatted_term = searchTerm
+
+            if (searchTerm === '') {
+                formatted_term = 'empty'
+            }
+
+            const response = await fetch(`http://localhost:8000/finance-api/transactions/${formatted_term}/${category}/${sortBy}/${pageNumber}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -40,18 +47,12 @@ function Transactions({ user }: transactionsProps) {
         }
     }
 
-    // get transactions by search term
+    // get transactions by search term -> initial search
     async function getTransactionsSearch(event: React.FormEvent<HTMLFormElement>) {
         try {
             event.preventDefault()
 
-            let formatted_term = searchTerm
-
-            if (searchTerm === '') {
-                formatted_term = 'empty'
-            }
-
-            const response = await fetch(`http://localhost:8000/finance-api/transactions/search/${formatted_term}/${sortBy}/${pageNumber}`, {
+            const response = await fetch(`http://localhost:8000/finance-api/transactions/search/${searchTerm}/${sortBy}/${1}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -144,7 +145,7 @@ function Transactions({ user }: transactionsProps) {
                                 </td>
                                 <td>{t.category}</td>
                                 <td data-testid="date">{new Date(t.date).toLocaleString('en-GB', { 'day': 'numeric', 'month': 'short', 'year': 'numeric' })}</td>
-                                <td data-testid="amount" className={t.amount < 0 ? '' : 'income'}>${formatTransaction(t.amount.toString())}</td>
+                                <td data-testid="amount" className={t.amount < 0 ? '' : 'income'}>{formatTransaction(t.amount.toString())}</td>
                             </tr>
                         )}
                     </tbody>
