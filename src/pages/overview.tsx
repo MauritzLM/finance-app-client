@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { userObj, overviewData, transaction, pot, budget, budget_spending } from "../types"
 import { Link } from "react-router-dom"
-import { isPaid, isUpcoming, dueSoon, formatTransaction } from "../helpers/helpers"
+import { isPaid, isUpcoming, dueSoon, formatTransaction, calculateOffset } from "../helpers/helpers"
 import '../assets/sass/overview.scss'
 
 interface overviewProps {
@@ -148,15 +148,27 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                     </Link>
                     {Object.keys(overviewData).includes('budgets') &&
                         <div>
-                            <div className="total">
-                                {/* calculate total spent* */}
-                                <span data-testid="budgets-spent">${Math.floor(Math.abs(Object.values(overviewData.budget_spending).reduce((a, c) => a + c, 0))) / 100}</span>
-                                {/* limit */}
+                            {/* budget graphic and total */}
+                            <div className="color-wheel">
+                                <div className="total">
+                                    {/* calculate total spent* */}
+                                    <span data-testid="budgets-spent">${Math.floor(Math.abs(Object.values(overviewData.budget_spending).reduce((a, c) => a + c, 0)) / 100)}</span>
+                                    {/* limit */}
+                                    <span data-testid="budgets-limit">of ${overviewData.budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit</span>
+                                </div>
 
-                                <span data-testid="budgets-limit">of ${overviewData.budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit</span>
+                                <svg width="240" height="240" viewBox="0 0 240 240">
+                                    {overviewData.budgets.map((b, i) =>
+                                        <circle className="bg"
+                                            cx="120" cy="120" r="104" fill="none" stroke={b.theme} stroke-width="32" strokeDasharray={`${(b.maximum / (overviewData.budgets.reduce((a, c) => a + c.maximum, 0))) * 653.45} ${653.45 - (b.maximum / (overviewData.budgets.reduce((a, c) => a + c.maximum, 0)) * 653.45)}`}
+                                            strokeDashoffset={calculateOffset(i, overviewData.budgets, 653.45)}
+                                        ></circle>
+                                    )}
+                                </svg>
                             </div>
+
                             <ul>
-                                {overviewData.budgets.slice(0, 4).map(budget =>
+                                {overviewData.budgets.map(budget =>
                                     <li key={budget.category} >
                                         <div style={{ backgroundColor: budget.theme }}></div>
                                         <span>{budget.category}</span>
