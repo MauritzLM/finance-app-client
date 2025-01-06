@@ -196,3 +196,22 @@ export function separateButtons(num: number) {
 
     return [newArr_1, newArr_2]
 }
+
+// calculate dashoffset
+export function calculateOffset(index: number, budgetArr: budget[], circumference: number) {
+    // create array from current index
+    const indexArr = Array.from({ length: index }, (v, i) => i + 1)
+
+    let totalOffset = 0
+
+    indexArr.forEach(el => {
+        if (el !== 0) {
+            totalOffset += (budgetArr[el].maximum / (budgetArr.reduce((a, c) => a + c.maximum, 0))) * circumference
+        }
+    })
+
+    return totalOffset
+}
+
+
+
