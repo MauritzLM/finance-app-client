@@ -1,0 +1,155 @@
+.transactions-wrapper {
+    padding: 24px 20px;
+    background-color: white;
+    border-radius: 10px;
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+
+        form {}
+
+        .sort {
+            select {
+                display: none;
+
+                &+svg {
+                    display: none;
+                }
+            }
+
+        }
+
+        .category {
+            select {
+                display: none;
+
+                &+svg {
+                    display: none;
+                }
+            }
+
+        }
+    }
+
+    
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+
+        thead {
+            visibility: hidden;
+        }
+
+        tbody {
+
+            tr {
+                border-bottom: 1px solid var(--grey-100);
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                // grid-template-rows: 1fr 1fr;
+                width: 77vw;
+                grid-template-areas: "name price"
+                    "category date";
+                padding: 16px 0 6px 0;
+
+                &:last-of-type {
+                    border-bottom: none;
+                }
+
+                td {
+                    color: var(--grey-500);
+                    font-size: 12px;
+
+                    img {
+                        border-radius: 50%;
+                    }
+
+                    &:nth-of-type(1) {
+                        grid-area: name;
+                        display: flex;
+                        gap: 12px;
+
+                    }
+
+                    &:nth-of-type(2) {
+                        grid-area: category;
+                        padding-left: 44px;
+                        position: relative;
+                        bottom: 12px;
+                    }
+
+                    &:nth-of-type(3) {
+                        grid-area: date;
+                        text-align: right;
+                        position: relative;
+                        bottom: 12px;
+                    }
+
+                    &:nth-of-type(4) {
+                        grid-area: price;
+                        text-align: right;
+                        position: relative;
+                        bottom: 5px;
+                    }
+                }
+
+                .name,
+                .amount {
+                    font-weight: 700;
+                    color: var(--grey-900);
+                    font-size: 14px;
+                }
+
+                .name {
+                    position: relative;
+                    bottom: 5px;
+                }
+
+                .income {
+                    color: var(--green);
+                }
+            }
+
+        }
+    }
+
+    .page-buttons {
+        position: relative;
+        display: flex;
+        margin-top: 10px;
+
+        button {
+
+            // prev button
+            &:first-child {
+                order: 0;
+            }
+
+            // next button
+            &:last-child {
+                order: 5;
+            }
+        }
+
+        // last page button*
+        .page-btn:last-child {
+            order: 4;
+        }
+
+        .toggle-btn {
+            order: 2;
+        }
+
+        // show hide toggle buttons
+        .toggle-btn+div {
+            position: absolute;
+            visibility: hidden;
+        }
+
+        .cs-active+div {
+            visibility: visible;
+        }
+    }
+}
