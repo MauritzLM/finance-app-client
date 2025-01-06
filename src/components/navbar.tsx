@@ -7,7 +7,7 @@ interface navProps {
 
 
 function Navbar({ user }: navProps) {
-    let location = useLocation();
+    const location = useLocation();
 
     return (
         <>
