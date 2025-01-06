@@ -177,6 +177,16 @@
 /* BUDGETS SECTION */
 .budgets {
     .total {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.11);
+
         span {
             &:nth-of-type(1) {
                 font-size: 32px;
@@ -189,6 +199,19 @@
                 color: var(--grey-500);
                 font-size: 14px;
             }
+        }
+    }
+
+    .color-wheel {
+        height: 260px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .bg {
+            // transform: rotate(-90deg);
+            transform-origin: 125px 125px;
         }
     }
 
