@@ -56,6 +56,7 @@ body {
 #container {
   display: grid;
   grid-template-columns: 1fr;
+  min-height: 100vh;
 }
 
 main {
@@ -89,6 +90,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* transaction images */
 .t-image {
   border-radius: 50%;
@@ -100,6 +105,8 @@ nav {
   background-color: var(--grey-900);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  align-self: end;
+  height: fit-content;
 
   .nav-links {
     display: flex;
