@@ -92,6 +92,10 @@ a {
 
 button {
   cursor: pointer;
+  font: inherit;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
 /* transaction images */
