@@ -160,7 +160,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
                                 <svg width="240" height="240" viewBox="0 0 240 240">
                                     {overviewData.budgets.map((b, i) =>
                                         <circle className="bg"
-                                            cx="120" cy="120" r="104" fill="none" stroke={b.theme} stroke-width="32" strokeDasharray={`${(b.maximum / (overviewData.budgets.reduce((a, c) => a + c.maximum, 0))) * 653.45} ${653.45 - (b.maximum / (overviewData.budgets.reduce((a, c) => a + c.maximum, 0)) * 653.45)}`}
+                                            cx="120" cy="120" r="104" fill="none" stroke={b.theme} strokeWidth="32" strokeDasharray={`${(b.maximum / (overviewData.budgets.reduce((a, c) => a + c.maximum, 0))) * 653.45} ${653.45 - (b.maximum / (overviewData.budgets.reduce((a, c) => a + c.maximum, 0)) * 653.45)}`}
                                             strokeDashoffset={calculateOffset(i, overviewData.budgets, 653.45)}
                                         ></circle>
                                     )}
