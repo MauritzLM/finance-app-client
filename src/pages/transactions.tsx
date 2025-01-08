@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { userObj, transaction } from "../types"
 import { formatTransaction, separateButtons } from "../helpers/helpers"
 import '../assets/sass/transactions.scss'
@@ -17,6 +17,12 @@ function Transactions({ user }: transactionsProps) {
     const [transactions, setTransactions] = useState<transaction[]>([])
     const [pageBtnToggle, setPageBtnToggle] = useState(false)
     const [activeSelect, setActiveSelect] = useState('')
+
+    // option refs
+    const currentOptionIndex = useRef(1)
+
+    const sortOption_1 = useRef(null)
+    const sortOption_2 = useRef(null)
 
     function buttonToggle() {
         if (pageBtnToggle) {
@@ -37,6 +43,31 @@ function Transactions({ user }: transactionsProps) {
         else {
             setActiveSelect(select)
         }
+    }
+
+    // handle key press on custom select elements*
+    function handleKeyPress(select: string, event: React.KeyboardEvent<HTMLButtonElement>) {
+        // Esc
+        if (event.key === 'Escape') {
+            setActiveSelect('')
+        }
+        
+        // arrow keys*
+        if (event.key === 'ArrowDown') {
+            // if select is open
+            if (activeSelect === select) {
+                currentOptionIndex.current = currentOptionIndex.current + 1
+
+            }
+            
+            else {
+                setActiveSelect(select)
+                // focus first element
+                sortOption_1.current.focus()
+                currentOptionIndex.current = 1
+            }
+        }
+        //  1. is select open? 2. currently focused option 3. current focus
     }
 
     // get transactions
@@ -115,22 +146,22 @@ function Transactions({ user }: transactionsProps) {
 
 
 
-                    {/* sort */}
+                    {/* custom sort select */}
                     <div className={activeSelect === 'sort' ? 'cs-active sort' : 'sort'}>
-                        <button onClick={() => selectToggle('sort')}>
+                        <button onKeyDown={(e) => handleKeyPress('sort', e)} onClick={() => selectToggle('sort')} role="combobox" id="sort-select" value="Select" tabIndex={0} aria-expanded={activeSelect === 'sort' ? true : false} aria-controls="listbox-sort" aria-haspopup="listbox">
                             <svg fill="none" height="20" viewBox="0 0 16 15" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m14.25 0h-12.5c-.33152 0-.64946.131696-.883884.366116-.23442.234421-.366116.552363-.366116.883884v12.5c0 .3315.131696.6495.366116.8839.234424.2344.552364.3661.883884.3661h12.5c.3315 0 .6495-.1317.8839-.3661s.3661-.5524.3661-.8839v-12.5c0-.331521-.1317-.649463-.3661-.883884-.2344-.23442-.5524-.366116-.8839-.366116zm-10.625 3.125h7.5c.1658 0 .3247.06585.4419.18306.1173.11721.1831.27618.1831.44194s-.0658.32473-.1831.44194c-.1172.11721-.2761.18306-.4419.18306h-7.5c-.16576 0-.32473-.06585-.44194-.18306s-.18306-.27618-.18306-.44194.06585-.32473.18306-.44194.27618-.18306.44194-.18306zm3.125 8.75h-3.125c-.16576 0-.32473-.0658-.44194-.1831-.11721-.1172-.18306-.2761-.18306-.4419s.06585-.3247.18306-.4419c.11721-.1173.27618-.1831.44194-.1831h3.125c.16576 0 .32473.0658.44194.1831.11721.1172.18306.2761.18306.4419s-.06585.3247-.18306.4419c-.11721.1173-.27618.1831-.44194.1831zm.625-3.75h-3.75c-.16576 0-.32473-.06585-.44194-.18306s-.18306-.27618-.18306-.44194.06585-.32473.18306-.44194.27618-.18306.44194-.18306h3.75c.16576 0 .32473.06585.44194.18306s.18306.27618.18306.44194-.06585.32473-.18306.44194-.27618.18306-.44194.18306zm6.0672 2.3172-1.875 1.875c-.0581.0581-.127.1042-.2029.1357-.0758.0314-.1572.0476-.2393.0476s-.1635-.0162-.2393-.0476c-.0759-.0315-.1448-.0776-.2029-.1357l-1.87499-1.875c-.11727-.1173-.18316-.2763-.18316-.4422 0-.16585.06589-.32491.18316-.44219.11728-.11727.27634-.18316.44219-.18316s.32491.06589.44219.18316l.80781.80859v-3.4914c0-.16576.0658-.32473.1831-.44194.1172-.11721.2761-.18306.4419-.18306s.3247.06585.4419.18306c.1173.11721.1831.27618.1831.44194v3.4914l.8078-.80859c.1173-.11727.2763-.18316.4422-.18316s.3249.06589.4422.18316c.1173.11728.1831.27634.1831.44219 0 .1659-.0658.3249-.1831.4422z" fill="#201f24" /></svg>
                         </button>
 
-                        {/* custom sort select */}
-                        <div className="dropdown">
+                        {/* dropdown */}
+                        <ul role="listbox" id="listbox-sort">
                             <span>Sort by</span>
-                            <button className={sortBy === 'Latest' ? 'cs-active' : ''} onClick={() => setSortBy('Latest')}>Latest</button>
-                            <button className={sortBy === 'Oldest' ? 'cs-active' : ''} onClick={() => setSortBy('Oldest')}>Oldest</button>
-                            <button className={sortBy === 'A-to-Z' ? 'cs-active' : ''} onClick={() => setSortBy('A-to-Z')}>A to Z</button>
-                            <button className={sortBy === 'Z-to-A' ? 'cs-active' : ''} onClick={() => setSortBy('Z-to-A')}>Z to A</button>
-                            <button className={sortBy === 'Highest' ? 'cs-active' : ''} onClick={() => setSortBy('Highest')}>Highest</button>
-                            <button className={sortBy === 'Lowest' ? 'cs-active' : ''} onClick={() => setSortBy('Lowest')}>Lowest</button>
-                        </div>
+                            <li ref={sortOption_1} role="option" className={sortBy === 'Latest' ? 'cs-active' : ''} onClick={() => setSortBy('Latest')}>Latest</li>
+                            <li ref={sortOption_2} role="option" className={sortBy === 'Oldest' ? 'cs-active' : ''} onClick={() => setSortBy('Oldest')}>Oldest</li>
+                            <li role="option" className={sortBy === 'A-to-Z' ? 'cs-active' : ''} onClick={() => setSortBy('A-to-Z')}>A to Z</li>
+                            <li role="option" className={sortBy === 'Z-to-A' ? 'cs-active' : ''} onClick={() => setSortBy('Z-to-A')}>Z to A</li>
+                            <li role="option" className={sortBy === 'Highest' ? 'cs-active' : ''} onClick={() => setSortBy('Highest')}>Highest</li>
+                            <li role="option" className={sortBy === 'Lowest' ? 'cs-active' : ''} onClick={() => setSortBy('Lowest')}>Lowest</li>
+                        </ul>
 
                         <svg fill="none" height="6" viewBox="0 0 12 6" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m11.3538.85375-5.00002 5c-.04644.04649-.10158.08337-.16228.10853s-.12576.03811-.19147.03811-.13077-.01295-.19147-.03811-.11585-.06204-.16228-.10853l-5.000002-5c-.070006-.069927-.11769-.159054-.137015-.256096-.019325-.097043-.009423-.197638.028453-.289049.037877-.091412.102024-.16953.18432-.224465.082297-.0549354.179044-.08421771.277994-.08413985h9.99997c.099-.00007786.1957.02920445.278.08413985.0823.054935.1465.133053.1843.224465.0379.091411.0478.192006.0285.289049-.0193.097042-.067.186169-.137.256096z" fill="#201f24" /></svg>
                     </div>
@@ -139,25 +170,25 @@ function Transactions({ user }: transactionsProps) {
 
                     {/* category */}
                     <div className={activeSelect === 'category' ? 'cs-active category' : 'category'}>
-                        <button onClick={() => selectToggle('category')}>
+                        <button onKeyDown={(e) => handleKeyPress('category', e)} onClick={() => selectToggle('category')} role="combobox" id="sort-select" value="Select" tabIndex={0} aria-expanded={activeSelect === 'category' ? true : false} aria-controls="listbox-category" aria-haspopup="listbox">
                             <svg fill="none" height="20" viewBox="0 0 18 16" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m16.7976 2.71562-.0062.00704-5.2914 5.65v4.33514c.0003.2062-.0504.4092-.1476.5911-.0972.1818-.2379.3368-.4095.4511l-2.49995 1.6672c-.1884.1255-.40734.1975-.63344.2082-.22611.0108-.45091-.04-.65039-.147s-.36616-.2662-.48225-.4605-.17723-.4165-.17689-.6429v-6.00234l-5.29141-5.65-.00625-.00704c-.16269-.17905-.269938-.40146-.308716-.64026s-.007425-.48373.090256-.70506c.09768-.22133.25749-.409563.46005-.541857.20255-.132294.43914-.202966.68107-.203443h13.75002c.2421.000024.479.070368.6819.202485.2029.132118.3631.320325.4611.541745.0979.22142.1295.46653.0908.70555-.0387.23901-.146.46165-.3088.64084z" fill="#201f24" /></svg>
                         </button>
 
                         {/* custom category select */}
-                        <div className="dropdown">
+                        <ul role="listbox" id="listbox-category">
                             <span>Category</span>
-                            <button className={category === 'All' ? 'cs-active' : ''} onClick={() => setCategory('All')}>All Transactions</button>
-                            <button className={category === 'Entertainment' ? 'cs-active' : ''} onClick={() => setCategory('Entertainment')}>Entertainment</button>
-                            <button className={category === 'Bills' ? 'cs-active' : ''} onClick={() => setCategory('Bills')}>Bills</button>
-                            <button className={category === 'Groceries' ? 'cs-active' : ''} onClick={() => setCategory('Groceries')}>Groceries</button>
-                            <button className={category === 'Dining Out' ? 'cs-active' : ''} onClick={() => setCategory('Dining Out')}>Dining Out</button>
-                            <button className={category === 'Transportation' ? 'cs-active' : ''} onClick={() => setCategory('Transportation')}>Transportation</button>
-                            <button className={category === 'Personal Care' ? 'cs-active' : ''} onClick={() => setCategory('Personal Care')}>Personal Care</button>
-                            <button className={category === 'General' ? 'cs-active' : ''} onClick={() => setCategory('General')}>General</button>
-                            <button className={category === 'Lifestyle' ? 'cs-active' : ''} onClick={() => setCategory('Lifestyle')}>Lifestyle</button>
-                            <button className={category === 'Education' ? 'cs-active' : ''} onClick={() => setCategory('Education')}>Education</button>
-                            <button className={category === 'Shopping' ? 'cs-active' : ''} onClick={() => setCategory('Shopping')}>Shopping</button>
-                        </div>
+                            <li role="option" className={category === 'All' ? 'cs-active' : ''} onClick={() => setCategory('All')}>All Transactions</li>
+                            <li role="option" className={category === 'Entertainment' ? 'cs-active' : ''} onClick={() => setCategory('Entertainment')}>Entertainment</li>
+                            <li role="option" className={category === 'Bills' ? 'cs-active' : ''} onClick={() => setCategory('Bills')}>Bills</li>
+                            <li role="option" className={category === 'Groceries' ? 'cs-active' : ''} onClick={() => setCategory('Groceries')}>Groceries</li>
+                            <li role="option" className={category === 'Dining Out' ? 'cs-active' : ''} onClick={() => setCategory('Dining Out')}>Dining Out</li>
+                            <li role="option" className={category === 'Transportation' ? 'cs-active' : ''} onClick={() => setCategory('Transportation')}>Transportation</li>
+                            <li role="option" className={category === 'Personal Care' ? 'cs-active' : ''} onClick={() => setCategory('Personal Care')}>Personal Care</li>
+                            <li role="option" className={category === 'General' ? 'cs-active' : ''} onClick={() => setCategory('General')}>General</li>
+                            <li role="option" className={category === 'Lifestyle' ? 'cs-active' : ''} onClick={() => setCategory('Lifestyle')}>Lifestyle</li>
+                            <li role="option" className={category === 'Education' ? 'cs-active' : ''} onClick={() => setCategory('Education')}>Education</li>
+                            <li role="option" className={category === 'Shopping' ? 'cs-active' : ''} onClick={() => setCategory('Shopping')}>Shopping</li>
+                        </ul>
 
                         <svg fill="none" height="6" viewBox="0 0 12 6" width="12" xmlns="http://www.w3.org/2000/svg"><path d="m11.3538.85375-5.00002 5c-.04644.04649-.10158.08337-.16228.10853s-.12576.03811-.19147.03811-.13077-.01295-.19147-.03811-.11585-.06204-.16228-.10853l-5.000002-5c-.070006-.069927-.11769-.159054-.137015-.256096-.019325-.097043-.009423-.197638.028453-.289049.037877-.091412.102024-.16953.18432-.224465.082297-.0549354.179044-.08421771.277994-.08413985h9.99997c.099-.00007786.1957.02920445.278.08413985.0823.054935.1465.133053.1843.224465.0379.091411.0478.192006.0285.289049-.0193.097042-.067.186169-.137.256096z" fill="#201f24" /></svg>
                     </div>
@@ -166,10 +197,10 @@ function Transactions({ user }: transactionsProps) {
                 <table>
                     <thead>
                         <tr>
-                            <th>Recipient / Sender</th>
-                            <th>Category</th>
-                            <th>Transaction Date</th>
-                            <th>Amount</th>
+                            <th scope="col">Recipient / Sender</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Transaction Date</th>
+                            <th scope="col">Amount</th>
                         </tr>
                     </thead>
                     <tbody>
