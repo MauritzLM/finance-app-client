@@ -6,7 +6,8 @@ import NewBudgetForm from "../components/budgets/new_budget_form"
 import { Link } from "react-router-dom"
 import EditBudgetForm from "../components/budgets/edit_budget_form"
 import DeleteBudgetForm from "../components/budgets/delete_budget_form"
-import { roundPercentage } from "../helpers/helpers"
+import { roundPercentage, calculateOffset } from "../helpers/helpers"
+import "../assets/sass/budgets.scss"
 
 interface budgetProps {
     user: userObj,
@@ -23,6 +24,8 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
     const [budgetToEdit, setBudgetToEdit] = useState<budget>({})
     // if new budget has been created
     const [newBudget, setNewBudget] = useState('')
+
+    const [currentToggle, setCurrentToggle] = useState('')
 
 
     // fetch budgets and spending if not in props
@@ -112,6 +115,17 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         setShowDeleteform(false)
     }
 
+    // edit / delete toggle
+    function handleToggle(category: string) {
+        if (currentToggle === category) {
+            setCurrentToggle('')
+        }
+
+        else {
+            setCurrentToggle(category)
+        }
+    }
+
     useEffect(() => {
         if (!budgets.length || !budgetSpending.length) {
             getBudgets()
@@ -126,59 +140,88 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
 
     return (
         <>
-            <h1>Budgets</h1>
-            <button data-testid="new-btn" onClick={() => setShowNewForm(true)}>+ Add New Budget</button>
+            <section className="header">
+                <h1>Budgets</h1>
+                <button data-testid="new-btn" onClick={() => setShowNewForm(true)} className="new-btn">+ Add New Budget</button>
+            </section>
 
             {/* spending summary */}
             {budgets.length > 0 &&
-                <div>
+                <div className="budgets-wrapper">
                     <div className="budgets-summary">
                         {/* total spent and total limit */}
-                        <span data-testid="total-spent">${Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0)) / 100}</span>
-                        <span data-testid="limit">of ${budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit</span>
+                        <div className="color-wheel">
+                            <div className="total">
+                                <span data-testid="total-spent">${Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0)) / 100}</span>
+                                <span data-testid="limit">of ${budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit</span>
+                            </div>
 
-                        <h2>Spending Summary</h2>
+                            <svg width="240" height="240" viewBox="0 0 240 240">
+                                {budgets.map((b, i) =>
+                                    <circle className="bg"
+                                        cx="120" cy="120" r="104" fill="none" stroke={b.theme} strokeWidth="32" strokeDasharray={`${(b.maximum / (budgets.reduce((a, c) => a + c.maximum, 0))) * 653.45} ${653.45 - (b.maximum / (budgets.reduce((a, c) => a + c.maximum, 0)) * 653.45)}`}
+                                        strokeDashoffset={calculateOffset(i, budgets, 653.45)}
+                                    ></circle>
+                                )}
+                            </svg>
+                        </div>
 
-                        <ul>
-                            {budgets.map(budget =>
-                                <li data-testid="summary-list" key={budget.id}>
-                                    <div style={{ backgroundColor: budget.theme }}></div>
-                                    <span>{budget.category}</span>
-                                    <span data-testid="budget-spending">${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)} of ${(budget.maximum / 100).toFixed(2)}</span>
-                                </li>
-                            )}
-                        </ul>
+                        <div>
+                            <h2>Spending Summary</h2>
+
+                            <ul>
+                                {budgets.map(budget =>
+                                    <li data-testid="summary-list" key={budget.id}>
+                                        <div>
+                                            <div style={{ backgroundColor: budget.theme }}></div>
+                                            <span>{budget.category}</span>
+                                        </div>
+
+                                        <div data-testid="budget-spending">
+                                            <span>${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}</span>
+                                            <span>of ${(budget.maximum / 100).toFixed(2)}</span>
+                                        </div>
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
                     </div>
                     {/* budgets detail list */}
                     <div className="budgets-detail">
 
                         {budgets.map(budget =>
-                            <div key={budget.category}>
+                            <section className="budget" key={budget.category}>
                                 <div>
-                                    <div>
+                                    <div className="heading">
                                         <div style={{ backgroundColor: budget.theme }}></div>
                                         <h2 data-testid="detail-category">{budget.category}</h2>
                                     </div>
                                     {/* toggle edit delete button* */}
-                                    <button>
+
+                                    <button className={currentToggle === budget.category ? 'toggle-btn cs-active' : 'toggle-btn'} onClick={() => handleToggle(budget.category)}>
                                         <svg fill="none" height="4" viewBox="0 0 14 4" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m8.75 2c0 .34612-.10264.68446-.29493.97225-.19229.28778-.4656.51209-.78537.64454s-.67164.16711-1.01111.09958c-.33946-.06752-.65128-.23419-.89603-.47893-.24474-.24474-.41141-.55657-.47893-.89603-.06753-.33947-.03287-.69134.09958-1.01111.13246-.31977.35676-.593079.64454-.785372.28779-.192292.62613-.294928.97225-.294928.46413 0 .90925.184375 1.23744.512563.32819.328187.51256.773307.51256 1.237437zm-6.75-1.75c-.34612 0-.68446.102636-.97225.294928-.287783.192293-.512085.465602-.644538.785372-.132454.31977-.16711.67164-.099585 1.01111.067524.33946.234195.65129.478937.89603.244746.24474.556566.41141.896026.47893.33947.06753.69134.03287 1.01111-.09958s.59308-.35676.78537-.64454c.1923-.28779.29493-.62613.29493-.97225 0-.46413-.18437-.90925-.51256-1.237437-.32819-.328188-.77331-.512563-1.23744-.512563zm10 0c-.3461 0-.6845.102636-.9722.294928-.2878.192293-.5121.465602-.6446.785372-.1324.31977-.1671.67164-.0996 1.01111.0676.33946.2342.65129.479.89603.2447.24474.5565.41141.896.47893.3395.06753.6913.03287 1.0111-.09958s.5931-.35676.7854-.64454c.1923-.28779.2949-.62613.2949-.97225 0-.22981-.0453-.45738-.1332-.6697-.088-.21232-.2169-.405234-.3794-.567737-.1625-.162502-.3554-.291407-.5677-.379352-.2123-.087946-.4399-.133211-.6697-.133211z" fill="#b3b3b3" /></svg>
                                     </button>
-                                    <div className="">
+
+                                    <div className="toggle-box">
                                         <button data-testid="edit-btn" onClick={() => displayEditForm(budget)}>Edit budget</button>
                                         <button data-testid="delete-btn" onClick={() => displayDeleteForm(budget)}>Delete budget</button>
                                     </div>
+
                                     <p>maximum of ${(budget.maximum / 100).toFixed(2)}</p>
-                                    <div>
+
+                                    <div className="summary">
                                         {/* spending bar* */}
                                         <div className="spending-bar">
                                             <div style={{ backgroundColor: budget.theme, width: `${roundPercentage((Math.abs(budgetSpending[budget.category]) / budget.maximum) * 100)}%` }}></div>
                                         </div>
-                                        <div>
+
+                                        <div className="spent">
                                             <div style={{ backgroundColor: budget.theme }}></div>
                                             <span>Spent</span>
                                             <span data-testid="detail-spending">${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}</span>
                                         </div>
-                                        <div>
+                                        <div className="remaining">
+                                            <div></div>
                                             <span>Remaining</span>
                                             <span data-testid="detail-remaining">${((budget.maximum - Math.abs(budgetSpending[budget.category])) / 100).toFixed(2)}</span>
                                         </div>
@@ -187,7 +230,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                 </div>
 
                                 {/* latest spending */}
-                                <div>
+                                <div className="latest-spending">
                                     <div>
                                         <h3>Latest Spending</h3>
                                         <Link to="/transactions">
@@ -197,7 +240,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                     </div>
                                     <LatestSpending user={user} category={budget.category} />
                                 </div>
-                            </div>
+                            </section>
                         )
                         }
                     </div>
