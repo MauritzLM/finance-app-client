@@ -33,7 +33,7 @@
         .sort {
             position: relative;
 
-            .dropdown {
+            #listbox-sort {
                 position: absolute;
                 display: none;
                 flex-direction: column;
@@ -53,13 +53,19 @@
                     color: var(--grey-500);
                 }
 
-                button {
+                li {
                     text-align: left;
                     padding: 12px 0;
                     border-bottom: 1px solid var(--grey-100);
+                    cursor: pointer;
 
                     &:last-child {
                         border-bottom: none;
+                    }
+
+                    &:focus {
+                        background-color: var(--grey-900);
+                        color: white;
                     }
                 }
 
@@ -76,7 +82,7 @@
         .category {
             position: relative;
 
-            .dropdown {
+            #listbox-category {
                 position: absolute;
                 display: none;
                 flex-direction: column;
@@ -95,13 +101,19 @@
                     color: var(--grey-500);
                 }
 
-                button {
+                li {
                     text-align: left;
                     padding: 12px 0;
                     border-bottom: 1px solid var(--grey-100);
+                    cursor: pointer;
 
                     &:last-child {
                         border-bottom: none;
+                    }
+
+                    &:focus {
+                        background-color: var(--grey-900);
+                        color: white;
                     }
                 }
 
@@ -118,9 +130,12 @@
 
         // active select
         .cs-active {
-            .dropdown {
+
+            #listbox-sort,
+            #listbox-category {
                 display: flex;
             }
+
         }
     }
 
@@ -229,6 +244,11 @@
                     display: none;
                 }
             }
+            
+            // last page button - when there is a toggle button (test for different page sizes)*
+            &:nth-of-type(4) {
+                order: 3;
+            }
 
             // next button
             &:last-child {
@@ -238,11 +258,6 @@
                     display: none;
                 }
             }
-        }
-
-        // last page button*
-        .page-btn:last-child {
-            order: 4;
         }
 
         .toggle-btn {
