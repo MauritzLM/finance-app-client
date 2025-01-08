@@ -11,6 +11,7 @@
   --green: #277C78;
   --yellow: #F2CDAC;
   --cyan: #82C9D7;
+  --red: #C94736;
 
 }
 
@@ -96,6 +97,16 @@ button {
   background-color: transparent;
   border: none;
   padding: 0;
+}
+
+.new-btn {
+  background-color: var(--grey-900);
+  color: white;
+  padding: 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  height: 53px;
+  width: 154px;
 }
 
 /* transaction images */
