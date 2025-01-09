@@ -106,7 +106,7 @@ button {
   border-radius: 10px;
   font-weight: 700;
   height: 53px;
-  width: 154px;
+  // width: 154px;
 }
 
 /* transaction images */
@@ -140,7 +140,7 @@ nav {
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       color: var(--grey-300);
-      
+
 
       // svg {
       //   height: 24px;
@@ -177,5 +177,206 @@ nav {
 
   button {
     display: none;
+  }
+}
+
+
+// FORM STYLES
+.form-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #201f2423;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+
+  .cs-form,
+  .delete-form {
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    padding: 24px 20px;
+    width: 100%;
+    max-width: 560px;
+
+    h2 {
+      max-width: 80%;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 20px;
+      top: 24px;
+    }
+
+    p {
+      color: var(--grey-500);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    label {
+      color: var(--grey-500);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    select,
+    input {
+      font: inherit;
+      border: 1px solid var(--grey-300);
+      border-radius: 10px;
+      padding: 12px 20px;
+    }
+
+    button[type="submit"] {
+      padding: 16px;
+      width: 100%;
+      border-radius: 10px;
+      background-color: var(--grey-900);
+      color: white;
+      font-weight: 700;
+    }
+  }
+
+  .delete-form {
+    button[type="submit"] {
+      background-color: var(--red);
+      color: white;
+    }
+
+    .back-btn {
+      padding: 16px;
+      padding-bottom: 0;
+      width: 100%;
+      border-radius: 10px;
+      background-color: inherit;
+      color: var(--grey-500);
+    }
+  }
+
+  .add-form,
+  .withdraw-form {
+    .total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      span {
+        color: var(--grey-500);
+
+        &:last-child {
+          font-size: 32px;
+          font-weight: 700;
+          color: var(--grey-900);
+        }
+      }
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      border-radius: 10px;
+      position: relative;
+      margin-bottom: 13px;
+      background-color: var(--beige-100);
+
+      div {
+        height: 8px;
+        border-radius: 10px;
+      }
+
+      .initial-value {
+        background-color: var(--grey-900);
+      }
+    }
+
+    .percentage {
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+  }
+
+  .add-form {
+    .progress-bar {
+      .new-value {
+        background-color: var(--green);
+        position: absolute;
+        left: 0;
+        top: 0;
+        max-width: 100%;
+
+      }
+
+      .initial-value {
+        z-index: 10;
+        position: relative;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right: 2px solid var(--grey-100);
+      }
+    }
+
+    .percentage {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: var(--grey-500);
+
+        &:first-child {
+          font-weight: 700;
+          color: var(--green);
+        }
+      }
+    }
+  }
+
+  .withdraw-form {
+    .progress-bar {
+      .new-value {
+        background-color: var(--grey-900);
+        position: relative;
+        z-index: 10;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right: 2px solid var(--grey-100);
+      }
+
+      .initial-value {
+        background-color: var(--red);
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    .percentage {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        color: var(--grey-500);
+
+        &:first-child {
+          font-weight: 700;
+          color: var(--red);
+        }
+      }
+    }
   }
 }
