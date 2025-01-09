@@ -8,6 +8,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 24px;
+        margin-bottom: 24px;
 
         form {
             position: relative;
@@ -35,7 +36,7 @@
 
             #listbox-sort {
                 position: absolute;
-                display: none;
+                visibility: hidden;
                 flex-direction: column;
                 padding: 12px 20px;
                 background-color: white;
@@ -45,6 +46,16 @@
                 top: 40px;
                 right: 20px;
                 width: max-content;
+                max-height: 300px;
+                overflow: auto;
+                scrollbar-color: var(--grey-100) white;
+                scrollbar-width: thin;
+                
+                &::-webkit-scrollbar-track {
+                    border-radius: 10px;
+                }
+                
+                
 
 
                 span {
@@ -94,6 +105,10 @@
                 top: 40px;
                 right: 50px;
                 width: max-content;
+                max-height: 300px;
+                overflow: auto;
+                scrollbar-color: var(--grey-100) white;
+                scrollbar-width: thin;
 
                 span {
                     padding: 12px 0;
@@ -134,6 +149,7 @@
             #listbox-sort,
             #listbox-category {
                 display: flex;
+                visibility: visible;
             }
 
         }
@@ -146,7 +162,7 @@
         table-layout: fixed;
 
         thead {
-            visibility: hidden;
+            visibility: collapse;
         }
 
         tbody {
@@ -244,7 +260,7 @@
                     display: none;
                 }
             }
-            
+
             // last page button - when there is a toggle button (test for different page sizes)*
             &:nth-of-type(4) {
                 order: 3;
