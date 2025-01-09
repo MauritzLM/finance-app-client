@@ -101,6 +101,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         setShowEditForm(true)
         hideNewForm()
         hideDeleteForm()
+        setCurrentToggle('')
     }
 
     // show delete form
@@ -109,6 +110,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
         setShowDeleteform(true)
         hideNewForm()
         hideEditForm()
+        setCurrentToggle('')
     }
 
     function hideDeleteForm() {
