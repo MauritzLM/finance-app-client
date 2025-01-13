@@ -34,6 +34,19 @@
         .sort {
             position: relative;
 
+            .label {
+                display: none;
+            }
+
+            // button text
+            button {
+                text-align: center;
+
+                span {
+                    display: none;
+                }
+            }
+
             #listbox-sort {
                 position: absolute;
                 visibility: hidden;
@@ -50,13 +63,10 @@
                 overflow: auto;
                 scrollbar-color: var(--grey-100) white;
                 scrollbar-width: thin;
-                
+
                 &::-webkit-scrollbar-track {
                     border-radius: 10px;
                 }
-                
-                
-
 
                 span {
                     padding: 12px 0;
@@ -92,6 +102,19 @@
 
         .category {
             position: relative;
+
+            .label {
+                display: none;
+            }
+
+            // button text
+            button {
+                text-align: center;
+
+                span {
+                    display: none;
+                }
+            }
 
             #listbox-category {
                 position: absolute;
@@ -155,14 +178,21 @@
         }
     }
 
-
-
     table {
         width: 100%;
         table-layout: fixed;
+        border-collapse: collapse;
 
         thead {
             visibility: collapse;
+
+            tr {
+                th {
+                    &:last-child {
+                        text-align: right;
+                    }
+                }
+            }
         }
 
         tbody {
@@ -251,28 +281,28 @@
             height: 40px;
             width: 40px;
 
-
-            // prev button
-            &:first-child {
-                order: 0;
-
-                span {
-                    display: none;
-                }
-            }
-
             // last page button - when there is a toggle button (test for different page sizes)*
             &:nth-of-type(4) {
                 order: 3;
             }
 
-            // next button
-            &:last-child {
-                order: 5;
+        }
 
-                span {
-                    display: none;
-                }
+        // prev button
+        .prev-btn {
+            order: 0;
+
+            span {
+                display: none;
+            }
+        }
+
+        // next button
+        .next-btn {
+            order: 5;
+
+            span {
+                display: none;
             }
         }
 
@@ -302,6 +332,226 @@
             background-color: var(--grey-900);
             color: white;
             border: transparent;
+        }
+    }
+}
+
+/* tablet styles */
+@media screen and (min-width: 720px) {
+    .transactions-wrapper {
+        padding: 32px;
+
+        .top-bar {
+            .sort {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .label {
+                    display: inline-block;
+                    color: var(--grey-500);
+                }
+
+                button {
+                    border: 1px solid var(--grey-300);
+                    width: 114px;
+                    height: 45px;
+                    border-radius: 10px;
+                    font-size: 14px;
+                    text-align: left;
+                    padding-left: 20px;
+
+                    span {
+                        display: inline-block;
+                    }
+
+                    svg {
+                        display: none;
+                    }
+                }
+
+
+                #listbox-sort {
+                    right: 0;
+                    width: 114px;
+                    top: 45px;
+
+                    span {
+                        display: none;
+                    }
+
+                    &+svg {
+                        display: inline-block;
+                        position: absolute;
+                        right: 15px;
+                        top: 20px;
+                    }
+                }
+            }
+
+            .category {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .label {
+                    display: inline-block;
+                    color: var(--grey-500);
+                }
+
+                button {
+                    border: 1px solid var(--grey-300);
+                    width: 140px;
+                    height: 45px;
+                    border-radius: 10px;
+                    font-size: 14px;
+                    text-align: left;
+                    padding-left: 20px;
+
+                    span {
+                        display: inline-block;
+                    }
+
+                    svg {
+                        display: none;
+                    }
+                }
+
+                #listbox-category {
+                    right: 0;
+                    width: 140px;
+                    top: 45px;
+
+                    span {
+                        display: none;
+                    }
+
+                    &+svg {
+                        display: inline-block;
+                        position: absolute;
+                        right: 15px;
+                        top: 20px;
+                    }
+                }
+            }
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+
+            thead {
+                visibility: visible;
+
+                tr {
+                    height: 72px;
+
+                    th {
+                        text-align: center;
+
+                        &:first-child {
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    display: table-row;
+                    height: 72px;
+
+                    td {
+
+                        &:nth-of-type(1) {
+                            display: table-cell;
+                        }
+
+                        &:nth-of-type(2) {
+                            position: static;
+                            text-align: center;
+                            padding: 0;
+                        }
+
+                        &:nth-of-type(3) {
+                            position: static;
+                            text-align: center;
+
+                        }
+
+                        &:nth-of-type(4) {
+                            position: relative;
+
+                        }
+                    }
+
+                    .name {
+                        position: static;
+
+                    }
+
+                }
+
+            }
+        }
+
+        .page-buttons {
+            margin-top: 30px;
+
+            button {
+                border: 1px solid var(--grey-300);
+                border-radius: 10px;
+                height: 40px;
+                width: 40px;
+
+            }
+
+            // prev button
+            .prev-btn {
+                position: absolute;
+                left: 0;
+                width: 95px;
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                justify-content: center;
+
+
+                span {
+                    display: inline-block;
+                }
+            }
+
+            // next button
+            .next-btn {
+                position: absolute;
+                right: 0;
+                width: 95px;
+                display: flex;
+                gap: 16px;
+                align-items: center;
+                justify-content: center;
+
+                span {
+                    display: inline-block;
+                }
+            }
+
+            .toggle-btn {
+                order: 2;
+                display: none;
+            }
+
+            // show hide toggle buttons
+            .toggle-btn+div {
+                position: static;
+                visibility: visible;
+                background-color: transparent;
+                padding: 0;
+                box-shadow: none;
+                gap: 8px;
+            }
+
         }
     }
 }
