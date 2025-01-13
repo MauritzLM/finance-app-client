@@ -154,8 +154,13 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                         {/* total spent and total limit */}
                         <div className="color-wheel">
                             <div className="total">
-                                <span data-testid="total-spent">${Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0)) / 100}</span>
-                                <span data-testid="limit">of ${budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit</span>
+                                <span data-testid="total-spent">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                    {Math.abs(Object.values(budgetSpending).reduce((a, c) => a + c, 0)) / 100}
+                                </span>
+                                <span data-testid="limit">of <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                    {budgets.reduce((a, c) => a + c.maximum, 0) / 100} limit
+                                </span>
                             </div>
 
                             <svg width="240" height="240" viewBox="0 0 240 240">
@@ -180,8 +185,12 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                         </div>
 
                                         <div data-testid="budget-spending">
-                                            <span>${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}</span>
-                                            <span>of ${(budget.maximum / 100).toFixed(2)}</span>
+                                            <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                                {(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}
+                                            </span>
+                                            <span>of <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                                {(budget.maximum / 100).toFixed(2)}
+                                            </span>
                                         </div>
                                     </li>
                                 )}
@@ -209,7 +218,9 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                         <button data-testid="delete-btn" onClick={() => displayDeleteForm(budget)}>Delete budget</button>
                                     </div>
 
-                                    <p>maximum of ${(budget.maximum / 100).toFixed(2)}</p>
+                                    <p>Maximum of<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                        {(budget.maximum / 100).toFixed(2)}
+                                    </p>
 
                                     <div className="summary">
                                         {/* spending bar* */}
@@ -220,12 +231,16 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                                         <div className="spent">
                                             <div style={{ backgroundColor: budget.theme }}></div>
                                             <span>Spent</span>
-                                            <span data-testid="detail-spending">${(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}</span>
+                                            <span data-testid="detail-spending"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                                {(Math.abs(budgetSpending[budget.category]) / 100).toFixed(2)}
+                                            </span>
                                         </div>
                                         <div className="remaining">
                                             <div></div>
                                             <span>Remaining</span>
-                                            <span data-testid="detail-remaining">${((budget.maximum - Math.abs(budgetSpending[budget.category])) / 100).toFixed(2)}</span>
+                                            <span data-testid="detail-remaining"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                                {((budget.maximum - Math.abs(budgetSpending[budget.category])) / 100).toFixed(2)}
+                                            </span>
                                         </div>
 
                                     </div>

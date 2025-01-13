@@ -12,7 +12,7 @@ interface withdrawFormProps {
 
 function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdrawFormProps) {
     const [formData, setFormData] = useState({ 'amount': 0 })
-    const [formErrors, setFormErrors] = useState({ 'amount': '' })
+    const [formErrors, setFormErrors] = useState({ 'total': '' })
 
     // handle submit function*
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -32,6 +32,7 @@ function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdra
 
             // if errors
             if (response.status === 400) {
+                console.log(data)
                 const dataArr = Object.keys(data)
 
                 const errorsObj: strObj = {}
@@ -77,9 +78,10 @@ function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdra
 
                 <div className="percentage"><span data-testid="percentage">{roundPercentage((((pot.total / 100) - formData.amount) / (pot.target / 100)) * 100)}%</span> <span data-testid="target">Target of ${pot.target / 100}</span></div>
                 <div className="form-group">
-                    {formErrors.amount && <span className="error">{formErrors.amount}</span>}
+                    {formErrors.total && <span className="error">{formErrors.total}</span>}
                     <label htmlFor="amount">Amount to Withdraw</label>
-                    <input type="number" name="amount" id="amount" min={10} max={pot.total / 100} value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
+                    <img src="./src/assets/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
+                    <input type="number" name="amount" id="amount" min={10} value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
                 </div>
                 <button type="submit">Confirm Withdrawal</button>
             </form>

@@ -12,7 +12,7 @@ interface addFormProps {
 
 function AddForm({ user, pot, pots, updatePots, hideAddForm }: addFormProps) {
     const [formData, setFormData] = useState({ 'amount': 0 })
-    const [formErrors, setFormErrors] = useState({ 'amount': '' })
+    const [formErrors, setFormErrors] = useState({ 'value': '' })
 
     // handle submit function
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -32,6 +32,7 @@ function AddForm({ user, pot, pots, updatePots, hideAddForm }: addFormProps) {
 
             // if errors
             if (response.status === 400) {
+                console.log(data)
                 const dataArr = Object.keys(data)
 
                 const errorsObj: strObj = {}
@@ -76,9 +77,10 @@ function AddForm({ user, pot, pots, updatePots, hideAddForm }: addFormProps) {
                 </div>
                 <div className="percentage"><span data-testid="percentage">{roundPercentage(((formData.amount + (pot.total / 100)) / (pot.target / 100)) * 100)}%</span> <span data-testid="target">Target of ${pot.target / 100}</span></div>
                 <div className="form-group">
-                    {formErrors.amount && <span className="error">{formErrors.amount}</span>}
+                    {formErrors.value && <span className="error">{formErrors.value}</span>}
                     <label htmlFor="amount">Amount to Add</label>
-                    <input type="number" name="amount" id="amount" min={10} max={pot.target} value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
+                    <img src="./src/assets/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
+                    <input type="number" name="amount" id="amount" min={10}  value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
                 </div>
                 <button type="submit">Confirm Addition</button>
             </form>

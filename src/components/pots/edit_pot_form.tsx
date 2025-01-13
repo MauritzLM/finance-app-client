@@ -79,6 +79,7 @@ function EditPotForm({ user, pot, pots, updatePots, hideEditForm }: editFormProp
                 <div className="form-group">
                     {formErrors.target && <span className="error">{formErrors.target}</span>}
                     <label htmlFor="target">Target</label>
+                    <img src="./src/assets/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
                     <input type="number" name="target" id="target" value={formData.target} onInput={(e) => setFormData({ ...formData, 'target': Number(e.currentTarget.value) })} />
                 </div>
                 <div className="form-group">

@@ -50,8 +50,8 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
     }
 
     function handleSort(s: string) {
-          setSortBy(s)
-          setActiveSelect(false)
+        setSortBy(s)
+        setActiveSelect(false)
     }
 
     useEffect(() => {
@@ -70,7 +70,9 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                     <div className="total">
                         <svg fill="none" height="28" viewBox="0 0 32 28" width="32" xmlns="http://www.w3.org/2000/svg"><path d="m24.4375 10.25c0 .2486-.0988.4871-.2746.6629s-.4143.2746-.6629.2746h-15c-.24864 0-.4871-.0988-.66291-.2746-.17582-.1758-.27459-.4143-.27459-.6629s.09877-.4871.27459-.66291c.17581-.17582.41427-.27459.66291-.27459h15c.2486 0 .4871.09877.6629.27459.1758.17581.2746.41431.2746.66291zm-.9375 4.0625h-15c-.24864 0-.4871.0988-.66291.2746-.17582.1758-.27459.4143-.27459.6629s.09877.4871.27459.6629c.17581.1758.41427.2746.66291.2746h15c.2486 0 .4871-.0988.6629-.2746s.2746-.4143.2746-.6629-.0988-.4871-.2746-.6629-.4143-.2746-.6629-.2746zm8.4375-11.5625v23.75c-.0002.1598-.0412.3168-.1191.4563-.078.1395-.1902.2567-.3262.3406-.1476.0921-.3182.1409-.4922.1406-.1453.0001-.2887-.0336-.4187-.0984l-4.5813-2.2907-4.5813 2.2907c-.13.0649-.2734.0987-.4187.0987s-.2887-.0338-.4187-.0987l-4.5813-2.2907-4.5813 2.2907c-.13.0649-.2734.0987-.4187.0987s-.2887-.0338-.4187-.0987l-4.5813-2.2907-4.58125 2.2907c-.14295.0713-.30178.105-.461388.0977-.159613-.0073-.314721-.0552-.450598-.1393-.135877-.084-.248016-.2014-.325769-.341-.077754-.1396-.1185428-.2967-.118495-.4565v-23.75c0-.58016.230468-1.13656.640704-1.5468.410236-.410232.966636-.6407 1.546796-.6407h27.5c.5802 0 1.1366.230468 1.5468.6407.4102.41024.6407.96664.6407 1.5468zm-1.875 0c0-.08288-.0329-.16237-.0915-.22097-.0586-.05861-.1381-.09153-.221-.09153h-27.5c-.08288 0-.16237.03292-.22097.09153-.05861.0586-.09153.13809-.09153.22097v22.2328l3.64375-1.8219c.13004-.0649.2734-.0987.41875-.0987s.28871.0338.41875.0987l4.58125 2.2907 4.5813-2.2907c.13-.0649.2734-.0987.4187-.0987s.2887.0338.4187.0987l4.5813 2.2907 4.5813-2.2907c.13-.0649.2734-.0987.4187-.0987s.2887.0338.4187.0987l3.6438 1.8219z" fill="#fff" /></svg>
                         <p>Total Bills</p>
-                        <p data-testid="total">${(Math.abs(recurringBills.reduce((a: number, c: transaction) => a + c.amount, 0)) / 100).toFixed(2)}</p>
+                        <p data-testid="total">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                            {(Math.abs(recurringBills.reduce((a: number, c: transaction) => a + c.amount, 0)) / 100).toFixed(2)}</p>
                     </div>
 
                     {/* summary */}
@@ -80,17 +82,20 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                             <li>
                                 <span>Paid Bills</span>
                                 {/* calculate amount* */}
-                                <span data-testid="paid">{recurringBills.filter(isPaid).length} (${(Math.abs(recurringBills.filter(isPaid).reduce((a, c) => a + c.amount, 0)) / 100).toFixed(2)})</span>
+                                <span data-testid="paid">{recurringBills.filter(isPaid).length} (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                    {(Math.abs(recurringBills.filter(isPaid).reduce((a, c) => a + c.amount, 0)) / 100).toFixed(2)} )</span>
                             </li>
                             <li>
                                 <span>Total Upcoming</span>
                                 {/* calculate amount* */}
-                                <span data-testid="upcoming">{recurringBills.filter(isUpcoming).length} (${(Math.abs(recurringBills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0)) / 100).toFixed(2)})</span>
+                                <span data-testid="upcoming">{recurringBills.filter(isUpcoming).length} (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                    {(Math.abs(recurringBills.filter(isUpcoming).reduce((a, c) => a + c.amount, 0)) / 100).toFixed(2)} )</span>
                             </li>
                             <li>
                                 <span>Due Soon</span>
                                 {/* calculate amount* */}
-                                <span>{recurringBills.filter(dueSoon).length} (${(Math.abs(recurringBills.filter(dueSoon).reduce((a, c) => a + c.amount, 0)) / 100).toFixed(2)})</span>
+                                <span>{recurringBills.filter(dueSoon).length} (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                    {(Math.abs(recurringBills.filter(dueSoon).reduce((a, c) => a + c.amount, 0)) / 100).toFixed(2)} )</span>
                             </li>
                         </ul>
                     </div>
@@ -103,7 +108,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                 <div className="top-bar">
                     {/* search */}
                     <div className="search-bar">
-                        <input data-testid="search" type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.currentTarget.value)} placeholder="search bills"/>
+                        <input data-testid="search" type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.currentTarget.value)} placeholder="search bills" />
                         <button>
                             <svg fill="none" height="14" viewBox="0 0 14 14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m13.3538 13.1462-3.1294-3.1287c.907-1.08894 1.3593-2.48564 1.2628-3.89955-.0966-1.41391-.7345-2.73618-1.78109-3.69173-1.0466-.95555-2.42131-1.470821-3.83815-1.438621-1.41683.032201-2.76671.609391-3.76883 1.611501-1.00211 1.00212-1.579301 2.352-1.611501 3.76883-.0322 1.41684.483071 2.79155 1.438621 3.83817.95556 1.0466 2.27782 1.6845 3.69173 1.781 1.41391.0966 2.81061-.3557 3.89954-1.2627l3.12878 3.1293c.0464.0465.1016.0833.1623.1085.0607.0251.1257.0381.1914.0381s.1308-.013.1915-.0381c.0607-.0252.1158-.062.1623-.1085.0464-.0464.0833-.1016.1084-.1623.0252-.0607.0381-.1257.0381-.1914s-.0129-.1308-.0381-.1915c-.0251-.0607-.062-.1158-.1084-.1623zm-11.85378-6.64621c0-.89002.26392-1.76005.75839-2.50007.49446-.74002 1.19727-1.31679 2.01954-1.65739.82226-.34059 1.72706-.42971 2.59998-.25607.87291.17363 1.67473.60221 2.30407 1.23155s1.0579 1.43116 1.2316 2.30407c.1736.87292.0845 1.77772-.2561 2.59999-.34062.82226-.91739 1.52507-1.65741 2.01953-.74002.4945-1.61005.7584-2.50007.7584-1.19307-.0013-2.33689-.4759-3.18052-1.31949-.84363-.84363-1.31816-1.98745-1.31948-3.18052z" fill="#201f24" /></svg>
                         </button>
@@ -149,7 +154,10 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                                     {dueSoon(t) && <img src="./src/assets/images/icon-bill-due.svg"></img>}
                                     {isPaid(t) && <img src="./src/assets/images/icon-bill-paid.svg"></img>}
                                 </td>
-                                <td data-testid="amount" className={dueSoon(t) ? 'danger amount' : 'amount'}>${(Math.abs(t.amount) / 100).toFixed(2)}</td>
+                                <td data-testid="amount" className={dueSoon(t) ? 'danger amount' : 'amount'}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#201F24"><path d="M441-120v-86q-53-12-91.5-46T293-348l74-30q15 48 44.5 73t77.5 25q41 0 69.5-18.5T587-356q0-35-22-55.5T463-458q-86-27-118-64.5T313-614q0-65 42-101t86-41v-84h80v84q50 8 82.5 36.5T651-650l-74 32q-12-32-34-48t-60-16q-44 0-67 19.5T393-614q0 33 30 52t104 40q69 20 104.5 63.5T667-358q0 71-42 108t-104 46v84h-80Z" /></svg>
+                                    {(Math.abs(t.amount) / 100).toFixed(2)}
+                                </td>
                             </tr>
                         )}
                     </tbody>
