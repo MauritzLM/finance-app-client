@@ -36,16 +36,37 @@
             background-color: rgba(255, 255, 255, 0.11);
 
             span {
+                display: flex;
+                align-items: center;
+
                 &:nth-of-type(1) {
                     font-size: 32px;
                     font-weight: 700;
-                    display: block;
                     margin-bottom: 8px;
+                    position: relative;
+                    right: 10px;
+
+                    svg {
+                        height: 45px;
+                        width: 45px;
+                        position: relative;
+                        left: 12px;
+                        top: 2px;
+                    }
                 }
 
                 &:nth-of-type(2) {
                     color: var(--grey-500);
                     font-size: 14px;
+
+                    svg {
+                        height: 18px;
+                        width: 18px;
+                        position: relative;
+                        left: 5px;
+
+                        fill: var(--grey-500);
+                    }
                 }
             }
         }
@@ -96,12 +117,31 @@
 
                         span {
                             color: var(--grey-500);
-                            font-size: 12px;
+                            font-size: 14px;
+                            display: flex;
+                            align-items: center;
+                            
+                            svg {
+                                fill: var(--grey-500);
+                                height: 18px;
+                                width: 18px;
+                                position: relative;
+                                left: 3px;
+                                top: .407px;
+                            }
 
                             &:nth-of-type(1) {
                                 font-weight: 700;
                                 font-size: 16px;
                                 color: var(--grey-900);
+
+                                svg {
+                                    height: 18px;
+                                    width: 18px;
+                                    fill: var(--grey-900);
+                                    left: 4px;
+                                    top: 1px;
+                                }
                             }
                         }
                     }
@@ -162,12 +202,26 @@
                     text-align: center;
 
                     &:first-child {
-                        border-bottom: 1px solid var(--grey-100);   
+                        border-bottom: 1px solid var(--grey-100);
                     }
 
                     &:last-child {
                         color: var(--red);
                     }
+                }
+            }
+
+            p {
+                color: var(--grey-500);
+                display: flex;
+                align-items: center;
+                svg {
+                    fill: var(--grey-500);
+                    height: 18px;
+                    width: 18px;
+                    position: relative;
+                    left: 3px;
+                    top: .5px;
                 }
             }
 
@@ -212,6 +266,17 @@
 
                         &:nth-of-type(2) {
                             font-weight: 700;
+                            display: flex;
+                            align-items: center;
+                            position: relative;
+                            right: 10px;
+                            
+                            svg {
+                                height: 20px;
+                                width: 20px;
+                                position: relative;
+                                left: 4px;
+                            }
                         }
                     }
 
@@ -239,6 +304,17 @@
 
                         &:nth-of-type(2) {
                             font-weight: 700;
+                            display: flex;
+                            align-items: center;
+                            position: relative;
+                            right: 10px;
+                            
+                            svg {
+                                height: 20px;
+                                width: 20px;
+                                position: relative;
+                                left: 4px;
+                            }
                         }
                     }
 

@@ -76,6 +76,16 @@
                         color: var(--grey-900);
                         font-weight: 700;
                         font-size: 32px;
+                        display: flex;
+                        align-items: center;
+
+                        svg {
+                            height: 45px;
+                            width: 45px;
+                            position: relative;
+                            left: 12px;
+                            top: 1.4px;
+                        }
                     }
                 }
             }
@@ -100,7 +110,16 @@
 
                 span {
                     color: var(--grey-500);
-                    font-size: 12px;
+                    font-size: 14px;
+
+                    svg {
+                        fill: var(--grey-500);
+                        height: 18px;
+                        width: 18px;
+                        position: relative;
+                        top: 4px;
+                        left: 3px;
+                    }
                     
                     &:first-child {
                         font-weight: 700;
