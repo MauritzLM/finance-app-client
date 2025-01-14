@@ -43,6 +43,7 @@ function LatestSpending({ user, category }: LatestSpendingProps) {
                     {transactions.map(t =>
                         <li key={t.date}>
                             <div>
+                                <img src={t.avatar} alt="avatar image" loading="lazy" decoding="async" height={32} width={32} aria-hidden="true" />
                                 <span>{t.name}</span>
                             </div>
                             <div>

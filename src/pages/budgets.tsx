@@ -173,7 +173,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                             </svg>
                         </div>
 
-                        <div>
+                        <div className="spending-summary">
                             <h2>Spending Summary</h2>
 
                             <ul>
