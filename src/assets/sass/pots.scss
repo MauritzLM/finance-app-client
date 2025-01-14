@@ -120,7 +120,7 @@
                         top: 4px;
                         left: 3px;
                     }
-                    
+
                     &:first-child {
                         font-weight: 700;
                     }
@@ -144,5 +144,22 @@
             }
         }
 
+    }
+}
+
+/* tablet styles */
+@media screen and (min-width: 699px) {
+    .pots-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+        .pot-card {
+            padding: 24px;
+
+            .toggle-btn {
+                right: 24px;
+                top: 24px;
+            }
+        }
     }
 }
