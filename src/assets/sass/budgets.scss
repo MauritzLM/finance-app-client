@@ -73,7 +73,6 @@
 
         .color-wheel {
             height: 260px;
-            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -120,7 +119,7 @@
                             font-size: 14px;
                             display: flex;
                             align-items: center;
-                            
+
                             svg {
                                 fill: var(--grey-500);
                                 height: 18px;
@@ -215,6 +214,7 @@
                 color: var(--grey-500);
                 display: flex;
                 align-items: center;
+
                 svg {
                     fill: var(--grey-500);
                     height: 18px;
@@ -270,7 +270,7 @@
                             align-items: center;
                             position: relative;
                             right: 10px;
-                            
+
                             svg {
                                 height: 20px;
                                 width: 20px;
@@ -308,7 +308,7 @@
                             align-items: center;
                             position: relative;
                             right: 10px;
-                            
+
                             svg {
                                 height: 20px;
                                 width: 20px;
@@ -363,6 +363,11 @@
 
                         div {
                             &:nth-of-type(1) {
+                                img {
+                                    display: none;
+                                    border-radius: 50%;
+                                }
+
                                 span {
                                     font-weight: 700;
                                 }
@@ -380,6 +385,56 @@
                                     &:nth-of-type(1) {
                                         font-weight: 700;
                                         color: var(--grey-900);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* tablet styles */
+@media screen and (min-width: 699px) {
+    .budgets-wrapper {
+        .budgets-summary {
+            padding: 32px;
+            flex-direction: row;
+
+            .color-wheel {
+                flex: 50;
+            }
+
+            .spending-summary {
+                flex: 50;
+            }
+        }
+
+        .budgets-detail {
+            .budget {
+                padding: 32px;
+
+                .toggle-btn {
+                    right: 32px;
+                    top: 32px;
+                }
+
+                .latest-spending {
+                    padding: 20px;
+
+                    ul {
+                        li {
+
+                            div {
+                                &:nth-of-type(1) {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 16px;
+
+                                    img {
+                                        display: inline-block;
                                     }
                                 }
                             }
