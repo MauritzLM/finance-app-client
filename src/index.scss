@@ -130,6 +130,11 @@ nav {
   align-self: end;
   height: fit-content;
 
+  .logo-l,
+  .logo-s {
+    display: none;
+  }
+
   .nav-links {
     display: flex;
     align-items: center;
@@ -184,8 +189,279 @@ nav {
 
   button {
     display: none;
+    margin-top: 100px;
+    padding-left: 32px;
   }
 }
+
+/* desktop layout */
+@media screen and (min-width: 999px) {
+  #container {
+    grid-template-columns: auto 1fr;
+
+  }
+
+  // mini nav 
+  nav {
+    order: 0;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+
+
+    .logo-s {
+      display: block;
+    }
+
+    .logo-s,
+    .logo-l {
+      margin-top: 40px;
+      margin-left: 32px;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      align-items: start;
+      padding: 0;
+      margin-top: 64px;
+      gap: 16px;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        padding: 16px 32px;
+        border-radius: 0;
+
+        svg {
+          height: 24px;
+          width: 24px;
+        }
+
+        .line {
+          height: 100%;
+          width: 5px;
+          left: 0;
+
+        }
+      }
+    }
+
+    button {
+      display: flex;
+      gap: 16px;
+
+      svg {
+        transform: rotate(.5turn);
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  // expanded nav
+  .expanded {
+    width: 300px;
+
+    .logo-s {
+      display: none;
+    }
+
+    .logo-l {
+      display: block;
+    }
+
+    .nav-links {
+
+      a {
+
+        border-radius: 0 10px 10px 0;
+        width: 80%;
+
+        // text
+        span {
+          display: inline;
+          font-weight: 700;
+        }
+
+      }
+
+      .cs-active {
+        span {
+          color: var(--grey-900);
+        }
+      }
+    }
+
+    button {
+      svg {
+        transform: rotate(1turn);
+      }
+
+      span {
+        display: inline;
+        color: var(--grey-300);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+// AUTH PAGES
+.auth-container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  padding: 16px;
+
+  .logo {
+    width: 100%;
+    background-color: var(--grey-900);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    top: 0;
+  }
+
+
+  .illustration {
+    display: none;
+  }
+
+  .form-wrapper {
+    width: 100%;
+    max-width: 560px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 24px 20px;
+
+    h2 {
+      font-size: 32px;
+    }
+
+    form {
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+        gap: 8px;
+        position: relative;
+
+        label {
+          color: var(--grey-500);
+          font-weight: 700;
+          font-size: 12px;
+
+        }
+
+        input {
+          font: inherit;
+          border: 1px solid var(--grey-300);
+          border-radius: 10px;
+          padding: 12px 20px;
+          width: 100%;
+        }
+
+        button {
+          position: absolute;
+          right: 20px;
+          bottom: 12px;
+        }
+      }
+
+      .error {
+        span {
+          position: absolute;
+          right: 0;
+          color: var(--red);
+        }
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        background-color: var(--grey-900);
+        color: white;
+        padding: 16px;
+        border-radius: 10px;
+        font-weight: 700;
+        margin-top: 32px;
+      }
+
+    }
+
+    p {
+      margin-top: 32px;
+      color: var(--grey-500);
+      text-align: center;
+
+      button {
+        margin-left: 6px;
+        border-bottom: 1px solid var(--grey-900);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+/* tablet styles */
+@media screen and (min-width: 560px) {
+  .auth-container {
+    .form-wrapper {
+      padding: 32px;
+    }
+  }
+}
+
+/* desktop styles */
+@media screen and (min-width: 1399px) {
+  .auth-container {
+    grid-template-columns: 42% 58%;
+    padding: 20px;
+
+    .logo {
+      display: none;
+    }
+
+    .illustration {
+      display: block;
+      padding: 40px;
+      background-image: url('./src/assets/images/illustration-authentication.svg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100%;
+      width: 560px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      img {
+        height: 21px;
+        width: 121px;
+      }
+
+      div {
+        color: white;
+
+        h1 {
+          margin-bottom: 24px;
+        }
+      }
+
+    }
+  }
+}
+
 
 
 // FORM STYLES
@@ -433,6 +709,26 @@ nav {
           font-weight: 700;
           color: var(--red);
         }
+      }
+    }
+  }
+}
+
+/* tablet styles */
+@media screen and (min-width: 550px) {
+  .form-modal {
+
+    .cs-form,
+    .delete-form {
+      padding: 32px;
+
+      .close-btn {
+        top: 42px;
+        right: 32px;
+      }
+
+      h2 {
+        font-size: 32px;
       }
     }
   }
