@@ -337,11 +337,13 @@
 }
 
 /* tablet styles */
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 750px) {
     .transactions-wrapper {
         padding: 32px;
 
         .top-bar {
+            gap: 0;
+
             .sort {
                 display: flex;
                 align-items: center;
@@ -448,9 +450,22 @@
 
                     th {
                         text-align: center;
+                        color: var(--grey-500);
+                        font-weight: 400;
+                        font-size: 12px;
 
                         &:first-child {
                             text-align: left;
+                            width: 45%;
+                        }
+
+                        &:nth-of-type(2) {
+                            text-align: left;
+                        }
+
+                        &:nth-of-type(3) {
+                            text-align: left;
+
                         }
                     }
                 }
@@ -465,17 +480,18 @@
 
                         &:nth-of-type(1) {
                             display: table-cell;
+
                         }
 
                         &:nth-of-type(2) {
                             position: static;
-                            text-align: center;
+                            text-align: left;
                             padding: 0;
                         }
 
                         &:nth-of-type(3) {
                             position: static;
-                            text-align: center;
+                            text-align: left;
 
                         }
 
@@ -486,7 +502,8 @@
                     }
 
                     .name {
-                        position: static;
+                        bottom: 10px;
+                        left: 10px;
 
                     }
 
