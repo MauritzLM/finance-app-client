@@ -144,6 +144,16 @@
         .sort {
             position: relative;
 
+            .label {
+                display: none;
+            }
+
+            button {
+                span {
+                    display: none;
+                }
+            }
+
             #listbox-sort {
                 position: absolute;
                 visibility: hidden;
@@ -330,12 +340,58 @@
 
         .top-bar {
             margin-bottom: 24px;
+            justify-content: space-between;
 
             .search-bar {
                 width: 320px;
 
                 input {
                     width: 100%;
+                }
+            }
+
+            .sort {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                .label {
+                    display: revert;
+                    color: var(--grey-500);
+                }
+
+                button {
+                    border: 1px solid var(--grey-300);
+                    border-radius: 10px;
+                    padding: 12px 20px;
+                    width: 113px;
+                    text-align: left;
+                    background-color: transparent;
+                    z-index: 2;
+
+                    span {
+                        display: inline-block;
+                    }
+
+                    svg {
+                        display: none;
+
+                    }
+                }
+
+                #listbox-sort {
+                    width: 113px;
+                    right: 0;
+                    span {
+                        display: none;
+                    }
+                }
+
+                #listbox-sort+svg {
+                    display: revert;
+                    position: absolute;
+                    right: 20px;
+                    
                 }
             }
         }
@@ -377,17 +433,35 @@
                     td {
                         &:nth-of-type(1) {
                             display: table-cell;
+
+                            .name {
+                                position: relative;
+                                bottom: 10px;
+                                left: 16px;
+                            }
                         }
 
                         &:nth-of-type(2) {
                             display: table-cell;
                             text-align: left;
+
+                            img {
+                                position: relative;
+                                top: 2px;
+                                left: 8px;
+                            }
                         }
                     }
 
                     .amount {
                         display: table-cell;
                         text-align: right;
+
+                        svg {
+                            position: relative;
+                            top: 4px;
+                            
+                        }
                     }
                 }
             }
