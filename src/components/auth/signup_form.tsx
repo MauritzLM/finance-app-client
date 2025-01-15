@@ -54,23 +54,32 @@ function SignUpForm({ loginStatus, updateUser }: signUpProps) {
 
     return (
         <>
-            <div>
-                <form onSubmit={(e) => handleSubmit(formData, e)}>
-                    <h2>Sign up form</h2>
+            <div className="illustration">
+                <img src="./src/assets/images/logo-large.svg" alt="" aria-hidden="true" decoding="async" loading="eager" />
+                <div>
+                    <h1>Keep track of your money <br />
+                        and save for your future</h1>
+                    <p>Personal finance app puts you in control of your spending. Track <br /> transactions, set budgets, and add to savings pots easily.</p>
+                </div>
+            </div>
 
-                    <div className={formErrors.username ? 'error formgroup' : 'formgroup'}>
+            <div className="form-wrapper">
+                <form onSubmit={(e) => handleSubmit(formData, e)}>
+                    <h2>Sign Up</h2>
+
+                    <div className={formErrors.username ? 'error form-group' : 'form-group'}>
                         {formErrors.username && <span>{formErrors.username}</span>}
                         <label htmlFor="username">Name</label>
                         <input type="text" name="username" id="username" value={formData.username} onInput={e => setFormData({ ...formData, 'username': e.currentTarget.value })} />
                     </div>
 
-                    <div className={formErrors.email ? 'error formgroup' : 'formgroup'}>
+                    <div className={formErrors.email ? 'error form-group' : 'form-group'}>
                         {formErrors.email && <span>{formErrors.email}</span>}
                         <label htmlFor="email">Email</label>
                         <input type="email" name="email" id="email" value={formData.email} onInput={e => setFormData({ ...formData, 'email': e.currentTarget.value })} />
                     </div>
 
-                    <div className={formErrors.password ? 'error formgroup' : 'formgroup'}>
+                    <div className={formErrors.password ? 'error form-group' : 'form-group'}>
                         {formErrors.password && <span>{formErrors.password}</span>}
                         <label htmlFor="password">Create Password</label>
                         <input type={showPassword ? 'text' : 'password'} name="password" id="password" value={formData.password} onInput={e => setFormData({ ...formData, 'password': e.currentTarget.value })} />
@@ -81,7 +90,8 @@ function SignUpForm({ loginStatus, updateUser }: signUpProps) {
 
                     <button type="submit">Create Account</button>
                 </form>
-                <button onClick={loginStatus}>login</button>
+                <p>Already have an account? <button onClick={loginStatus}>Login</button></p>
+
             </div>
         </>
     )

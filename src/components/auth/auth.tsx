@@ -7,7 +7,7 @@ interface authProps {
     updateUser: (u: userObj) => void
 }
 
-function Auth({updateUser}: authProps) {
+function Auth({ updateUser }: authProps) {
     const [loginState, setLoginState] = useState(true)
 
     function signUpStatus() {
@@ -22,15 +22,21 @@ function Auth({updateUser}: authProps) {
 
     if (loginState) {
         return (
-            <div>
-                <LoginForm signUpStatus={signUpStatus} updateUser={updateUser}/>
+            <div className="auth-container">
+                <div className="logo">
+                    <img src="./src/assets/images/logo-large.svg" alt="" />
+                </div>
+                <LoginForm signUpStatus={signUpStatus} updateUser={updateUser} />
             </div>
         )
     }
 
     return (
-        <div>
-            <SignUpForm loginStatus={loginStatus} updateUser={updateUser}/>
+        <div className="auth-container">
+            <div className="logo">
+                <img src="./src/assets/images/logo-large.svg" alt="" />
+            </div>
+            <SignUpForm loginStatus={loginStatus} updateUser={updateUser} />
         </div>
     )
 }
