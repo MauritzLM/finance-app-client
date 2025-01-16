@@ -165,7 +165,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
 
                             <svg width="240" height="240" viewBox="0 0 240 240">
                                 {budgets.map((b, i) =>
-                                    <circle className="bg"
+                                    <circle key={`${i}-c`} className="bg"
                                         cx="120" cy="120" r="104" fill="none" stroke={b.theme} strokeWidth="32" strokeDasharray={`${(b.maximum / (budgets.reduce((a, c) => a + c.maximum, 0))) * 653.45} ${653.45 - (b.maximum / (budgets.reduce((a, c) => a + c.maximum, 0)) * 653.45)}`}
                                         strokeDashoffset={calculateOffset(i, budgets, 653.45)}
                                     ></circle>
