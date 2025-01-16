@@ -445,3 +445,19 @@
         }
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .budgets-wrapper {
+        flex-direction: row;
+
+        .budgets-summary {
+            flex-direction: column;
+            height: fit-content;
+            flex: 35;
+        }
+
+        .budgets-detail {
+            flex: 65;
+        }
+    }
+}

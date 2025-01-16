@@ -469,3 +469,25 @@
         }
     }
 }
+
+@media screen and (min-width: 1399px) {
+    .bills-wrapper {
+        display: flex;
+        gap: 24px;
+    }
+
+    .row-1 {
+        flex-direction: column;
+        flex: 30;
+        height: fit-content;
+
+        .total {
+            flex: auto;
+            height: 190px;
+        }
+    }
+
+    .row-2 {
+        flex: 70;
+    }
+}

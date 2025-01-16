@@ -3,6 +3,15 @@
     display: grid;
     grid-template-columns: 100%;
     gap: 24px;
+
+    .row-2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 0;
+        background-color: transparent;
+
+    }
 }
 
 .page-link {
@@ -20,6 +29,38 @@
     .page-link {
         top: 40px;
         right: 35px;
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 1200px) {
+    .overview-wrapper {
+        gap: 32px;
+
+        .row-2 {
+            grid-template-areas: "pots budgets"
+                "transactions budgets"
+                "transactions bills"
+                "transactions bills";
+            grid-template-columns: 57% 43%;
+            gap: 24px;
+
+            .pots {
+                grid-area: pots;
+            }
+
+            .budgets {
+                grid-area: budgets;
+            }
+
+            .transactions {
+                grid-area: transactions;
+            }
+
+            .recurring-bills {
+                grid-area: bills;
+            }
+        }
     }
 }
 
@@ -206,6 +247,10 @@
     .pots {
         padding: 32px;
 
+        h2 {
+            margin-bottom: 20px;
+        }
+
         div {
             display: grid;
             grid-template-columns: 1.5fr 2fr;
@@ -219,6 +264,10 @@
                 }
             }
 
+        }
+
+        ul {
+            margin: 0;
         }
 
     }
