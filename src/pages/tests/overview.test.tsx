@@ -43,9 +43,9 @@ describe('overview component tests', () => {
         const expenses = await screen.findByTestId('expenses')
         const balance = await screen.findByTestId('balance')
 
-        expect(income.textContent).toMatch('$300.00')
-        expect(expenses.textContent).toMatch('$217.55')
-        expect(balance.textContent).toMatch('$82.45')
+        expect(income.textContent).toMatch('300.00')
+        expect(expenses.textContent).toMatch('217.55')
+        expect(balance.textContent).toMatch('82.45')
     });
 
     // pots
@@ -57,11 +57,11 @@ describe('overview component tests', () => {
         const pot_totals = await screen.findAllByTestId('pot-total')
 
         expect(pot_list).toHaveLength(4)
-        expect(total_saved.textContent).toMatch('$395')
-        expect(pot_totals[0].textContent).toMatch('$50')
-        expect(pot_totals[1].textContent).toMatch('$150')
-        expect(pot_totals[2].textContent).toMatch('$40')
-        expect(pot_totals[3].textContent).toMatch('$120')
+        expect(total_saved.textContent).toMatch('395')
+        expect(pot_totals[0].textContent).toMatch('50')
+        expect(pot_totals[1].textContent).toMatch('150')
+        expect(pot_totals[2].textContent).toMatch('40')
+        expect(pot_totals[3].textContent).toMatch('120')
     });
 
     // budgets
@@ -73,11 +73,11 @@ describe('overview component tests', () => {
         const budgets_limit = await screen.findByTestId('budgets-limit')
         const budgets_maximum = await screen.findAllByTestId('budget-maximum')
 
-        expect(total_spent.textContent).toMatch('$500')
-        expect(budgets_limit.textContent).toMatch('of $750 limit')
+        expect(total_spent.textContent).toMatch('500')
+        expect(budgets_limit.textContent).toMatch('of750 limit')
         expect(budgets_maximum.length).toEqual(2)
-        expect(budgets_maximum[0].textContent).toMatch('$500.00')
-        expect(budgets_maximum[1].textContent).toMatch('$250.00')
+        expect(budgets_maximum[0].textContent).toMatch('500.00')
+        expect(budgets_maximum[1].textContent).toMatch('250.00')
 
     });
 

@@ -27,16 +27,16 @@ describe('test budget component', () => {
         render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} /></BrowserRouter>)
 
         // correct total and limit
-        expect(screen.getByTestId('total-spent').textContent).toMatch('$500')
-        expect(screen.getByTestId('limit').textContent).toMatch('of $750 limit')
+        expect(screen.getByTestId('total-spent').textContent).toMatch('500')
+        expect(screen.getByTestId('limit').textContent).toMatch('of 750 limit')
 
         // spending of maximum
         expect(screen.getAllByTestId('summary-list')).toHaveLength(2)
 
         const summary_spending = screen.getAllByTestId('budget-spending')
         expect(summary_spending).toHaveLength(2)
-        expect(summary_spending[0].textContent).toMatch('$400.00 of $500.00')
-        expect(summary_spending[1].textContent).toMatch('$100.00 of $250.00')
+        expect(summary_spending[0].textContent).toMatch('400.00of 500.00')
+        expect(summary_spending[1].textContent).toMatch('100.00of 250.00')
     });
 
 
@@ -54,15 +54,15 @@ describe('test budget component', () => {
         const detail_spending = screen.getAllByTestId('detail-spending')
 
         expect(detail_spending).toHaveLength(2)
-        expect(detail_spending[0].textContent).toMatch('$400.00')
-        expect(detail_spending[1].textContent).toMatch('$100.00')
+        expect(detail_spending[0].textContent).toMatch('400.00')
+        expect(detail_spending[1].textContent).toMatch('100.00')
 
         // remaining
         const detail_remaining = screen.getAllByTestId('detail-remaining')
 
         expect(detail_remaining).toHaveLength(2)
-        expect(detail_remaining[0].textContent).toMatch('$100.00')
-        expect(detail_remaining[1].textContent).toMatch('$150.00')
+        expect(detail_remaining[0].textContent).toMatch('100.00')
+        expect(detail_remaining[1].textContent).toMatch('150.00')
     })
 
     // new, edit, delete

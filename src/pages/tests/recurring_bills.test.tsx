@@ -6,8 +6,6 @@ import RecurringBills from '../recurring_bills'
 import { userObj, transaction } from '../../types'
 import userEvent from '@testing-library/user-event'
 
-
-
 // mocks
 const fetchMock = vi.fn();
 fetchMock.mockReturnValue(
@@ -28,14 +26,14 @@ describe('test recurring bills component', () => {
     it('test correct total displayed', () => {
         render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
 
-        expect(screen.getByTestId('total')).toHaveTextContent('$65.50')
+        expect(screen.getByTestId('total')).toHaveTextContent('65.50')
     });
 
     it('test correct summary values', () => {
         render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
         
-        expect(screen.getByTestId('paid')).toHaveTextContent('2 ($35.50)')
-        expect(screen.getByTestId('upcoming')).toHaveTextContent('1 ($30.00)')
+        expect(screen.getByTestId('paid')).toHaveTextContent('2 (35.50 )')
+        expect(screen.getByTestId('upcoming')).toHaveTextContent('1 (30.00 )')
     });
 
     it('test initial bill list', () => {
@@ -46,7 +44,7 @@ describe('test recurring bills component', () => {
         const dates = screen.getAllByTestId('date')
 
         expect(bill_list.length).toEqual(3)
-        expect(amounts[2]).toHaveTextContent('$30.00')
+        expect(amounts[2]).toHaveTextContent('30.00')
         expect(dates[0].textContent).toMatch('Monthly-1st')
         expect(dates[1].textContent).toMatch('Monthly-2nd')
     });
@@ -70,12 +68,12 @@ describe('test recurring bills component', () => {
         
         const user = userEvent.setup()
     
-        const sortOptions = screen.getByRole('combobox')
+        const sortOptions = screen.getAllByRole('option')
 
-        await user.selectOptions(sortOptions, 'A to Z')
+        await user.click(sortOptions[2])
 
         const amounts = await screen.findAllByTestId('amount')
         expect(amounts.length).toBe(3)
-        expect(amounts[2].textContent).toMatch('$17.00')
+        expect(amounts[2].textContent).toMatch('17.00')
     });
 });

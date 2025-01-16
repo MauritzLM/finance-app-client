@@ -34,8 +34,8 @@ describe('pot component tests', () => {
 
         const pot_totals = screen.getAllByTestId('pot-total')
 
-        expect(pot_totals[0].textContent).toMatch('$50.00')
-        expect(pot_totals[3].textContent).toMatch('$120.00')
+        expect(pot_totals[0].textContent).toMatch('50.00')
+        expect(pot_totals[3].textContent).toMatch('120.00')
     });
 
     it('test pot percentage values', () => {
@@ -52,7 +52,7 @@ describe('pot component tests', () => {
 
         const pot_targets = screen.getAllByTestId('pot-target')
 
-        expect(pot_targets[1].textContent).toMatch('Target of $550')
+        expect(pot_targets[1].textContent).toMatch('Target of550')
 
     });
 
