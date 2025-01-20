@@ -99,6 +99,15 @@ button {
   padding: 0;
 }
 
+.logout-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: transparent;
+  font-size: 14px;
+  
+}
+
 .new-btn {
   background-color: var(--grey-900);
   color: white;

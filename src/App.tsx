@@ -49,6 +49,25 @@ function App() {
     setRecurringBills([...transactionArr])
   }
 
+  // logout
+  async function handleLogout() {
+    try {
+      const response = await fetch('https://web-production-de787.up.railway.app/finance-api/logout', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      })
+
+      const data = await response.json()
+
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // check if userobj in localstorage
   useEffect(() => {
     if (localStorage.user) {
@@ -69,8 +88,12 @@ function App() {
   return (
     <>
       <div id='container'>
-        <Navbar/>
+        <Navbar />
         <main>
+          {isAuthenticated &&
+            <button className='logout-btn' onClick={() => handleLogout()}>Logout</button>
+          }
+
           <Routes>
             <Route path='/' element={<Overview user={user} changeAuthStatus={changeAuthStatus} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} />} />
             <Route path='/transactions' element={<Transactions user={user} />} />
