@@ -14,7 +14,7 @@ interface overviewProps {
 }
 
 function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBudgetSpending, updateRecurringBills }: overviewProps) {
-    const [overviewData, setOverviewData] = useState<overviewData>({})
+    const [overviewData, setOverviewData] = useState<overviewData>({ 'pots': [], 'budgets': [], 'expenses': [], 'recent_transactions': [], 'recurring_bills': [], 'income': [], 'budget_spending': {} })
     const [expenses, setExpenses] = useState<number>()
     const [income, setIncome] = useState<number>()
 
@@ -62,6 +62,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
         if (Object.keys(overviewData).length !== 6) {
             getOverviewData()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
