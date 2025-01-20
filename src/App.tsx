@@ -59,10 +59,10 @@ function App() {
         }
       });
 
-      console.log(response)
-      // if success change unauthorized state
-      setIsAuthenticated(false)
-
+      // if success change authorized state
+      if (response.status === 204) {
+        setIsAuthenticated(false)
+      }
 
     } catch (error) {
       console.log(error)
