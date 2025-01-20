@@ -1,13 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
-import { userObj } from "../types"
 import { useState } from "react";
 
-interface navProps {
-    user: userObj
-}
-
-
-function Navbar({ user }: navProps) {
+function Navbar() {
     const [expanded, setExpanded] = useState(false)
     const location = useLocation();
 

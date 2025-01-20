@@ -187,7 +187,7 @@ export function separateButtons(num: number) {
         return []
     }
 
-    const numArr = Array.from({ length: num }, (v, i) => i + 1)
+    const numArr = Array.from({ length: num }, (_v, i) => i + 1)
     // arr one contains button 1,2 and last button
     const newArr_1 = numArr.slice(0, 2)
     newArr_1.push(numArr[numArr.length - 1])
@@ -200,7 +200,7 @@ export function separateButtons(num: number) {
 // calculate dashoffset
 export function calculateOffset(index: number, budgetArr: budget[], circumference: number) {
     // create array from current index
-    const indexArr = Array.from({ length: index }, (v, i) => i + 1)
+    const indexArr = Array.from({ length: index }, (_v, i) => i + 1)
 
     let totalOffset = 0
 

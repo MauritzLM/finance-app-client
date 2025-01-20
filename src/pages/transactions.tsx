@@ -224,7 +224,7 @@ function Transactions({ user }: transactionsProps) {
                         <span>Prev</span>
                     </button>
                     {/* if only 4 pages or less */}
-                    {numPages <= 4 && Array.from({ length: numPages }, (v, i) => i + 1).map(page =>
+                    {numPages <= 4 && Array.from({ length: numPages }, (_v, i) => i + 1).map(page =>
                         <button className={pageNumber === page ? 'current-page page-btn' : 'page-btn'} data-testid="page-btn" key={page} onClick={() => setPageNumber(page)} disabled={pageNumber === page ? true : false}>{page}</button>
                     )}
                     {/* if more than 4 pages */}

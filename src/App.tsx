@@ -13,7 +13,7 @@ import { userObj, pot, budget, budget_spending, transaction } from './types'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState<userObj>({})
+  const [user, setUser] = useState<userObj>({ 'token': '', 'user': { 'id': 0, 'username': '' } })
   const [pots, setPots] = useState<pot[]>([])
   const [budgets, setBudgets] = useState<budget[]>([])
   const [budgetSpending, setBudgetSpending] = useState<budget_spending>({})
@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <div id='container'>
-        <Navbar user={user} />
+        <Navbar/>
         <main>
           <Routes>
             <Route path='/' element={<Overview user={user} changeAuthStatus={changeAuthStatus} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} />} />

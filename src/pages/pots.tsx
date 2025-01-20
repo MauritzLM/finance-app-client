@@ -20,7 +20,7 @@ function Pots({ user, pots, updatePots }: potsProps) {
     const [showDeleteForm, setShowDeleteform] = useState(false)
     const [showAddForm, setShowAddForm] = useState(false)
     const [showWithdrawForm, setShowWithdrawForm] = useState(false)
-    const [potToEdit, setPotToEdit] = useState<pot>({})
+    const [potToEdit, setPotToEdit] = useState<pot>({ 'name': '', 'total': 0, 'theme': '', 'id': 1, 'target': 0 })
 
     const [currentToggle, setCurrentToggle] = useState('')
 
@@ -108,6 +108,7 @@ function Pots({ user, pots, updatePots }: potsProps) {
         if (!pots.length) {
             getPots()
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

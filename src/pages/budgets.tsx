@@ -21,7 +21,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
     const [showNewForm, setShowNewForm] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false)
     const [showDeleteForm, setShowDeleteform] = useState(false)
-    const [budgetToEdit, setBudgetToEdit] = useState<budget>({})
+    const [budgetToEdit, setBudgetToEdit] = useState<budget>({ 'name': '', 'id': 0, 'category': '', 'maximum': 0, 'theme': '' })
     // if new budget has been created
     const [newBudget, setNewBudget] = useState('')
 
