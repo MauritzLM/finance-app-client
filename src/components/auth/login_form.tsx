@@ -24,8 +24,6 @@ function LoginForm({ signUpStatus, updateUser }: loginProps) {
         body: JSON.stringify(formData)
       })
 
-      console.log(response)
-
       const data = await response.json()
 
       // update user context/state with user & token

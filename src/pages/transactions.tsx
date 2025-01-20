@@ -85,8 +85,6 @@ function Transactions({ user }: transactionsProps) {
 
             const data = await response.json()
 
-            console.log(data)
-
             setTransactions([...data.page_list])
             setNumPages(data.num_pages)
             setActiveSelect('')

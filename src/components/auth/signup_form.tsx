@@ -26,8 +26,6 @@ function SignUpForm({ loginStatus, updateUser }: signUpProps) {
 
             const data = await response.json()
 
-            console.log(data)
-
             // update user context/state with user & token
             if (data.token) {
                 updateUser(data)
