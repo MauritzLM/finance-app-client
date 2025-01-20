@@ -55,10 +55,10 @@ function SignUpForm({ loginStatus, updateUser }: signUpProps) {
     return (
         <>
             <div className="illustration">
-                <img src="./src/assets/images/logo-large.svg" alt="" aria-hidden="true" decoding="async" loading="eager" />
+                <img src="/images/logo-large.svg" alt="" aria-hidden="true" decoding="async" loading="eager" />
                 <div>
-                    <h1>Keep track of your money <br />
-                        and save for your future</h1>
+                    <h1>Keep track of your money <br />and save for your future</h1>
+
                     <p>Personal finance app puts you in control of your spending. Track <br /> transactions, set budgets, and add to savings pots easily.</p>
                 </div>
             </div>

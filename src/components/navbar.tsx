@@ -17,8 +17,8 @@ function Navbar() {
     return (
         <>
             <nav className={expanded ? "expanded" : ""}>
-                <img className="logo-l" src="./src/assets/images/logo-large.svg" alt="logo" decoding="async" aria-hidden="true" loading="eager" />
-                <img className="logo-s" src="./src/assets/images/logo-small.svg" alt="logo" decoding="async" aria-hidden="true" loading="eager" />
+                <img className="logo-l" src="/images/logo-large.svg" alt="logo" decoding="async" aria-hidden="true" loading="eager" />
+                <img className="logo-s" src="/images/logo-small.svg" alt="logo" decoding="async" aria-hidden="true" loading="eager" />
 
                 <div className="nav-links">
                     <Link className={location.pathname === '/' ? 'cs-active' : ''} to="/">

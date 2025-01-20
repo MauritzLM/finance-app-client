@@ -63,7 +63,7 @@ function LoginForm({ signUpStatus, updateUser }: loginProps) {
     <>
 
       <div className="illustration">
-        <img src="./src/assets/images/logo-large.svg" alt="" aria-hidden="true" decoding="async" loading="eager" />
+        <img src="/images/logo-large.svg" alt="" aria-hidden="true" decoding="async" loading="eager" />
 
         <div>
           <h1>Keep track of your money <br />

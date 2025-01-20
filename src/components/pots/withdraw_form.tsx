@@ -80,7 +80,7 @@ function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdra
                 <div className="form-group">
                     {formErrors.total && <span className="error">{formErrors.total}</span>}
                     <label htmlFor="amount">Amount to Withdraw</label>
-                    <img src="./src/assets/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
+                    <img src="/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
                     <input type="number" name="amount" id="amount" min={10} value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
                 </div>
                 <button type="submit">Confirm Withdrawal</button>

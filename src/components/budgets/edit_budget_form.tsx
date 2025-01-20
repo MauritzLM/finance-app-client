@@ -92,7 +92,7 @@ function EditBudgetForm({ user, budget, budgets, hideEditForm, updateBudgets }: 
                 <div className="form-group">
                     {formErrors.maximum && <span className="error">{formErrors.maximum}</span>}
                     <label htmlFor="maximum">Maximum Spend</label>
-                    <img src="./src/assets/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
+                    <img src="/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
                     <input type="number" name="maximum" id="maximum" value={formData.maximum} onInput={(e) => setFormData({ ...formData, 'maximum': Number(e.currentTarget.value) })}></input>
                 </div>
 

@@ -79,7 +79,7 @@ function AddForm({ user, pot, pots, updatePots, hideAddForm }: addFormProps) {
                 <div className="form-group">
                     {formErrors.value && <span className="error">{formErrors.value}</span>}
                     <label htmlFor="amount">Amount to Add</label>
-                    <img src="./src/assets/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
+                    <img src="/images/attach-money.svg" alt="$" height={20} width={20} aria-hidden="true" decoding="async" loading="lazy" />
                     <input type="number" name="amount" id="amount" min={10}  value={formData.amount} onInput={(e) => setFormData({ ...formData, 'amount': Number(e.currentTarget.value) })} />
                 </div>
                 <button type="submit">Confirm Addition</button>
