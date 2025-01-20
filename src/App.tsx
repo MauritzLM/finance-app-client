@@ -59,9 +59,11 @@ function App() {
         }
       });
 
-      const data = await response.json()
+      console.log(response)
+      // if success change unauthorized state
+      setIsAuthenticated(false)
 
-      console.log(data)
+
     } catch (error) {
       console.log(error)
     }
