@@ -58,7 +58,8 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
         if (!recurringBills.length) {
             getRecurringBills()
         }
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>
