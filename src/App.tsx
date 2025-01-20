@@ -53,6 +53,7 @@ function App() {
   async function handleLogout() {
     try {
       const response = await fetch('https://web-production-de787.up.railway.app/finance-api/logout', {
+        method: 'POST',
         headers: {
           'Authorization': `Token ${user.token}`
         }
