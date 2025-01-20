@@ -24,7 +24,7 @@ function Auth({ updateUser }: authProps) {
         return (
             <div className="auth-container">
                 <div className="logo">
-                    <img src="./src/assets/images/logo-large.svg" alt="" />
+                    <img src="/images/logo-large.svg" alt="" />
                 </div>
                 <LoginForm signUpStatus={signUpStatus} updateUser={updateUser} />
             </div>
@@ -34,7 +34,7 @@ function Auth({ updateUser }: authProps) {
     return (
         <div className="auth-container">
             <div className="logo">
-                <img src="./src/assets/images/logo-large.svg" alt="" />
+                <img src="/images/logo-large.svg" alt="" />
             </div>
             <SignUpForm loginStatus={loginStatus} updateUser={updateUser} />
         </div>
