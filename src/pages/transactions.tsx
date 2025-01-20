@@ -75,7 +75,7 @@ function Transactions({ user }: transactionsProps) {
                 formatted_term = 'empty'
             }
 
-            const response = await fetch(`http://localhost:8000/finance-api/transactions/${formatted_term}/${category}/${sortBy}/${pageNumber}`, {
+            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/transactions/${formatted_term}/${category}/${sortBy}/${pageNumber}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -103,7 +103,7 @@ function Transactions({ user }: transactionsProps) {
         try {
             event.preventDefault()
 
-            const response = await fetch(`http://localhost:8000/finance-api/transactions/search/${searchTerm}/${sortBy}/${1}`, {
+            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/transactions/search/${searchTerm}/${sortBy}/${1}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',

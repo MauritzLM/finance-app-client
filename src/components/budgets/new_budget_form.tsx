@@ -22,7 +22,7 @@ function NewBudgetForm({ user, budgets, hideNewForm, updateBudgets, updateNewBud
         try {
             event.preventDefault()
 
-            const response = await fetch('http://localhost:8000/finance-api/budgets', {
+            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/budgets', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',

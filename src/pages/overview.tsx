@@ -21,7 +21,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
     // fetch overview content
     async function getOverviewData() {
         try {
-            const response = await fetch('http://localhost:8000/finance-api/overview', {
+            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/overview', {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',

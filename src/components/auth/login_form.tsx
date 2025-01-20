@@ -16,7 +16,7 @@ function LoginForm({ signUpStatus, updateUser }: loginProps) {
     try {
       event.preventDefault()
 
-      const response = await fetch('http://localhost:8000/finance-api/login', {
+      const response = await fetch('https://web-production-de787.up.railway.app/finance-api/login', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json'

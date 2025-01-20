@@ -16,7 +16,7 @@ function DeleteBudgetForm({ user, budget, budgets, updateBudgets, hideDeleteForm
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         try {
             event.preventDefault()
-            const response = await fetch(`http://localhost:8000/finance-api/budgets/${budget.id}`, {
+            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/budgets/${budget.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json',

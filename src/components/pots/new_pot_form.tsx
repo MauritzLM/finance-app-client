@@ -18,7 +18,7 @@ function NewPotForm({ user, pots, updatePots, hideNewForm }: newFormProps) {
         try {
             event.preventDefault()
 
-            const response = await fetch(`http://localhost:8000/finance-api/pots`, {
+            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/pots`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',

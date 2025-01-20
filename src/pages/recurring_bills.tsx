@@ -17,7 +17,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
     // fetch function
     async function getRecurringBills() {
         try {
-            const response = await fetch('http://localhost:8000/finance-api/transactions/recurring', {
+            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/transactions/recurring', {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',

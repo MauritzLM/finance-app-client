@@ -16,7 +16,7 @@ function DeletePotForm({ user, pot, pots, updatePots, hideDeleteForm }: deleteFo
         try {
             event.preventDefault()
 
-            const response = await fetch(`http://localhost:8000/finance-api/pots/${pot.id}`, {
+            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/pots/${pot.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json',

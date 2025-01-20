@@ -31,7 +31,7 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
     // fetch budgets and spending if not in props
     async function getBudgets() {
         try {
-            const response = await fetch('http://localhost:8000/finance-api/budgets', {
+            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/budgets', {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',

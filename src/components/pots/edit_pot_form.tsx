@@ -19,7 +19,7 @@ function EditPotForm({ user, pot, pots, updatePots, hideEditForm }: editFormProp
         try {
             event.preventDefault()
 
-            const response = await fetch(`http://localhost:8000/finance-api/pots/${pot.id}`, {
+            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/pots/${pot.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
