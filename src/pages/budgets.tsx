@@ -263,6 +263,12 @@ function Budgets({ user, budgets, budgetSpending, updateBudgets, updateBudgetSpe
                     </div>
                 </div>
             }
+
+            {/* if no budgets* */}
+            {budgets.length === 0 &&
+                <h2>Could not find any budgets for {user.user.username}</h2>
+            }
+
             {/* new budget form */}
             {showNewForm &&
                 <div className="form-modal">

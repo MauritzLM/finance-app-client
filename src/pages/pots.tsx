@@ -108,7 +108,7 @@ function Pots({ user, pots, updatePots }: potsProps) {
         if (!pots.length) {
             getPots()
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -161,6 +161,11 @@ function Pots({ user, pots, updatePots }: potsProps) {
                         </div>
                     </section>
                 )}
+
+                {/* if no pots* */}
+                {pots.length === 0 &&
+                    <h2>Could not find any pots for {user.user.username}</h2>
+                }
 
             </div>
             {/* new pot form* */}
