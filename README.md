@@ -1,50 +1,42 @@
-# React + TypeScript + Vite
+# Finance app client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Built with
 
-Currently, two official plugins are available:
+ - React + Typescript
+ - SASS
+ - [Backend](https://github.com/MauritzLM/financeapp) uses django-rest-framework
+ - Hosted on [Vercel](https://vercel.com/) 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Pages
+  
+### Overview
+  
+  - Fetches overview data and displays it
 
-## Expanding the ESLint configuration
+### Budgets
+  
+  - Displays budgets summary and list of budgets
+  - Fetches budgets if not in props or state
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Transactions
+  
+  - Displays paginated list of transactions
+  - Fetches transactions by page, search term, sort and category
 
-- Configure the top-level `parserOptions` property like this:
+### Pots
+  
+  - Displays list of pots
+  - Fetches pots if not in state or props
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Recurring Bills
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+  - Displays list of recurring bills sorted
+  - Fetches recurring bills if not in state or props
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Components
+  
+  - navbar
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+  - forms: renders inside form modal
+
+  - latest spending: renders inside budget card  
