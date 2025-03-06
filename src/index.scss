@@ -105,7 +105,8 @@ button {
   top: 10px;
   background-color: transparent;
   font-size: 14px;
-  
+  border-bottom: 1px solid var(--grey-500);
+  padding-bottom: 2px;
 }
 
 .new-btn {
