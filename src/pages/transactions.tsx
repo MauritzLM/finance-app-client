@@ -17,6 +17,9 @@ function Transactions({ user }: transactionsProps) {
     const [transactions, setTransactions] = useState<transaction[]>([])
     const [pageBtnToggle, setPageBtnToggle] = useState(false)
     const [activeSelect, setActiveSelect] = useState('')
+    const [showNewForm, setShowNewForm] = useState(false)
+    const [showEditForm, setShowEditForm] = useState(false)
+    const [showDeleteForm, setShowDeleteform] = useState(false)
 
     // option refs
 
@@ -75,7 +78,7 @@ function Transactions({ user }: transactionsProps) {
                 formatted_term = 'empty'
             }
 
-            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/transactions/${formatted_term}/${category}/${sortBy}/${pageNumber}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/transactions/${formatted_term}/${category}/${sortBy}/${pageNumber}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -101,7 +104,7 @@ function Transactions({ user }: transactionsProps) {
         try {
             event.preventDefault()
 
-            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/transactions/search/${searchTerm}/${sortBy}/${1}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/transactions/search/${searchTerm}/${sortBy}/${1}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -126,7 +129,11 @@ function Transactions({ user }: transactionsProps) {
 
     return (
         <>
-            <h1>Transactions</h1>
+            <section className="header">
+                <h1>Transactions</h1>
+                <button data-testid="new-btn" onClick={() => setShowNewForm(true)} className="new-btn">+ New Transaction</button>
+            </section>
+
             <div className="transactions-wrapper">
                 {/* include search bar, sortby, category inputs* */}
                 <div className="top-bar">
@@ -250,6 +257,26 @@ function Transactions({ user }: transactionsProps) {
                 </div>
 
             </div>
+
+            {/* forms */}
+            {/* new */}
+            {showNewForm &&
+                <div className="form-modal">
+
+                </div>
+            }
+            {/* edit */}
+            {showEditForm &&
+                <div className="form-modal">
+
+                </div>
+            }
+            {/* delete */}
+            {showDeleteForm &&
+                <div className="form-modal">
+
+                </div>
+            }
 
         </>
     )
