@@ -27,7 +27,7 @@ function Pots({ user, pots, updatePots }: potsProps) {
     // fetch pots if not in state
     async function getPots() {
         try {
-            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/pots', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/pots`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',

@@ -13,7 +13,7 @@ function LatestSpending({ user, category }: LatestSpendingProps) {
     // function to fetch latest transactions
     async function getLatestSpending() {
         try {
-            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/budgets/${category}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/budgets/${category}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
