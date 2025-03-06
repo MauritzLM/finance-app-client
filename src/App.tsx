@@ -25,11 +25,6 @@ function App() {
     setIsAuthenticated(true)
   }
 
-  // when token is expired
-  function changeAuthStatus() {
-    setIsAuthenticated(false)
-  }
-
   // update pots function
   function updatePots(potsArr: pot[]) {
     setPots([...potsArr])
@@ -49,24 +44,8 @@ function App() {
     setRecurringBills([...transactionArr])
   }
 
-  // logout
-  async function handleLogout() {
-    try {
-      const response = await fetch('https://web-production-de787.up.railway.app/finance-api/logout', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Token ${user.token}`
-        }
-      });
-
-      // if success change authorized state
-      if (response.status === 204) {
-        setIsAuthenticated(false)
-      }
-
-    } catch (error) {
-      console.log(error)
-    }
+  function updateAuthStatus(b: boolean) {
+    setIsAuthenticated(b)
   }
 
   // check if userobj in localstorage
@@ -91,12 +70,9 @@ function App() {
       <div id='container'>
         <Navbar />
         <main>
-          {isAuthenticated &&
-            <button className='logout-btn' onClick={() => handleLogout()}>Logout</button>
-          }
 
           <Routes>
-            <Route path='/' element={<Overview user={user} changeAuthStatus={changeAuthStatus} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} />} />
+            <Route path='/' element={<Overview user={user} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} isAuthenticated={isAuthenticated} updateAuthStatus={updateAuthStatus} />} />
             <Route path='/transactions' element={<Transactions user={user} />} />
             <Route path='/budgets' element={<Budgets user={user} budgets={budgets} budgetSpending={budgetSpending} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} />} />
             <Route path='/pots' element={<Pots user={user} pots={pots} updatePots={updatePots} />} />
