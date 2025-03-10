@@ -73,7 +73,7 @@ function App() {
 
           <Routes>
             <Route path='/' element={<Overview user={user} updatePots={updatePots} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} updateRecurringBills={updateRecurringBills} isAuthenticated={isAuthenticated} updateAuthStatus={updateAuthStatus} />} />
-            <Route path='/transactions' element={<Transactions user={user} />} />
+            <Route path='/transactions' element={<Transactions user={user} recurringBills={recurringBills} updateRecurringBills={updateRecurringBills} />} />
             <Route path='/budgets' element={<Budgets user={user} budgets={budgets} budgetSpending={budgetSpending} updateBudgets={updateBudgets} updateBudgetSpending={updateBudgetSpending} />} />
             <Route path='/pots' element={<Pots user={user} pots={pots} updatePots={updatePots} />} />
             <Route path='/recurring-bills' element={<RecurringBills user={user} recurringBills={recurringBills} updateRecurringBills={updateRecurringBills} />} />
