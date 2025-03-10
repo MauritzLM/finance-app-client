@@ -3,12 +3,17 @@ import { useEffect, useRef, useState } from "react"
 import { userObj, transaction } from "../types"
 import { formatTransaction, separateButtons } from "../helpers/helpers"
 import '../assets/sass/transactions.scss'
+import NewTransactionForm from "../components/transactions/new_transaction_form"
+import EditTransactionForm from "../components/transactions/edit_transaction_form"
+import DeleteTransactionForm from "../components/transactions/delete_transaction_form"
 
 interface transactionsProps {
-    user: userObj
+    user: userObj,
+    recurringBills: transaction[],
+    updateRecurringBills: (transactionArr: transaction[]) => void
 }
 
-function Transactions({ user }: transactionsProps) {
+function Transactions({ user, recurringBills, updateRecurringBills }: transactionsProps) {
     const [pageNumber, setPageNumber] = useState(1)
     const [numPages, setNumPages] = useState(1)
     const [category, setCategory] = useState('All')
@@ -20,6 +25,7 @@ function Transactions({ user }: transactionsProps) {
     const [showNewForm, setShowNewForm] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false)
     const [showDeleteForm, setShowDeleteform] = useState(false)
+    const [selectedTransation, setSelectedTransaction] = useState({} as transaction)
 
     // option refs
 
@@ -34,6 +40,29 @@ function Transactions({ user }: transactionsProps) {
         else {
             setPageBtnToggle(true)
         }
+    }
+
+    function hideNewForm() {
+        setShowNewForm(false)
+    }
+
+    function hideEditForm() {
+        setShowEditForm(false)
+    }
+
+    function hideDeleteForm() {
+        setShowDeleteform(false)
+    }
+
+    function toggleEdit(t: transaction) {
+        setShowEditForm(true)
+        setSelectedTransaction(t)
+    }
+
+    function toggleDelete(t: transaction) {
+        setShowDeleteform(true)
+        setSelectedTransaction(t)
+        setShowEditForm(false)
     }
 
     // toggle the current active select element
@@ -209,7 +238,7 @@ function Transactions({ user }: transactionsProps) {
                     </thead>
                     <tbody>
                         {transactions?.map(t =>
-                            <tr data-testid="transaction" key={t.id}>
+                            <tr data-testid="transaction" key={t.id} onClick={() => toggleEdit(t)}>
 
                                 <td>
                                     <img src={t.avatar} alt="" height={32} width={32} loading="lazy" decoding="async" aria-hidden="true" />
@@ -262,19 +291,19 @@ function Transactions({ user }: transactionsProps) {
             {/* new */}
             {showNewForm &&
                 <div className="form-modal">
-
+                    <NewTransactionForm user={user} hideNewForm={hideNewForm} recurringBills={recurringBills} updateRecurringBills={updateRecurringBills} />
                 </div>
             }
             {/* edit */}
             {showEditForm &&
                 <div className="form-modal">
-
+                    <EditTransactionForm user={user} hideEditForm={hideEditForm} toggleDelete={toggleDelete} recurringBills={recurringBills} updateRecurringBills={updateRecurringBills} selected_transaction={selectedTransation} />
                 </div>
             }
             {/* delete */}
             {showDeleteForm &&
                 <div className="form-modal">
-
+                    <DeleteTransactionForm user={user} hideDeleteForm={hideDeleteForm} selected_transaction={selectedTransation} />
                 </div>
             }
 
