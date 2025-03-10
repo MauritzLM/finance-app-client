@@ -537,12 +537,45 @@ nav {
       // money symbol
       img {
         position: absolute;
-        top: 35px;
+        top: 31px;
         left: 10px;
       }
 
       img+input {
         padding-left: 35px;
+      }
+    }
+
+    .checkbox-group {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      input {
+        width: 10px;
+        height: 16px;
+        cursor: pointer;
+        appearance: none;
+        position: relative;
+        border-radius: 5px;
+
+        &::before {
+          content: "✔";
+          height: 90%;
+          width: 90%;
+          position: absolute;
+          font-size: 1.2em;
+          right: 1px;
+          top: 1px;
+          visibility: hidden;
+          text-align: center;
+          // background-color: #201F24;
+        }
+
+        &:checked::before {
+          /* Use `visibility` instead of `display` to avoid recalculating layout */
+          visibility: visible;
+        }
       }
     }
 
@@ -595,6 +628,11 @@ nav {
       font-weight: 700;
     }
   }
+
+  .delete-form-btn {
+    padding-bottom: 1px;
+    border-bottom: 1px solid;
+  } 
 
   .delete-form {
     button[type="submit"] {
