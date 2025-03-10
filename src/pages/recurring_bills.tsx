@@ -17,7 +17,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
     // fetch function
     async function getRecurringBills() {
         try {
-            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/transactions/recurring', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/transactions/recurring`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -64,7 +64,7 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
             <h1>Recurring Bills</h1>
             {/* total and summary */}
             <div className="bills-wrapper">
-                {recurringBills.length &&
+                {recurringBills &&
                     <div className="row-1">
 
                         <div className="total">

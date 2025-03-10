@@ -37,7 +37,7 @@ const mockUser: userObj = { 'user': { 'id': 1, 'username': 'mo' }, 'token': '123
 describe('overview component tests', () => {
     // current balance, income expenses
     it('test balance, income and expenses values', async () => {
-        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} changeAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} isAuthenticated={true} updateAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
 
         const income = await screen.findByTestId('income')
         const expenses = await screen.findByTestId('expenses')
@@ -50,7 +50,7 @@ describe('overview component tests', () => {
 
     // pots
     it('test pot section values and rendering', async () => {
-        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} changeAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} isAuthenticated={true} updateAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
 
         const pot_list = await screen.findAllByTestId('pot-item')
         const total_saved = await screen.findByTestId('pots-total')
@@ -66,7 +66,7 @@ describe('overview component tests', () => {
 
     // budgets
     it('test budget section values and rendering', async () => {
-        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} changeAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} isAuthenticated={true} updateAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
 
         // budgets-spent , budgets-limit, budget-maximum
         const total_spent = await screen.findByTestId('budgets-spent')
@@ -83,7 +83,7 @@ describe('overview component tests', () => {
 
     // transactions
     it('test recent transactions values, dates and rendering', async () => {
-        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} changeAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} isAuthenticated={true} updateAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
         
         // list, amount, date
         const transactions = await screen.findAllByTestId('transaction')
@@ -100,7 +100,7 @@ describe('overview component tests', () => {
 
     // recurring bills
     it('test recurring bills values', async () => {
-        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} changeAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Overview user={mockUser} updateBudgets={vi.fn()} isAuthenticated={true} updateAuthStatus={vi.fn()} updatePots={vi.fn()} updateBudgetSpending={vi.fn()} updateRecurringBills={vi.fn()} /></BrowserRouter>)
         
         const recurring_items = await screen.findAllByTestId('recurring-item')
         const paid_bills = await screen.findByTestId('paid')

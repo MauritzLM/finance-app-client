@@ -16,7 +16,7 @@ function SignUpForm({ loginStatus, updateUser }: signUpProps) {
         try {
             event.preventDefault()
 
-            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/users', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/users`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'

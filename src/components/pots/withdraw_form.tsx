@@ -19,7 +19,7 @@ function WithdrawForm({ user, pot, pots, updatePots, hideWithdrawForm }: withdra
         try {
             event.preventDefault()
 
-            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/pots/withdraw/${pot.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/pots/withdraw/${pot.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
