@@ -103,10 +103,12 @@ button {
   position: absolute;
   right: 10px;
   top: 10px;
-  background-color: transparent;
+  background-color: white;
+  color: var(--grey-500);
   font-size: 14px;
-  border-bottom: 1px solid var(--grey-500);
-  padding-bottom: 2px;
+  padding: 6px;
+  border-radius: 10px;
+  z-index: 10;
 }
 
 .new-btn {
