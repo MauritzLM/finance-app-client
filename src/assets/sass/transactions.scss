@@ -1,3 +1,14 @@
+.header {
+    .t-h1 {
+        font-size: 24px;
+    }
+
+    .t-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
 .transactions-wrapper {
     padding: 24px 20px;
     background-color: white;
@@ -6,7 +17,7 @@
     .top-bar {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 16px;
         margin-bottom: 24px;
 
         form {
@@ -32,7 +43,7 @@
 
         .col-2 {
             display: flex;
-            gap: 24px;
+            gap: 20px;
         }
 
         .sort {
@@ -341,14 +352,58 @@
     }
 }
 
+@media screen and (min-width: 400px) {
+    .transactions-wrapper {
+        .top-bar {
+            gap: 32px;
+
+            .col-2 {
+                gap: 24px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 450px) {
+    .header {
+        .t-h1 {
+            font-size: 32px;
+        }
+
+        .t-btn {
+            font-size: 16px;
+            padding: 16px;
+        }
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .transactions-wrapper {
+        .top-bar {
+            form {
+                input {
+                    width: 300px;
+                }
+            }
+        }
+    }
+}
+
 /* tablet styles */
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 775px) {
     .transactions-wrapper {
         padding: 32px;
 
         .top-bar {
             gap: 0;
             justify-content: space-between;
+
+            form {
+
+                input {
+                    width: 215px;
+                }
+            }
 
             .sort {
                 display: flex;
@@ -579,11 +634,8 @@
     }
 }
 
-/* larger screens */
-@media screen and (min-width: 999px) {
+@media screen and (min-width: 900px) {
     .transactions-wrapper {
-        padding: 32px;
-
         .top-bar {
             form {
                 input {
@@ -591,5 +643,12 @@
                 }
             }
         }
+    }
+}
+
+/* larger screens */
+@media screen and (min-width: 999px) {
+    .transactions-wrapper {
+        padding: 32px;
     }
 }
