@@ -159,8 +159,8 @@ function Transactions({ user, recurringBills, updateRecurringBills }: transactio
     return (
         <>
             <section className="header">
-                <h1>Transactions</h1>
-                <button data-testid="new-btn" onClick={() => setShowNewForm(true)} className="new-btn">+ New Transaction</button>
+                <h1 className="t-h1">Transactions</h1>
+                <button data-testid="new-btn" onClick={() => setShowNewForm(true)} className="new-btn t-btn">+ New Transaction</button>
             </section>
 
             <div className="transactions-wrapper">
