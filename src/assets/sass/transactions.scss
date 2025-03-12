@@ -302,6 +302,17 @@
                 order: 3;
             }
 
+            &:hover {
+                background-color: var(--grey-500);
+                color: white;
+
+                svg {
+                    path {
+                        fill: white;
+                    }
+                }
+            }
+
         }
 
         // prev button

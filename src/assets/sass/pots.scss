@@ -140,6 +140,12 @@
                 border-radius: 10px;
                 background-color: var(--beige-100);
                 flex: 50;
+                border: 1px solid transparent;
+
+                &:hover {
+                    background-color: transparent;
+                    border: 1px solid var(--beige-500);
+                }
             }
         }
 
