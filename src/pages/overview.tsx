@@ -6,14 +6,15 @@ import '../assets/sass/overview.scss'
 
 interface overviewProps {
     user: userObj,
-    changeAuthStatus: () => void,
     updatePots: (potsArr: pot[]) => void,
     updateBudgets: (budgetsArr: budget[]) => void,
     updateBudgetSpending: (spendingObj: budget_spending) => void,
-    updateRecurringBills: (transactionArr: transaction[]) => void
+    updateRecurringBills: (transactionArr: transaction[]) => void,
+    isAuthenticated: boolean,
+    updateAuthStatus: (b: boolean) => void
 }
 
-function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBudgetSpending, updateRecurringBills }: overviewProps) {
+function Overview({ user, updatePots, updateBudgets, updateBudgetSpending, updateRecurringBills, isAuthenticated, updateAuthStatus }: overviewProps) {
     const [overviewData, setOverviewData] = useState<overviewData>({ 'pots': [], 'budgets': [], 'expenses': [], 'recent_transactions': [], 'recurring_bills': [], 'income': [], 'budget_spending': {} })
     const [expenses, setExpenses] = useState<number>()
     const [income, setIncome] = useState<number>()
@@ -21,7 +22,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
     // fetch overview content
     async function getOverviewData() {
         try {
-            const response = await fetch('https://web-production-de787.up.railway.app/finance-api/overview', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/overview`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -32,7 +33,7 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
             const data: overviewData = await response.json()
 
             if (response.status === 401) {
-                changeAuthStatus()
+                updateAuthStatus(false)
                 // clear localstorage
                 localStorage.removeItem('user')
                 return
@@ -58,6 +59,26 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
         }
     }
 
+    // logout
+    async function handleLogout() {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/logout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Token ${user.token}`
+                }
+            });
+
+            // if success change authorized state
+            if (response.status === 204) {
+                updateAuthStatus(false)
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         if (Object.keys(overviewData).length !== 6) {
             getOverviewData()
@@ -67,6 +88,9 @@ function Overview({ user, changeAuthStatus, updatePots, updateBudgets, updateBud
 
     return (
         <>
+            {isAuthenticated &&
+                <button className='logout-btn' onClick={() => handleLogout()}>Logout</button>
+            }
             <div className="overview-wrapper">
                 <section className="balance">
                     <h1>Overview</h1>

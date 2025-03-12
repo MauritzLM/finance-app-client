@@ -35,4 +35,14 @@ export const themeData: strObj = {
     'Pink': '#AF81BA',
     'Gold': '#CAB361',
     'Orange': '#BE6C49'
-}    
+}
+
+// avatar image options
+export const avatar_images: string[] = [
+    '/images/avatars/aqua-flow-utilities.jpg',
+    '/images/avatars/buzz-marketing-group.jpg',
+    '/images/avatars/bytewise.jpg',
+    '/images/avatars/ecofuel-energy.jpg',
+    '/images/avatars/elevate-education.jpg',
+    '/images/avatars/pixel-playground.jpg'
+]

@@ -20,7 +20,7 @@ function EditBudgetForm({ user, budget, budgets, hideEditForm, updateBudgets }: 
         try {
             event.preventDefault()
 
-            const response = await fetch(`https://web-production-de787.up.railway.app/finance-api/budgets/${budget.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/finance-api/budgets/${budget.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json',
