@@ -10,10 +10,11 @@ import DeleteTransactionForm from "../components/transactions/delete_transaction
 interface transactionsProps {
     user: userObj,
     recurringBills: transaction[],
-    updateRecurringBills: (transactionArr: transaction[]) => void
+    updateRecurringBills: (transactionArr: transaction[]) => void,
+    updateAuthStatus: (b: boolean) => void
 }
 
-function Transactions({ user, recurringBills, updateRecurringBills }: transactionsProps) {
+function Transactions({ user, recurringBills, updateRecurringBills, updateAuthStatus }: transactionsProps) {
     const [pageNumber, setPageNumber] = useState(1)
     const [numPages, setNumPages] = useState(1)
     const [category, setCategory] = useState('All')
@@ -26,6 +27,7 @@ function Transactions({ user, recurringBills, updateRecurringBills }: transactio
     const [showEditForm, setShowEditForm] = useState(false)
     const [showDeleteForm, setShowDeleteform] = useState(false)
     const [selectedTransation, setSelectedTransaction] = useState({} as transaction)
+    const [isLoading, setIsLoading] = useState(true)
 
     // option refs
 
@@ -117,11 +119,18 @@ function Transactions({ user, recurringBills, updateRecurringBills }: transactio
 
             const data = await response.json()
 
+            // 401 -> change auth status
+            if (response.status === 401) {
+                updateAuthStatus(false)
+                // clear localstorage
+                localStorage.removeItem('user')
+                return
+            }
+
             setTransactions([...data.page_list])
             setNumPages(data.num_pages)
             setActiveSelect('')
-
-            // 401 status -> change auth status*
+            setIsLoading(false)
 
         } catch (error) {
             console.log(error)
@@ -143,8 +152,16 @@ function Transactions({ user, recurringBills, updateRecurringBills }: transactio
 
             const data = await response.json()
 
+            if (response.status === 401) {
+                updateAuthStatus(false)
+                // clear localstorage
+                localStorage.removeItem('user')
+                return
+            }
+
             setTransactions([...data.page_list])
             setNumPages(data.num_pages)
+            setIsLoading(false)
 
         } catch (error) {
             console.log(error)
@@ -227,6 +244,8 @@ function Transactions({ user, recurringBills, updateRecurringBills }: transactio
                     </div>
                 </div>
 
+                {isLoading && <div className="spinner-wrapper"><div className="lds-dual-ring"></div></div>}
+
                 <table>
                     <thead>
                         <tr>
@@ -252,7 +271,7 @@ function Transactions({ user, recurringBills, updateRecurringBills }: transactio
                     </tbody>
                 </table>
 
-                <div className="page-buttons">
+                <div className={isLoading ? 'hide' : 'page-buttons'}>
                     <button className="prev-btn" disabled={pageNumber === 1 ? true : false} onClick={() => setPageNumber(pageNumber - 1)}>
                         <svg fill="none" height="11" viewBox="0 0 6 11" width="6" xmlns="http://www.w3.org/2000/svg"><path d="m5.14656 10.8535-5.000005-4.99997c-.046488-.04643-.0833676-.10158-.1085298-.16228-.0251623-.06069-.03811269-.12576-.0381127-.19147 0-.0657.0129504-.13077.0381126-.19147.0251623-.06069.0620419-.11584.1085299-.16228l4.999995-4.999997c.06993-.0700052.15906-.117689.2561-.13701419.09704-.01932521.19764-.0094229.28905.02845329.09141.0378763.16953.1020229.22447.1843199.05493.082297.08421.179044.08414.277991v10.000017c.00007.0989-.02921.1957-.08414.278-.05494.0823-.13306.1464-.22447.1843s-.19201.0478-.28905.0284c-.09704-.0193-.18617-.067-.25609-.137z" fill="#696868" /></svg>
                         <span>Prev</span>
