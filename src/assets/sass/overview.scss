@@ -117,6 +117,10 @@
 
             .spinner-wrapper {
                 background-color: var(--grey-900);
+
+                div {
+                    background-color: inherit;
+                }
             }
 
             h2 {

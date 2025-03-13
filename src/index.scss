@@ -822,6 +822,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  div {
+    background-color: inherit;
+  }
 }
 
 .lds-dual-ring,
