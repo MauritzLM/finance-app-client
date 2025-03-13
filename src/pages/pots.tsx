@@ -120,7 +120,7 @@ function Pots({ user, pots, updatePots, updateAuthStatus }: potsProps) {
 
     return (
         <>
-            <section className="header">
+            <section className="pots-header">
                 <h1>Pots</h1>
                 <button className="new-btn" data-testid="new-btn" onClick={() => setShowNewForm(true)}>+ Add New Pot</button>
             </section>

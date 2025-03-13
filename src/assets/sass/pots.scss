@@ -1,7 +1,16 @@
+.pots-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: inherit;
+    padding: 0;
+}
+
 .pots-container {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    margin-top: 24px;
 
     .pot-card {
         position: relative;
@@ -157,6 +166,7 @@
     .pots-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        margin-top: 32px;
 
         .pot-card {
             padding: 24px;
