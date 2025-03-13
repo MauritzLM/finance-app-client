@@ -24,20 +24,20 @@ const mockBills: transaction[] = [{ 'amount': -1850, 'avatar': '', 'category': '
 describe('test recurring bills component', () => {
     
     it('test correct total displayed', () => {
-        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         expect(screen.getByTestId('total')).toHaveTextContent('65.50')
     });
 
     it('test correct summary values', () => {
-        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
         
         expect(screen.getByTestId('paid')).toHaveTextContent('2 (35.50 )')
         expect(screen.getByTestId('upcoming')).toHaveTextContent('1 (30.00 )')
     });
 
     it('test initial bill list', () => {
-        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const bill_list = screen.getAllByTestId('bill')
         const amounts = screen.getAllByTestId('amount')
@@ -50,7 +50,7 @@ describe('test recurring bills component', () => {
     });
 
     it('test user search', async () => {
-        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
         
         const user = userEvent.setup()
     
@@ -64,7 +64,7 @@ describe('test recurring bills component', () => {
 
     // sort
     it('test user sort', async () => {
-        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><RecurringBills user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
         
         const user = userEvent.setup()
     

@@ -6,10 +6,11 @@ import '../assets/sass/recurring_bills.scss'
 interface recurringBillsProps {
     user: userObj,
     recurringBills: transaction[],
-    updateRecurringBills: (transactionArr: transaction[]) => void
+    updateRecurringBills: (transactionArr: transaction[]) => void,
+    updateAuthStatus: (b: boolean) => void
 }
 
-function RecurringBills({ user, recurringBills, updateRecurringBills }: recurringBillsProps) {
+function RecurringBills({ user, recurringBills, updateRecurringBills, updateAuthStatus }: recurringBillsProps) {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [sortBy, setSortBy] = useState<string>('Latest')
     const [activeSelect, setActiveSelect] = useState(false)
@@ -24,12 +25,18 @@ function RecurringBills({ user, recurringBills, updateRecurringBills }: recurrin
                     Authorization: `token ${user['token']}`
                 },
             })
-
+            
             const data = await response.json()
 
-            updateRecurringBills(data)
+             // 401 -> change auth status
+             if (response.status === 401) {
+                updateAuthStatus(false)
+                // clear localstorage
+                localStorage.removeItem('user')
+                return
+            }
 
-            // 401 status -> change auth status*
+            updateRecurringBills(data)
 
         } catch (error) {
             console.log(error)

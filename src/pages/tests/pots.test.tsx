@@ -24,13 +24,13 @@ vi.stubGlobal('fetch', fetchMock);
 
 describe('pot component tests', () => {
     it('test pot items', () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         expect(screen.getAllByTestId('pot-item').length).toEqual(5)
     });
 
     it('test pot total values', () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const pot_totals = screen.getAllByTestId('pot-total')
 
@@ -39,7 +39,7 @@ describe('pot component tests', () => {
     });
 
     it('test pot percentage values', () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const pot_percetages = screen.getAllByTestId('pot-percentage')
 
@@ -48,7 +48,7 @@ describe('pot component tests', () => {
     });
 
     it('test pot target values', () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const pot_targets = screen.getAllByTestId('pot-target')
 
@@ -58,7 +58,7 @@ describe('pot component tests', () => {
 
     // show form buttons -> add, withdraw, edit, new, delete
     it('test clicking new pot button displays new pot form', async () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const new_btn = screen.getByTestId('new-btn')
@@ -70,7 +70,7 @@ describe('pot component tests', () => {
     });
 
     it('test clicking edit pot button displays edit pot form', async () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const edit_btn = screen.getAllByTestId('edit-btn')
@@ -82,7 +82,7 @@ describe('pot component tests', () => {
     });
 
     it('test clicking delete pot button displays delete form', async () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const delete_btn = screen.getAllByTestId('delete-btn')
@@ -94,7 +94,7 @@ describe('pot component tests', () => {
     });
 
     it('test clicking add money button displays add form', async () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const add_btn = screen.getAllByTestId('add-btn')
@@ -106,7 +106,7 @@ describe('pot component tests', () => {
     });
 
     it('test clicking withdraw button displays withdraw form', async () => {
-        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Pots user={mockUser} pots={mockPots} updatePots={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const withdraw_btn = screen.getAllByTestId('withdraw-btn')

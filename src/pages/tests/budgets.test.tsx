@@ -24,7 +24,7 @@ vi.mock('../../components/budgets/latest_spending')
 // test rendering
 describe('test budget component', () => {
     it('test budget summary', () => {
-        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         // correct total and limit
         expect(screen.getByTestId('total-spent').textContent).toMatch('500')
@@ -41,7 +41,7 @@ describe('test budget component', () => {
 
 
     it('test budget detail', () => {
-        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         // category heading
         const detail_categories = screen.getAllByTestId('detail-category')
@@ -67,7 +67,7 @@ describe('test budget component', () => {
 
     // new, edit, delete
     it('clicking add new button displays new budget form', async () => {
-        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const new_btn = screen.getByTestId('new-btn')
@@ -80,7 +80,7 @@ describe('test budget component', () => {
     });
 
     it('clicking edit button displays edit budget form', async () => {
-        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const edit_btns = screen.getAllByTestId('edit-btn')
@@ -93,7 +93,7 @@ describe('test budget component', () => {
     });
 
     it('clicking delete button displays delete budget form', async () => {
-        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Budgets user={mockUser} budgets={mockBudgets} budgetSpending={mock_budget_spending} updateBudgetSpending={vi.fn()} updateBudgets={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const user = userEvent.setup()
         const delete_btns = screen.getAllByTestId('delete-btn')

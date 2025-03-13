@@ -11,10 +11,11 @@ import '../assets/sass/pots.scss'
 interface potsProps {
     user: userObj,
     pots: pot[],
-    updatePots: (potArr: pot[]) => void
+    updatePots: (potArr: pot[]) => void,
+    updateAuthStatus: (b: boolean) => void
 }
 
-function Pots({ user, pots, updatePots }: potsProps) {
+function Pots({ user, pots, updatePots, updateAuthStatus }: potsProps) {
     const [showNewForm, setShowNewForm] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false)
     const [showDeleteForm, setShowDeleteform] = useState(false)
@@ -37,10 +38,16 @@ function Pots({ user, pots, updatePots }: potsProps) {
 
             const data = await response.json()
 
+             // 401 -> change auth status
+             if (response.status === 401) {
+                updateAuthStatus(false)
+                // clear localstorage
+                localStorage.removeItem('user')
+                return
+            }
+
             updatePots(data)
-
-            // 401 status -> change auth status*
-
+           
         } catch (error) {
             console.log(error)
         }

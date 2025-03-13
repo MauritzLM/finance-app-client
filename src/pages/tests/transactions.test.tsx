@@ -30,7 +30,7 @@ const mockUser: userObj = { 'user': { 'id': 1, 'username': 'mo' }, 'token': '123
 // test transaction list, amount / date formatting, number of page buttons
 describe('test transactions component', () => {
     it('renders transactions list', async () => {
-        render(<BrowserRouter><Transactions user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Transactions user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const transactions = await screen.findAllByTestId('transaction')
 
@@ -49,7 +49,7 @@ describe('test transactions component', () => {
     // })
 
     it('correct date and amount format', async () => {
-        render(<BrowserRouter><Transactions user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} /></BrowserRouter>)
+        render(<BrowserRouter><Transactions user={mockUser} recurringBills={mockBills} updateRecurringBills={vi.fn()} updateAuthStatus={vi.fn()} /></BrowserRouter>)
 
         const dates = await screen.findAllByTestId('date')
 

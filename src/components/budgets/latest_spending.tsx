@@ -5,9 +5,10 @@ import { userObj, transaction } from "../../types"
 interface LatestSpendingProps {
     user: userObj,
     category: string,
+    updateAuthStatus: (b: boolean) => void
 }
 
-function LatestSpending({ user, category }: LatestSpendingProps) {
+function LatestSpending({ user, category, updateAuthStatus }: LatestSpendingProps) {
     const [transactions, setTransactions] = useState<transaction[]>([])
 
     // function to fetch latest transactions
@@ -22,7 +23,15 @@ function LatestSpending({ user, category }: LatestSpendingProps) {
             })
 
             const data: transaction[] = await response.json()
-            console.log(data)
+
+            // 401 -> change auth status
+            if (response.status === 401) {
+                updateAuthStatus(false)
+                // clear localstorage
+                localStorage.removeItem('user')
+                return
+            }
+
             setTransactions([...data])
 
         } catch (error) {
