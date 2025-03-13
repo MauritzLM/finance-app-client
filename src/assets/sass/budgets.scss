@@ -1,20 +1,12 @@
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: inherit;
-    padding: 0;
-    margin-bottom: 33px;
-
-    h1 {
-        margin: 0;
-    }
-}
 
 .budgets-wrapper {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 24px;
+
 
     .budgets-summary {
         background-color: white;
@@ -51,7 +43,6 @@
                         width: 45px;
                         position: relative;
                         left: 12px;
-                        top: 2px;
                     }
                 }
 
@@ -122,11 +113,11 @@
 
                             svg {
                                 fill: var(--grey-500);
-                                height: 18px;
-                                width: 18px;
+                                height: 20px;
+                                width: 20px;
                                 position: relative;
                                 left: 3px;
-                                top: .407px;
+                                
                             }
 
                             &:nth-of-type(1) {
@@ -135,11 +126,12 @@
                                 color: var(--grey-900);
 
                                 svg {
-                                    height: 18px;
-                                    width: 18px;
+                                    height: 22px;
+                                    width: 22px;
                                     fill: var(--grey-900);
-                                    left: 4px;
-                                    top: 1px;
+                                    left: 3px;
+                                    bottom: 1px;
+                                    
                                 }
                             }
                         }
@@ -399,6 +391,8 @@
 /* tablet styles */
 @media screen and (min-width: 699px) {
     .budgets-wrapper {
+        margin-top: 32px;
+
         .budgets-summary {
             padding: 32px;
             flex-direction: row;
