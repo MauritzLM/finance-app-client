@@ -25,11 +25,11 @@ function RecurringBills({ user, recurringBills, updateRecurringBills, updateAuth
                     Authorization: `token ${user['token']}`
                 },
             })
-            
+
             const data = await response.json()
 
-             // 401 -> change auth status
-             if (response.status === 401) {
+            // 401 -> change auth status
+            if (response.status === 401) {
                 updateAuthStatus(false)
                 // clear localstorage
                 localStorage.removeItem('user')
@@ -63,12 +63,14 @@ function RecurringBills({ user, recurringBills, updateRecurringBills, updateAuth
         if (!recurringBills.length) {
             getRecurringBills()
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <>
-            <h1>Recurring Bills</h1>
+            <section className="header">
+                <h1>Recurring Bills</h1>
+            </section>
             {/* total and summary */}
             <div className="bills-wrapper">
                 {recurringBills &&

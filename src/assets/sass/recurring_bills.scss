@@ -1,3 +1,9 @@
+.bills-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: 24px;
+}
+
 .row-1 {
     display: flex;
     flex-direction: column;
@@ -380,6 +386,7 @@
                 #listbox-sort {
                     width: 113px;
                     right: 0;
+
                     span {
                         display: none;
                     }
@@ -389,7 +396,7 @@
                     display: revert;
                     position: absolute;
                     right: 20px;
-                    
+
                 }
             }
         }
@@ -458,7 +465,7 @@
                         svg {
                             position: relative;
                             top: 4px;
-                            
+
                         }
                     }
                 }
@@ -472,6 +479,7 @@
     .bills-wrapper {
         display: flex;
         gap: 24px;
+        margin-top: 32px;
     }
 
     .row-1 {

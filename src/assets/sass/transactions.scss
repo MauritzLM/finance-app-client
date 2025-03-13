@@ -1,4 +1,7 @@
 .header {
+    max-width: 1400px;
+    margin: 0 auto;
+
     .t-h1 {
         font-size: 24px;
     }
@@ -10,9 +13,12 @@
 }
 
 .transactions-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 24px 20px;
     background-color: white;
     border-radius: 10px;
+    margin-top: 24px;
 
     .top-bar {
         display: flex;
@@ -412,6 +418,7 @@
 @media screen and (min-width: 775px) {
     .transactions-wrapper {
         padding: 32px;
+        margin-top: 32px;
 
         .top-bar {
             gap: 0;

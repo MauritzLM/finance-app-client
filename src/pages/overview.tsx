@@ -97,7 +97,7 @@ function Overview({ user, updatePots, updateBudgets, updateBudgetSpending, updat
                 <section className="balance">
                     <h1>Overview</h1>
                     <div className="balance-wrapper">
-                        <div>
+                        <div className="balance">
                             <h2>Balance</h2>
                             {isLoading && <div className="spinner-wrapper"><div className="lds-dual-ring"></div></div>}
                             <span data-testid="balance" className={isLoading ? 'hide' : ''}>
