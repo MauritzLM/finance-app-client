@@ -23,7 +23,7 @@ const mockUser: userObj = { 'user': { 'id': 1, 'username': 'mo' }, 'token': '123
 describe('test latest spending component', () => {
     it('test component rendering', async () => {
         act(() => {
-            render(<BrowserRouter><LatestSpending user={mockUser} category={'Education'} /></BrowserRouter>)
+            render(<BrowserRouter><LatestSpending user={mockUser} category={'Education'} updateAuthStatus={vi.fn()} /></BrowserRouter>)
         })
         
         const transaction_list = await screen.findAllByRole('listitem');
